@@ -1,7 +1,7 @@
 .footer {
-  @apply border-t border-t-gray-200 mt-8 p-6;
+  @apply border-t border-t-gray-100 mt-8 p-5 bg-white;
 }
 
 .copyright {
-  @apply text-center;
+  @apply text-center text-sm;
 }

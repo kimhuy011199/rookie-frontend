@@ -1,0 +1,7 @@
+.button {
+  @apply p-2 rounded-md w-full;
+}
+
+.primary {
+  @apply bg-primary text-white disabled:bg-gray-300;
+}

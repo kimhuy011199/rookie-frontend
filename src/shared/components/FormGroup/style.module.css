@@ -1,0 +1,7 @@
+.errorMessage {
+  @apply text-red-500 text-sm mt-1;
+}
+
+.formGroup {
+  @apply flex flex-col gap-1 mb-3;
+}

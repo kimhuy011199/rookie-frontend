@@ -1,3 +1,23 @@
 .auth {
-  @apply max-w-sm w-96 flex flex-col items-center;
+  @apply flex flex-col items-center;
+}
+
+.heading {
+  @apply text-2xl font-medium;
+}
+
+.form {
+  @apply border border-gray-100 rounded-xl w-80 px-4 py-6 mt-5 mb-4 bg-white;
+}
+
+.link {
+  @apply pl-1 font-normal text-primary;
+}
+
+.logo {
+  @apply w-40 mx-auto mb-6 mt-4;
+}
+
+.serverError {
+  @apply block mx-auto text-red-500 text-center mt-3 -mb-1 text-sm;
 }

@@ -1,5 +1,5 @@
 .header {
-  @apply py-5 mb-8 border-b border-b-gray-200;
+  @apply py-4 mb-8 border-b border-b-gray-100 bg-white;
 }
 
 .container {
