@@ -1,0 +1,31 @@
+.header {
+  @apply py-5 mb-8 border-b border-b-gray-200;
+}
+
+.container {
+  @apply max-w-7xl mx-auto flex justify-between items-center;
+}
+
+.logo {
+  @apply w-28;
+}
+
+.list {
+  @apply flex;
+}
+
+.item {
+  @apply ml-6;
+}
+
+.link {
+  @apply flex items-center;
+}
+
+.link:hover {
+  @apply text-gray-500;
+}
+
+.link svg {
+  @apply mr-2;
+}
