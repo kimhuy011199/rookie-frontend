@@ -8,8 +8,8 @@ export interface LoginUserInterface {
 }
 
 export interface RegisterUserInterface {
+  displayName: string;
   email: string;
-  name: string;
   password: string;
 }
 

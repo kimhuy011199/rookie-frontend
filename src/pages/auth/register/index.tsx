@@ -1,19 +1,38 @@
-import { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { register, reset } from '../../../stores/auth/authSlice';
-import Spinner from '../../../shared/components/Spinner';
+import { Link, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import {
+  register as registerUser,
+  reset,
+} from '../../../stores/auth/authSlice';
+import FormGroup from '../../../shared/components/FormGroup';
+import Input from '../../../shared/components/Input';
+import Button from '../../../shared/components/Button';
+import { useTranslation } from 'react-i18next';
+import {
+  EMAIL_PATTERN,
+  PASSWORD_PATTERN,
+  DISPLAYNAME_PATTERN,
+} from '../../../shared/constants/patterns';
+import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
+import style from '../style.module.css';
+
+export interface RegisterUserInterface {
+  displayName: string;
+  email: string;
+  password: string;
+  password2: string;
+}
 
 function Register() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
-  });
-
-  const { name, email, password, password2 } = formData;
+  const { t } = useTranslation();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<RegisterUserInterface>();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,103 +42,101 @@ function Register() {
   );
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-
     if (isSuccess || user) {
       navigate('/');
     }
 
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isSuccess, navigate, dispatch]);
 
-  const onChange = (e: any) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+  const handleSubmitForm = (data: RegisterUserInterface) => {
+    const { password2, ...userData } = data;
+    dispatch(registerUser(userData));
   };
-
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-
-    if (password !== password2) {
-      toast.error('Passwords do not match');
-    } else {
-      const userData = {
-        name,
-        email,
-        password,
-      };
-
-      dispatch(register(userData));
-    }
-  };
-
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   return (
     <>
-      <section>
-        <h2>Please create an account</h2>
-      </section>
-
-      <section className="form">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
+      <div className={style.logo}>
+        <Logo />
+      </div>
+      <h2 className={style.heading}>{t('auth.register.desc')}</h2>
+      <div className={style.form}>
+        <form onSubmit={handleSubmit(handleSubmitForm)}>
+          <FormGroup
+            label={t('auth.label.displayName')}
+            error={errors.displayName?.message}
+          >
+            <Input
               type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={name}
-              placeholder="Enter your name"
-              onChange={onChange}
+              {...register('displayName', {
+                required: 'Display name is required',
+                pattern: {
+                  value: DISPLAYNAME_PATTERN,
+                  message: 'Please enter a valid display name',
+                },
+              })}
             />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
-              onChange={onChange}
+          </FormGroup>
+          <FormGroup
+            label={t('auth.label.email')}
+            error={errors.email?.message}
+          >
+            <Input
+              type="text"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: EMAIL_PATTERN,
+                  message: 'Please enter a valid email',
+                },
+              })}
             />
-          </div>
-          <div className="form-group">
-            <input
+          </FormGroup>
+          <FormGroup
+            label={t('auth.label.password')}
+            error={errors.password?.message}
+          >
+            <Input
               type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              placeholder="Enter password"
-              onChange={onChange}
+              {...register('password', {
+                required: 'Password is required',
+                pattern: {
+                  value: PASSWORD_PATTERN,
+                  message: 'Please enter a valid password',
+                },
+              })}
             />
-          </div>
-          <div className="form-group">
-            <input
+          </FormGroup>
+          <FormGroup
+            label={t('auth.label.password2')}
+            error={errors.password2?.message}
+          >
+            <Input
               type="password"
-              className="form-control"
-              id="password2"
-              name="password2"
-              value={password2}
-              placeholder="Confirm password"
-              onChange={onChange}
+              {...register('password2', {
+                required: 'Password is required',
+                validate: (val: string) => {
+                  if (watch('password') !== val) {
+                    return 'Your passwords do no match';
+                  }
+                },
+              })}
             />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-block">
-              Submit
-            </button>
-          </div>
+          </FormGroup>
+          <Button
+            label={t('auth.label.submit')}
+            loading={isLoading}
+            variant="primary"
+          />
+          {isError && <span className={style.serverError}>{message}</span>}
         </form>
-      </section>
+      </div>
+      <span className={style.action}>
+        {t('auth.register.q')}
+        <Link className={style.link} to="/auth/login">
+          {t('auth.register.a')}
+        </Link>
+      </span>
     </>
   );
 }
