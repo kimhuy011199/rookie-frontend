@@ -17,5 +17,10 @@
       "q": "Already have account?",
       "a": "Login"
     }
+  },
+  "header": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
   }
 }

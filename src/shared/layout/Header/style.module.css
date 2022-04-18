@@ -11,21 +11,13 @@
 }
 
 .list {
-  @apply flex;
+  @apply flex items-center;
 }
 
 .item {
-  @apply ml-6;
+  @apply ml-4;
 }
 
 .link {
   @apply flex items-center;
-}
-
-.link:hover {
-  @apply text-gray-500;
-}
-
-.link svg {
-  @apply mr-2;
 }

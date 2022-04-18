@@ -2,16 +2,15 @@ import i18n from 'i18next';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 
-import authEN from '../shared/locales/en/auth.json';
-import authVI from '../shared/locales/vi/auth.json';
+import en from '../shared/locales/en/index.json';
+import vi from '../shared/locales/vi/index.json';
 
-// the translations
 const resources = {
   en: {
-    translation: authEN,
+    translation: en,
   },
   vi: {
-    translation: authVI,
+    translation: vi,
   },
 };
 
