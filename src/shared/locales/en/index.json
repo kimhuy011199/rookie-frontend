@@ -22,5 +22,8 @@
     "login": "Login",
     "register": "Register",
     "logout": "Logout"
+  },
+  "footer": {
+    "copyright": "Made by Nguyen Kim Huy"
   }
 }

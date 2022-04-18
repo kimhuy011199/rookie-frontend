@@ -1,5 +1,5 @@
 .footer {
-  @apply border-t border-t-gray-100 mt-8 p-5 bg-white;
+  @apply border-t border-t-gray-100 mt-8 p-5 bg-white flex flex-col items-center;
 }
 
 .copyright {
