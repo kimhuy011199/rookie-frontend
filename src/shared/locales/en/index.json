@@ -32,7 +32,8 @@
       "title": "Title",
       "content": "Content",
       "tags": "Tags",
-      "submit": "Submit"
+      "submit": "Submit",
+      "preview": "Preview"
     }
   }
 }

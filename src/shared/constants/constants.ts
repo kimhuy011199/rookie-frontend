@@ -3,3 +3,4 @@ export const ENDPOINT = {
   QUESIONS: 'questions',
   USERS: 'users',
 };
+export const ZINDEX_DEFAULT = 1000;

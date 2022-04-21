@@ -9,3 +9,7 @@
 .form {
   @apply col-span-2;
 }
+
+.action {
+  @apply flex justify-between;
+}

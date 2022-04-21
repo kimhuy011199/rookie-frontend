@@ -11,3 +11,7 @@
 .app {
   @apply mb-auto mt-0;
 }
+
+.prevent-scroll {
+  @apply overflow-hidden;
+}

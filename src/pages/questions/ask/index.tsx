@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import style from './style.module.css';
@@ -9,6 +9,8 @@ import Input from '../../../shared/components/Input';
 import Button from '../../../shared/components/Button';
 import TextArea from '../../../shared/components/TextArea';
 import TagInput from '../../../shared/components/TagInput';
+import { useDialog } from '../../../shared/components/Dialog/Provider';
+import PreviewDialog from '../../../shared/components/Dialog/dialogs/preview-dialog';
 
 export interface AskQuestionInterface {
   title: string;
@@ -17,9 +19,11 @@ export interface AskQuestionInterface {
 }
 
 const AskQuestion = () => {
+  const { appendDialog } = useDialog();
   const { t } = useTranslation();
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<AskQuestionInterface>();
@@ -36,6 +40,14 @@ const AskQuestion = () => {
   const handleSubmitForm = (data: AskQuestionInterface) => {
     const questionData = { ...data, tags };
     console.log(questionData);
+  };
+
+  const previewQuestion = () => {
+    const [title, content] = getValues(['title', 'content']);
+    if (!title || !content) {
+      return;
+    }
+    appendDialog(<PreviewDialog title={title} content={content} />);
   };
 
   return (
@@ -70,11 +82,19 @@ const AskQuestion = () => {
             <FormGroup label={t('questions.label.tags')}>
               <TagInput tags={tags} setTags={setTags} />
             </FormGroup>
-            <Button
-              label={t('questions.label.submit')}
-              loading={isLoading}
-              variant="primary"
-            />
+            <div className={style.action}>
+              <Button
+                label={t('questions.label.submit')}
+                loading={isLoading}
+                variant="primary"
+              />
+              <Button
+                label={t('questions.label.preview')}
+                type="button"
+                variant="outline"
+                handleFuncion={previewQuestion}
+              />
+            </div>
             {isError && <span className={style.serverError}>{message}</span>}
           </form>
         </div>
