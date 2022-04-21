@@ -25,5 +25,14 @@
   },
   "footer": {
     "copyright": "Made by Nguyen Kim Huy"
+  },
+  "questions": {
+    "ask_question_title": "Ask a public question",
+    "label": {
+      "title": "Title",
+      "content": "Content",
+      "tags": "Tags",
+      "submit": "Submit"
+    }
   }
 }

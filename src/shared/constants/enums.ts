@@ -1,4 +1,5 @@
-export enum ENUMS {
-  ENUM_1 = 1,
-  ENUM_2 = 2,
+export enum KEY_CODE {
+  BACKSPACE = 8,
+  TAB = 9,
+  ENTER = 13,
 }
