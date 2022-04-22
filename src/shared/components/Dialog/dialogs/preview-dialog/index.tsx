@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Dialog } from '../../Provider';
 import style from './style.module.css';
 
@@ -16,13 +17,17 @@ const PreviewDialog = (props: PreviewDialogInterface) => {
     minHeight: '30rem',
     height: '30rem',
     width: '90%',
-    overflow: 'scroll',
+    overflowY: 'auto',
   };
 
   return (
     <Dialog close={close} inlineStyle={inlineStyle}>
       <h2 className={style.heading}>{title}</h2>
-      <div className={style.content}>{content}</div>
+      <div className={style.content}>
+        <div className="prose">
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </div>
+      </div>
     </Dialog>
   );
 };
