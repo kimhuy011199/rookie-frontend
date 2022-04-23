@@ -1,0 +1,11 @@
+.background {
+  @apply min-h-screen bg-gray-50 relative;
+}
+
+.img {
+  @apply opacity-60 w-2/3 fixed top-32 left-1/4 -translate-x-2/3 -translate-y-1/2 max-w-none;
+}
+
+.grid {
+  @apply opacity-70 absolute inset-0 bg-top bg-[url(https://play.tailwindcss.com/img/grid.svg)] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))];
+}

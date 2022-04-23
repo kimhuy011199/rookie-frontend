@@ -8,14 +8,16 @@
       "submit": "Submit"
     },
     "login": {
-      "desc": "Login and ask questions",
-      "q": "Don't have account?",
-      "a": "Register"
+      "desc": "Welcome,",
+      "sub": "Login and ask questions",
+      "q": "Don't have an account?",
+      "a": "Create account"
     },
     "register": {
-      "desc": "Create new account",
-      "q": "Already have account?",
-      "a": "Login"
+      "desc": "Welcome,",
+      "sub": "Register to continue!",
+      "q": "Already have an account?",
+      "a": "Login now"
     }
   },
   "header": {

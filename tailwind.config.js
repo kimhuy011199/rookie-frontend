@@ -5,10 +5,12 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        primary: '#17c37b',
+        primary: '#36bcfb',
+        secondary: '#5ec9fc',
+        dark: '#182133',
       },
       fontFamily: {
-        sans: ['Poppins'],
+        sans: ['Inter'],
       },
     },
   },

@@ -15,7 +15,7 @@ import {
   PASSWORD_PATTERN,
   DISPLAYNAME_PATTERN,
 } from '../../../shared/constants/patterns';
-import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
+import { ReactComponent as Logo } from '../../../assets/images/favicon.svg';
 import style from '../style.module.css';
 
 export interface RegisterUserInterface {
@@ -60,6 +60,7 @@ function Register() {
         <Logo />
       </div>
       <h2 className={style.heading}>{t('auth.register.desc')}</h2>
+      <p className={style.sub}>{t('auth.register.sub')}</p>
       <div className={style.form}>
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <FormGroup
@@ -127,6 +128,7 @@ function Register() {
             label={t('auth.label.submit')}
             loading={isLoading}
             variant="primary"
+            full
           />
           {isError && <span className={style.serverError}>{message}</span>}
         </form>

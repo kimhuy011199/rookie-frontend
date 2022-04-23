@@ -11,7 +11,7 @@ import {
   EMAIL_PATTERN,
   PASSWORD_PATTERN,
 } from '../../../shared/constants/patterns';
-import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
+import { ReactComponent as Logo } from '../../../assets/images/favicon.svg';
 import style from '../style.module.css';
 
 export interface LoginUserInterface {
@@ -52,6 +52,7 @@ function Login() {
         <Logo />
       </div>
       <h2 className={style.heading}>{t('auth.login.desc')}</h2>
+      <p className={style.sub}>{t('auth.login.sub')}</p>
       <div className={style.form}>
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <FormGroup
@@ -88,6 +89,7 @@ function Login() {
             label={t('auth.label.submit')}
             loading={isLoading}
             variant="primary"
+            full
           />
           {isError && <span className={style.serverError}>{message}</span>}
         </form>

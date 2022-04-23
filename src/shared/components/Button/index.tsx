@@ -2,6 +2,7 @@ import React from 'react';
 import style from './style.module.css';
 
 interface FormGroupInterface {
+  full?: boolean;
   loading?: boolean;
   type?: any;
   label?: string;
@@ -10,7 +11,7 @@ interface FormGroupInterface {
 }
 
 const FormGroup = (props: FormGroupInterface) => {
-  const { variant, type, label, loading, handleFuncion } = props;
+  const { full = false, variant, type, label, loading, handleFuncion } = props;
   const generateClassName = () => {
     switch (variant) {
       case 'primary':
@@ -24,7 +25,7 @@ const FormGroup = (props: FormGroupInterface) => {
 
   return (
     <button
-      className={`${style.button} ${generateClassName()}`}
+      className={`${style.button} ${generateClassName()} ${full && style.full}`}
       disabled={loading}
       type={type}
       onClick={handleFuncion}

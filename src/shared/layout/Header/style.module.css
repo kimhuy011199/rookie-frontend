@@ -1,5 +1,5 @@
 .header {
-  @apply py-4 mb-8 border-b border-b-gray-100 bg-white;
+  @apply py-3.5 bg-white fixed w-full z-10;
 }
 
 .container {
@@ -7,7 +7,7 @@
 }
 
 .logo {
-  @apply w-28;
+  @apply w-24;
 }
 
 .list {

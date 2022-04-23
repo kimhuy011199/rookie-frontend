@@ -3,11 +3,17 @@
 }
 
 .heading {
-  @apply text-2xl font-medium;
+  @apply text-3xl font-medium;
+}
+
+.sub {
+  @apply text-gray-500 text-xl mt-1.5;
 }
 
 .form {
-  @apply border border-gray-100 rounded-xl w-80 px-4 py-6 mt-5 mb-4 bg-white;
+  @apply rounded-xl px-5 py-6 mt-5 mb-4 bg-white;
+  max-width: 22rem;
+  width: 22rem;
 }
 
 .link {
@@ -15,7 +21,7 @@
 }
 
 .logo {
-  @apply w-40 mx-auto mb-6 mt-4;
+  @apply w-16 mx-auto mb-4 mt-3;
 }
 
 .serverError {

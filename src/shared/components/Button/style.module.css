@@ -1,11 +1,15 @@
 .button {
-  @apply px-4 py-2 rounded-md;
+  @apply px-4 py-2 rounded-md ease-in duration-100;
 }
 
 .primary {
-  @apply bg-primary text-white disabled:bg-gray-300;
+  @apply bg-primary text-white disabled:bg-gray-300 hover:bg-secondary;
 }
 
 .outline {
-  @apply border border-primary bg-white text-primary disabled:bg-gray-300;
+  @apply border border-primary bg-white text-primary disabled:bg-gray-300 hover:border-secondary;
+}
+
+.full {
+  @apply w-full;
 }
