@@ -58,6 +58,8 @@ const AskQuestion = () => {
           <form onSubmit={handleSubmit(handleSubmitForm)}>
             <FormGroup
               label={t('questions.label.title')}
+              boldLabel
+              subLabel={t('questions.label.sub_title')}
               error={errors.title?.message}
             >
               <Input
@@ -69,6 +71,8 @@ const AskQuestion = () => {
             </FormGroup>
             <FormGroup
               label={t('questions.label.content')}
+              boldLabel
+              subLabel={t('questions.label.sub_content')}
               error={errors.content?.message}
             >
               <TextArea
@@ -79,7 +83,11 @@ const AskQuestion = () => {
                 })}
               />
             </FormGroup>
-            <FormGroup label={t('questions.label.tags')}>
+            <FormGroup
+              label={t('questions.label.tags')}
+              boldLabel
+              subLabel={t('questions.label.sub_tags')}
+            >
               <TagInput tags={tags} setTags={setTags} />
             </FormGroup>
             <div className={style.action}>

@@ -3,7 +3,7 @@
 }
 
 .img {
-  @apply opacity-60 w-2/3 fixed top-32 left-1/4 -translate-x-2/3 -translate-y-1/2 max-w-none;
+  @apply opacity-50 w-full fixed top-60 left-full -translate-x-2/3 -translate-y-1/2 max-w-none;
 }
 
 .grid {

@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './style.module.css';
 
-interface FormGroupInterface {
+interface ButtonInterface {
   full?: boolean;
   loading?: boolean;
   type?: any;
@@ -10,7 +10,7 @@ interface FormGroupInterface {
   handleFuncion?: () => void;
 }
 
-const FormGroup = (props: FormGroupInterface) => {
+const Button = (props: ButtonInterface) => {
   const { full = false, variant, type, label, loading, handleFuncion } = props;
   const generateClassName = () => {
     switch (variant) {
@@ -35,4 +35,4 @@ const FormGroup = (props: FormGroupInterface) => {
   );
 };
 
-export default FormGroup;
+export default Button;

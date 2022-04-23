@@ -32,8 +32,11 @@
     "ask_question_title": "Ask a public question",
     "label": {
       "title": "Title",
+      "sub_title": "Be specific and imagine you’re asking a question to another person",
       "content": "Content",
+      "sub_content": "Include all the information someone would need to answer your question",
       "tags": "Tags",
+      "sub_tags": "Add up to 5 tags to describe what your question is about",
       "submit": "Submit",
       "preview": "Preview"
     }

@@ -1,5 +1,5 @@
 .heading {
-  @apply text-2xl font-normal;
+  @apply text-2xl font-normal py-2;
 }
 
 .container {
@@ -7,7 +7,7 @@
 }
 
 .form {
-  @apply col-span-2;
+  @apply col-span-2 bg-white p-5 rounded-xl;
 }
 
 .action {
