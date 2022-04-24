@@ -13,3 +13,7 @@
 .action {
   @apply flex justify-between;
 }
+
+.serverError {
+  @apply block mx-auto text-red-500 mt-3 -mb-1 text-sm;
+}

@@ -5,6 +5,7 @@ import questionService from './questionService';
 export interface QuestionInputInterface {
   title: string;
   content: string;
+  tags?: string[];
 }
 
 const initialState = {

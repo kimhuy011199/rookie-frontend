@@ -11,6 +11,7 @@ import TextArea from '../../../shared/components/TextArea';
 import TagInput from '../../../shared/components/TagInput';
 import { useDialog } from '../../../shared/components/Dialog/Provider';
 import PreviewDialog from '../../../shared/components/Dialog/dialogs/preview-dialog';
+import { createQuestion } from '../../../stores/questions/questionSlice';
 
 export interface AskQuestionInterface {
   title: string;
@@ -28,7 +29,7 @@ const AskQuestion = () => {
     formState: { errors },
   } = useForm<AskQuestionInterface>();
 
-  const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const AskQuestion = () => {
 
   const handleSubmitForm = (data: AskQuestionInterface) => {
     const questionData = { ...data, tags };
+    dispatch(createQuestion(questionData));
     console.log(questionData);
   };
 
