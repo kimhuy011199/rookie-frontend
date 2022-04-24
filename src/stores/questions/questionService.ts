@@ -22,6 +22,15 @@ const getQuestionById = async (questionId: string) => {
   return response.data;
 };
 
+// Update user question
+const updateQuestion = async (
+  questionId: string,
+  data: QuestionInputInterface
+) => {
+  const response = await api().put(`${endpoint}/${questionId}`, data);
+  return response.data;
+};
+
 // Delete user question
 const deleteQuestion = async (questionId: string) => {
   const response = await api().delete(`${endpoint}/${questionId}`);
@@ -32,6 +41,7 @@ const questionService = {
   createQuestion,
   getQuestions,
   getQuestionById,
+  updateQuestion,
   deleteQuestion,
 };
 

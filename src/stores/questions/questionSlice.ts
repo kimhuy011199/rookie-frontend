@@ -58,6 +58,19 @@ export const getQuestionById = createAsyncThunk(
   }
 );
 
+// Update user question
+export const updateQuestion = createAsyncThunk(
+  'questions/update',
+  async (data: any, thunkAPI) => {
+    try {
+      return await questionService.updateQuestion(data.id, data.updatedData);
+    } catch (error: any) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Delete user question
 export const deleteQuestion = createAsyncThunk(
   'questions/delete',
@@ -114,6 +127,19 @@ export const questionSlice = createSlice({
         state.question = action.payload;
       })
       .addCase(getQuestionById.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateQuestion.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateQuestion.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.question = action.payload;
+      })
+      .addCase(updateQuestion.rejected, (state, action: any) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

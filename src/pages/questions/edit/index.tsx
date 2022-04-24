@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getQuestionById } from '../../../stores/questions/questionSlice';
+import {
+  getQuestionById,
+  updateQuestion,
+} from '../../../stores/questions/questionSlice';
 import style from './style.module.css';
 import Spinner from '../../../shared/components/Spinner';
 import NotFound from '../../../shared/components/NotFound';
@@ -16,18 +19,21 @@ const EditQuestion = () => {
   const { question, isLoading, isError, message } = useSelector(
     (state: any) => state.questions
   );
+  const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    // Validate user
     if (id) {
       dispatch(getQuestionById(id));
     }
   }, [id, dispatch]);
 
   const submitForm = (data: any) => {
-    // Dispatch update question
-    console.log(data);
+    dispatch(updateQuestion({ id: question._id, updatedData: data }));
   };
+
+  if (question?.user && question.user !== user.id) {
+    return null;
+  }
 
   return (
     <>
