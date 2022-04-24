@@ -4,14 +4,16 @@ import style from './style.module.css';
 interface TextAreaInterface {
   error?: string;
   canResized?: boolean;
+  defaultValue?: string;
 }
 
 type TextAreaType = React.HTMLProps<HTMLTextAreaElement> & TextAreaInterface;
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaType>(
-  ({ error, canResized = true, ...rest }, ref) => {
+  ({ error, defaultValue, canResized = true, ...rest }, ref) => {
     const inputProps = {
       ref,
+      defaultValue,
       className: `${style.inputText} ${error && style.errorInput} ${
         !canResized && style.resize
       }`,

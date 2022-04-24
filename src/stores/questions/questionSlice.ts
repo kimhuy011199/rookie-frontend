@@ -50,8 +50,10 @@ export const getQuestionById = createAsyncThunk(
     try {
       return await questionService.getQuestionById(id);
     } catch (error: any) {
+      const errorCode = error?.response?.status;
       const message = error?.response?.data?.message;
-      return thunkAPI.rejectWithValue(message);
+      const errorResponse = { errorCode, message };
+      return thunkAPI.rejectWithValue(errorResponse);
     }
   }
 );

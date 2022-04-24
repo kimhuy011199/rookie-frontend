@@ -1,0 +1,11 @@
+.notFound {
+  @apply mx-auto max-w-md bg-white rounded-xl pt-12 pb-10 flex flex-col justify-center items-center gap-5 mt-10;
+}
+
+.title {
+  @apply text-4xl font-semibold;
+}
+
+.content {
+  @apply text-2xl uppercase font-medium;
+}

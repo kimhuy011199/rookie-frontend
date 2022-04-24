@@ -41,5 +41,10 @@
       "submit": "Submit",
       "preview": "Preview"
     }
+  },
+  "not_found": {
+    "title": "404",
+    "content": "Page not found",
+    "action": "Go to homepage"
   }
 }

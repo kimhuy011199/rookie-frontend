@@ -5,12 +5,13 @@ import { getQuestionById } from '../../../stores/questions/questionSlice';
 import style from './style.module.css';
 import MarkdownRender from '../../../shared/components/Markdown';
 import Spinner from '../../../shared/components/Spinner';
+import NotFound from '../../../shared/components/NotFound';
 
 const SingleQuestion = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const { question, isLoading, isError } = useSelector(
+  const { question, isLoading, isError, message } = useSelector(
     (state: any) => state.questions
   );
 
@@ -20,16 +21,14 @@ const SingleQuestion = () => {
     }
   }, [id, dispatch]);
 
-  if (isLoading) {
-  }
-
   return (
     <>
       <Spinner isLoading={isLoading} />
+      <NotFound isNotFound={isError && message?.errorCode === 404} />
       {question && (
         <div className={style.content}>
           <h2 className={style.title}>{question.title}</h2>
-          <MarkdownRender content={question.content} htmlCode />
+          <MarkdownRender content={question.content} />
         </div>
       )}
     </>
