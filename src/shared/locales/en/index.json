@@ -31,6 +31,7 @@
   "questions": {
     "ask_question_title": "Ask a public question",
     "label": {
+      "question": "Question",
       "title": "Title",
       "sub_title": "Be specific and imagine you’re asking a question to another person",
       "content": "Content",

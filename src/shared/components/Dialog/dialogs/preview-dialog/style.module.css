@@ -1,5 +1,11 @@
-.heading {
+.head {
+  @apply border-b border-gray-300 pb-4 mb-6;
 }
 
-.content {
+.heading {
+  @apply text-2xl font-medium;
+}
+
+.label {
+  @apply uppercase text-xs font-medium p-1 px-2 bg-primary rounded-md text-white inline-block mb-2;
 }
