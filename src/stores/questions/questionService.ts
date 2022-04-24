@@ -16,6 +16,12 @@ const getQuestions = async () => {
   return response.data;
 };
 
+// Get question by id
+const getQuestionById = async (questionId: string) => {
+  const response = await api().get(`${endpoint}/${questionId}`);
+  return response.data;
+};
+
 // Delete user question
 const deleteQuestion = async (questionId: string) => {
   const response = await api().delete(`${endpoint}/${questionId}`);
@@ -25,6 +31,7 @@ const deleteQuestion = async (questionId: string) => {
 const questionService = {
   createQuestion,
   getQuestions,
+  getQuestionById,
   deleteQuestion,
 };
 

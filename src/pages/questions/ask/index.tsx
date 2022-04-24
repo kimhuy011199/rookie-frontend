@@ -41,7 +41,6 @@ const AskQuestion = () => {
   const handleSubmitForm = (data: AskQuestionInterface) => {
     const questionData = { ...data, tags };
     dispatch(createQuestion(questionData));
-    console.log(questionData);
   };
 
   const previewQuestion = () => {

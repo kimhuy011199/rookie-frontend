@@ -10,6 +10,7 @@ export interface QuestionInputInterface {
 
 const initialState = {
   questions: [],
+  question: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -35,6 +36,19 @@ export const getQuestions = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       return await questionService.getQuestions();
+    } catch (error: any) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get question by id
+export const getQuestionById = createAsyncThunk(
+  'questions/getById',
+  async (id: string, thunkAPI) => {
+    try {
+      return await questionService.getQuestionById(id);
     } catch (error: any) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -85,6 +99,19 @@ export const questionSlice = createSlice({
         state.questions = action.payload;
       })
       .addCase(getQuestions.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getQuestionById.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getQuestionById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.question = action.payload;
+      })
+      .addCase(getQuestionById.rejected, (state, action: any) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

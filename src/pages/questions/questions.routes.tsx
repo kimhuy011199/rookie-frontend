@@ -5,6 +5,7 @@ import style from './style.module.css';
 
 import Questions from '.';
 import AskQuestion from './ask';
+import SingleQuestion from './single';
 
 const QuestionsRoutes = () => {
   const { user } = useSelector((state: any) => state.auth);
@@ -19,6 +20,7 @@ const QuestionsRoutes = () => {
       <Routes>
         <Route path="/" element={<Questions />} />
         <Route path="/ask" element={<AskQuestion />} />
+        <Route path="/:id" element={<SingleQuestion />} />
       </Routes>
     </div>
   );
