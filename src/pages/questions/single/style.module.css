@@ -1,3 +1,7 @@
 .content {
   @apply py-6 px-8 bg-white rounded-2xl max-w-3xl mx-auto;
 }
+
+.title {
+  @apply text-2xl mb-6 mt-2 pb-6 border-b border-gray-200;
+}

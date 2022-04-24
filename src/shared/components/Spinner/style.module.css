@@ -3,7 +3,7 @@
 }
 
 .spinner {
-  @apply w-16 h-16 border-8 rounded-full border-t-black border-b-black;
+  @apply w-16 h-16 border-8 rounded-full border-l-gray-100 border-r-gray-100 border-t-primary border-b-primary;
   animation: spin 1.2s linear infinite;
 }
 

@@ -24,11 +24,12 @@ function Questions() {
     console.log({ questions, isError, message });
   }, [questions, isError, message]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
-  return <h2>Questions page</h2>;
+  return (
+    <>
+      <Spinner isLoading={isLoading} />
+      <h2>Questions page</h2>;
+    </>
+  );
 }
 
 export default Questions;

@@ -21,13 +21,14 @@ const SingleQuestion = () => {
   }, [id, dispatch]);
 
   if (isLoading) {
-    return <Spinner />;
   }
 
   return (
     <>
+      <Spinner isLoading={isLoading} />
       {question && (
         <div className={style.content}>
+          <h2 className={style.title}>{question.title}</h2>
           <MarkdownRender content={question.content} htmlCode />
         </div>
       )}
