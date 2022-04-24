@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import style from './style.module.css';
@@ -34,7 +34,7 @@ const AskQuestion = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { questions, isLoading, isError, isSuccess, message } = useSelector(
+  const { question, isLoading, isError, isSuccess, message } = useSelector(
     (state: any) => state.questions
   );
 
@@ -50,6 +50,12 @@ const AskQuestion = () => {
     }
     appendDialog(<PreviewDialog title={title} content={content} />);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(`/questions/${question._id}`);
+    }
+  }, [isSuccess, navigate, question]);
 
   return (
     <>
