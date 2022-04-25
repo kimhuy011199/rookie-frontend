@@ -5,7 +5,8 @@ import { getQuestionById } from '../../../stores/questions/questionSlice';
 import style from './style.module.css';
 import MarkdownRender from '../../../shared/components/Markdown';
 import Spinner from '../../../shared/components/Spinner';
-import NotFound from '../../../shared/components/NotFound';
+import Error from '../../../shared/components/Error';
+import { ERROR_CODE } from '../../../shared/constants/enums';
 
 const SingleQuestion = () => {
   const { id } = useParams();
@@ -24,7 +25,10 @@ const SingleQuestion = () => {
   return (
     <>
       <Spinner isLoading={isLoading} />
-      <NotFound isNotFound={isError && message?.errorCode === 404} />
+      <Error
+        show={isError && message?.errorCode === 404}
+        code={ERROR_CODE.NOT_FOUND}
+      />
       {question && (
         <div className={style.content}>
           <h2 className={style.title}>{question.title}</h2>

@@ -1,4 +1,4 @@
-.notFound {
+.container {
   @apply mx-auto max-w-md bg-white rounded-xl pt-12 pb-10 flex flex-col justify-center items-center gap-5 mt-10;
 }
 

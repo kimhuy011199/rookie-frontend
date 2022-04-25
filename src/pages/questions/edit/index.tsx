@@ -7,9 +7,10 @@ import {
 } from '../../../stores/questions/questionSlice';
 import style from './style.module.css';
 import Spinner from '../../../shared/components/Spinner';
-import NotFound from '../../../shared/components/NotFound';
+import Error from '../../../shared/components/Error';
 import QuestionForm from '../../../shared/components/QuestionForm';
 import { useTranslation } from 'react-i18next';
+import { ERROR_CODE } from '../../../shared/constants/enums';
 
 const EditQuestion = () => {
   const { id } = useParams();
@@ -32,13 +33,16 @@ const EditQuestion = () => {
   };
 
   if (question?.user && question.user !== user.id) {
-    return null;
+    return <Error code={ERROR_CODE.FORBIDDEN} />;
   }
 
   return (
     <>
       <Spinner isLoading={isLoading} />
-      <NotFound isNotFound={isError && message?.errorCode === 404} />
+      <Error
+        show={isError && message?.errorCode === 404}
+        code={ERROR_CODE.NOT_FOUND}
+      />
       {question && (
         <>
           <h2 className={style.heading}>{t('questions.ask_question_title')}</h2>

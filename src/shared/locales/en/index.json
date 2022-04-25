@@ -46,5 +46,10 @@
     "title": "404",
     "content": "Page not found",
     "action": "Go to homepage"
+  },
+  "forbidden": {
+    "title": "403",
+    "content": "Access denied",
+    "action": "Go to homepage"
   }
 }
