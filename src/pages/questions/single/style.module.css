@@ -1,7 +1,15 @@
-.content {
-  @apply py-6 px-8 bg-white rounded-2xl max-w-3xl mx-auto;
+.container {
+  @apply grid grid-cols-3 gap-4;
 }
 
-.title {
-  @apply text-2xl mb-6 mt-2 pb-6 border-b border-gray-200;
+.main {
+  @apply col-span-2;
+}
+
+.heading {
+  @apply text-2xl font-normal mb-6;
+}
+
+.answers {
+  @apply flex flex-col gap-4 mt-4;
 }

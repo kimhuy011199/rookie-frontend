@@ -1,0 +1,35 @@
+.comment {
+  @apply flex items-start;
+}
+
+.img {
+  @apply w-10 h-10 pt-1 mr-3;
+}
+
+.avatar {
+  @apply w-10 h-10;
+}
+
+.main {
+  @apply bg-white rounded-xl flex-1 border border-gray-200;
+}
+
+.header {
+  @apply flex items-center bg-gray-50 px-5 py-3 rounded-t-xl border-b border-gray-200;
+}
+
+.info {
+  @apply mr-auto;
+}
+
+.content {
+  @apply px-5 py-3.5;
+}
+
+.user {
+  @apply font-medium;
+}
+
+.date {
+  @apply text-gray-500;
+}

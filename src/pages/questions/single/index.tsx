@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getQuestionById } from '../../../stores/questions/questionSlice';
 import style from './style.module.css';
-import MarkdownRender from '../../../shared/components/Markdown';
 import Spinner from '../../../shared/components/Spinner';
 import Error from '../../../shared/components/Error';
-import { ERROR_CODE } from '../../../shared/constants/enums';
+import { COMMENT_TYPE, ERROR_CODE } from '../../../shared/constants/enums';
+import Comment from '../../../shared/components/Comment';
 
 const SingleQuestion = () => {
   const { id } = useParams();
@@ -30,10 +30,18 @@ const SingleQuestion = () => {
         code={ERROR_CODE.NOT_FOUND}
       />
       {question && (
-        <div className={style.content}>
-          <h2 className={style.title}>{question.title}</h2>
-          <MarkdownRender content={question.content} />
-        </div>
+        <>
+          <div className={style.container}>
+            <div className={style.main}>
+              <h2 className={style.heading}>{question.title}</h2>
+              <div className={style.question}>
+                <Comment type={COMMENT_TYPE.QUESTION} data={question} />
+              </div>
+              <div className={style.answers}></div>
+            </div>
+            <div className={style.suggestion}></div>
+          </div>
+        </>
       )}
     </>
   );

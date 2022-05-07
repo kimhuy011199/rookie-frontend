@@ -3,9 +3,9 @@
 }
 
 .img {
-  @apply opacity-50 w-full fixed top-60 left-full -translate-x-2/3 -translate-y-1/2 max-w-none;
+  @apply opacity-80 w-full fixed top-60 left-full -translate-x-2/3 -translate-y-1/2 max-w-none;
 }
 
 .grid {
-  @apply opacity-70 absolute inset-0 bg-top bg-[url(https://play.tailwindcss.com/img/grid.svg)] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))];
+  @apply opacity-40 absolute inset-0 bg-top bg-[url(https://play.tailwindcss.com/img/grid.svg)] [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))];
 }

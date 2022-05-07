@@ -40,7 +40,9 @@
       "sub_tags": "Add up to 5 tags to describe what your question is about",
       "submit": "Submit",
       "preview": "Preview"
-    }
+    },
+    "asked": "asked",
+    "answered": "answered"
   },
   "not_found": {
     "title": "404",

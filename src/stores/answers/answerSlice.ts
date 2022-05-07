@@ -4,6 +4,7 @@ import answerService from './answerService';
 
 export interface AnswerInputInterface {
   content: string;
+  questionId: string;
 }
 
 const initialState = {
