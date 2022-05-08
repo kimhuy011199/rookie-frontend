@@ -8,6 +8,8 @@ import Error from '../../../shared/components/Error';
 import { COMMENT_TYPE, ERROR_CODE } from '../../../shared/constants/enums';
 import Comment from '../../../shared/components/Comment';
 import CommentInput from '../../../shared/components/CommentInput';
+import { getAnswers } from '../../../stores/answers/answerSlice';
+import { Answer } from '../../../shared/constants/types/Answer';
 
 const SingleQuestion = () => {
   const { id } = useParams();
@@ -16,16 +18,20 @@ const SingleQuestion = () => {
   const { question, isLoading, isError, message } = useSelector(
     (state: any) => state.questions
   );
+  const { answers, isAnswersLoading } = useSelector(
+    (state: any) => state.answers
+  );
 
   useEffect(() => {
     if (id) {
       dispatch(getQuestionById(id));
+      dispatch(getAnswers(id));
     }
   }, [id, dispatch]);
 
   return (
     <>
-      <Spinner isLoading={isLoading} />
+      <Spinner isLoading={isLoading || isAnswersLoading} />
       <Error
         show={isError && message?.errorCode === 404}
         code={ERROR_CODE.NOT_FOUND}
@@ -38,7 +44,15 @@ const SingleQuestion = () => {
               <div className={style.question}>
                 <Comment type={COMMENT_TYPE.QUESTION} data={question} />
               </div>
-              <div className={style.answers}></div>
+              {answers.length > 0 && (
+                <ul className={style.answers}>
+                  {answers.map((answer: Answer) => (
+                    <li key={answer._id}>
+                      <Comment type={COMMENT_TYPE.COMMENT} data={answer} />
+                    </li>
+                  ))}
+                </ul>
+              )}
               <div className={style.comment}>
                 <CommentInput type={COMMENT_TYPE.COMMENT} questionId={id} />
               </div>

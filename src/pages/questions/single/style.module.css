@@ -13,3 +13,7 @@
 .answers {
   @apply flex flex-col gap-4 mt-4;
 }
+
+.comment {
+  @apply mt-4;
+}
