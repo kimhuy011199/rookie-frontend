@@ -1,5 +1,5 @@
 .button {
-  @apply px-4 py-2 rounded-md ease-in duration-200;
+  @apply px-5 py-2 rounded-md ease-in duration-200;
 }
 
 .primary {
@@ -8,6 +8,10 @@
 
 .outline {
   @apply border border-primary bg-white text-primary disabled:bg-gray-300 hover:border-secondary;
+}
+
+.blank {
+  @apply text-black hover:text-secondary;
 }
 
 .full {

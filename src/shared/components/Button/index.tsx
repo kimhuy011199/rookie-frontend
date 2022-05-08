@@ -6,8 +6,8 @@ interface ButtonInterface {
   loading?: boolean;
   type?: any;
   label?: string;
-  variant?: 'primary' | 'outline';
-  handleFuncion?: () => void;
+  variant?: 'primary' | 'outline' | 'blank';
+  handleFuncion?: (event?: any) => void;
 }
 
 const Button = (props: ButtonInterface) => {
@@ -19,7 +19,7 @@ const Button = (props: ButtonInterface) => {
       case 'outline':
         return style.outline;
       default:
-        return style.primary;
+        return style.blank;
     }
   };
 

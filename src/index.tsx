@@ -15,8 +15,8 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <I18nextProvider i18n={i18n}>
-        <DialogProvider>
-          <Provider store={store}>
+        <Provider store={store}>
+          <DialogProvider>
             <App />
             <ToastContainer
               position="bottom-right"
@@ -30,8 +30,8 @@ ReactDOM.render(
               toastClassName={'toast'}
               closeButton={false}
             />
-          </Provider>
-        </DialogProvider>
+          </DialogProvider>
+        </Provider>
       </I18nextProvider>
     </BrowserRouter>
   </React.StrictMode>,

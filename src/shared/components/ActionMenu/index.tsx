@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { COMMENT_ACTIONS } from '../../constants/enums';
 import { useDialog } from '../Dialog/Provider';
 import { Menu } from '../Menu';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import DeleteCommentDialog from '../Dialog/dialogs/delete-comment';
 
 interface ActionMenuInterface {
   data?: any;
@@ -28,7 +28,7 @@ const ActionMenu = (props: ActionMenuInterface) => {
         console.log('edit');
         break;
       case COMMENT_ACTIONS.DELETE:
-        console.log('delete');
+        appendDialog(<DeleteCommentDialog data={data} />);
         break;
       default:
         break;

@@ -7,7 +7,7 @@ module.exports = {
         current: 'currentColor',
         primary: '#36bcfb',
         secondary: '#5ec9fc',
-        dark: '#182133',
+        dark: '#382133',
       },
       fontFamily: {
         sans: ['Inter'],

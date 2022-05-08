@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from './style.module.css';
-import { FiMoreHorizontal } from 'react-icons/fi';
 import MarkdownRender from '../Markdown';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ActionMenu from '../ActionMenu';
+import { COMMENT_TYPE } from '../../constants/enums';
 
 interface CommentInterface {
   type: number;
@@ -15,7 +15,6 @@ interface CommentInterface {
 const Comment = (props: CommentInterface) => {
   const { type, data } = props;
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
 
   const renderTime = () => {
@@ -44,9 +43,9 @@ const Comment = (props: CommentInterface) => {
             <span className={style.user}>{'displayName'}</span>
             <span className={style.date}>{renderTime()}</span>
           </div>
-          {data?.user === user.id && (
+          {data?.user === user.id && type !== COMMENT_TYPE.QUESTION && (
             <div className={style.action}>
-              <ActionMenu />
+              <ActionMenu data={data} />
             </div>
           )}
         </div>
