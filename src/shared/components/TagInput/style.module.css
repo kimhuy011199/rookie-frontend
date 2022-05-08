@@ -1,5 +1,5 @@
 .container {
-  @apply flex border border-gray-100 rounded-md p-2 gap-2 items-center;
+  @apply flex border border-gray-200 rounded-md p-2 gap-2 items-center;
 }
 
 .tags {

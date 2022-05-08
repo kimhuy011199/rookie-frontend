@@ -13,7 +13,6 @@ interface CommentInterface {
 
 const Comment = (props: CommentInterface) => {
   const { type, data } = props;
-  console.log({ data });
   const { t } = useTranslation();
   const dispatch = useDispatch();
 

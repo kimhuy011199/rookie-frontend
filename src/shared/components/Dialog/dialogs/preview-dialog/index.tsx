@@ -1,17 +1,19 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { COMMENT_TYPE } from '../../../../constants/enums';
 import MarkdownRender from '../../../Markdown';
 import { Dialog } from '../../Provider';
 import style from './style.module.css';
 
 interface PreviewDialogInterface {
-  title: string;
+  title?: string;
   content: string;
   close?: Function;
+  type?: number;
 }
 
 const PreviewDialog = (props: PreviewDialogInterface) => {
-  const { title, content, close } = props;
+  const { title, content, close, type = COMMENT_TYPE.QUESTION } = props;
   const inlineStyle = {
     maxWidth: '60rem',
     minHeight: '40rem',
@@ -23,10 +25,12 @@ const PreviewDialog = (props: PreviewDialogInterface) => {
 
   return (
     <Dialog close={close} inlineStyle={inlineStyle}>
-      <div className={style.head}>
-        <span className={style.label}>{t('questions.label.question')}</span>
-        <h2 className={style.heading}>{title}</h2>
-      </div>
+      {type === COMMENT_TYPE.QUESTION && (
+        <div className={style.head}>
+          <span className={style.label}>{t('questions.label.question')}</span>
+          <h2 className={style.heading}>{title}</h2>
+        </div>
+      )}
       <MarkdownRender content={content} />
     </Dialog>
   );

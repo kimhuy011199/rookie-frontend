@@ -11,7 +11,7 @@
 }
 
 .form {
-  @apply rounded-xl px-5 py-6 mt-5 mb-4 bg-white;
+  @apply rounded-xl px-5 py-6 mt-5 mb-4 bg-white border-gray-200 border;
   max-width: 22rem;
   width: 22rem;
 }

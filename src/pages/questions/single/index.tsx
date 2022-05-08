@@ -7,6 +7,7 @@ import Spinner from '../../../shared/components/Spinner';
 import Error from '../../../shared/components/Error';
 import { COMMENT_TYPE, ERROR_CODE } from '../../../shared/constants/enums';
 import Comment from '../../../shared/components/Comment';
+import CommentInput from '../../../shared/components/CommentInput';
 
 const SingleQuestion = () => {
   const { id } = useParams();
@@ -38,6 +39,9 @@ const SingleQuestion = () => {
                 <Comment type={COMMENT_TYPE.QUESTION} data={question} />
               </div>
               <div className={style.answers}></div>
+              <div className={style.comment}>
+                <CommentInput type={COMMENT_TYPE.COMMENT} questionId={id} />
+              </div>
             </div>
             <div className={style.suggestion}></div>
           </div>

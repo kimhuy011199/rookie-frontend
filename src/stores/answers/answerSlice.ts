@@ -21,7 +21,9 @@ export const createAnswer = createAsyncThunk(
   'answers/create',
   async (answerData: AnswerInputInterface, thunkAPI) => {
     try {
-      return await answerService.createAnswer(answerData);
+      const data = await answerService.createAnswer(answerData);
+      console.log(data);
+      return data;
     } catch (error: any) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -82,7 +84,7 @@ export const answerSlice = createSlice({
       .addCase(createAnswer.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.answer = action.payload;
+        state.answers = state.answers.push(action.payload);
       })
       .addCase(createAnswer.rejected, (state, action: any) => {
         state.isLoading = false;
