@@ -15,3 +15,7 @@
 .prevent-scroll {
   @apply overflow-hidden;
 }
+
+.toast {
+  @apply min-h-0 bg-primary text-white rounded-lg shadow-none !important;
+}

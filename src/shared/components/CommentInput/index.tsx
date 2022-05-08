@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import style from './style.module.css';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
 import Button from '../Button';
@@ -49,6 +50,7 @@ const CommentInput = (props: CommentInputInterface) => {
       const submitData = { content: data.content, questionId };
       dispatch(createAnswer(submitData));
       reset();
+      toast(t('toast.add_answer_success'));
     }
   };
 
@@ -70,6 +72,7 @@ const CommentInput = (props: CommentInputInterface) => {
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <FormGroup>
             <TextArea
+              placeholder={t('placeholder.add_answer')}
               rows={6}
               defaultValue={data?.content || ''}
               {...register('content', {

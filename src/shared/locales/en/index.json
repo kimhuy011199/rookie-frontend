@@ -44,6 +44,12 @@
     "asked": "asked",
     "answered": "answered"
   },
+  "placeholder": {
+    "add_answer": "Leave your answer"
+  },
+  "toast": {
+    "add_answer_success": "Your answer was added"
+  },
   "not_found": {
     "title": "404",
     "content": "Page not found",
