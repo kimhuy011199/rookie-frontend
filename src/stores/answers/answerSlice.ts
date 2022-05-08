@@ -22,7 +22,6 @@ export const createAnswer = createAsyncThunk(
   async (answerData: AnswerInputInterface, thunkAPI) => {
     try {
       const data = await answerService.createAnswer(answerData);
-      console.log(data);
       return data;
     } catch (error: any) {
       const message = error?.response?.data?.message;

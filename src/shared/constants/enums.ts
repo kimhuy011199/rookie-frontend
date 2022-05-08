@@ -14,3 +14,8 @@ export enum COMMENT_TYPE {
   COMMENT = 2,
   REPLY = 3,
 }
+
+export enum COMMENT_ACTIONS {
+  EDIT = 1,
+  DELETE = 2,
+}

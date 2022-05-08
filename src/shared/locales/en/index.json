@@ -50,6 +50,10 @@
   "toast": {
     "add_answer_success": "Your answer was added"
   },
+  "menu": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
   "not_found": {
     "title": "404",
     "content": "Page not found",

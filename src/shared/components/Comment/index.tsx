@@ -5,6 +5,7 @@ import { FiMoreHorizontal } from 'react-icons/fi';
 import MarkdownRender from '../Markdown';
 import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
 import { useDispatch, useSelector } from 'react-redux';
+import ActionMenu from '../ActionMenu';
 
 interface CommentInterface {
   type: number;
@@ -15,6 +16,7 @@ const Comment = (props: CommentInterface) => {
   const { type, data } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state.auth);
 
   const renderTime = () => {
     const formatedDate = new Date(data?.createdAt).toLocaleTimeString('en-EN', {
@@ -42,9 +44,11 @@ const Comment = (props: CommentInterface) => {
             <span className={style.user}>{'displayName'}</span>
             <span className={style.date}>{renderTime()}</span>
           </div>
-          <div className={style.action}>
-            <FiMoreHorizontal />
-          </div>
+          {data?.user === user.id && (
+            <div className={style.action}>
+              <ActionMenu />
+            </div>
+          )}
         </div>
         <div className={style.content}>
           <MarkdownRender content={data?.content} />
