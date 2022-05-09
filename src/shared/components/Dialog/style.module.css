@@ -7,7 +7,7 @@
 }
 
 .dialogContainer {
-  @apply relative z-50 bg-white max-w-md w-full rounded-xl p-4;
+  @apply relative z-50 bg-white max-w-md w-full rounded-xl p-3.5;
 }
 
 .close {

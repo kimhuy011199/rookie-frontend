@@ -1,5 +1,5 @@
 .errorMessage {
-  @apply text-red-500 text-sm mt-1;
+  @apply text-red-500 text-sm;
 }
 
 .formGroup {

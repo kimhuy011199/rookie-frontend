@@ -52,6 +52,7 @@ const CommentInput = (props: CommentInputInterface) => {
 
   const handleSubmitForm = (inputData: InputInterface) => {
     if (questionId) {
+      // !defaultValue => create new answer
       if (!defaultValue) {
         const submitData = {
           content: inputData.content,
@@ -61,9 +62,14 @@ const CommentInput = (props: CommentInputInterface) => {
         reset();
         toast(t('toast.add_answer_success'));
       } else {
+        const newContent = getValues('content').trim();
+        if (newContent === defaultValue || newContent === '') {
+          onClose && onClose();
+          return;
+        }
         const submitData = {
           id: data._id,
-          updatedData: { content: getValues('content') },
+          updatedData: { content: newContent },
         };
         dispatch(updateAnswer(submitData));
         setValue('content', '');
