@@ -11,7 +11,10 @@ import PreviewDialog from '../Dialog/dialogs/preview-dialog';
 import FormGroup from '../FormGroup';
 import TextArea from '../TextArea';
 import { COMMENT_TYPE } from '../../constants/enums';
-import { createAnswer } from '../../../stores/answers/answerSlice';
+import {
+  createAnswer,
+  updateAnswer,
+} from '../../../stores/answers/answerSlice';
 
 export interface InputInterface {
   content: string;
@@ -21,15 +24,17 @@ interface CommentInputInterface {
   type: number;
   data?: any;
   questionId?: string;
+  defaultValue?: string;
+  onClose?: (event?: any) => void;
 }
 
 const CommentInput = (props: CommentInputInterface) => {
-  const { type, data, questionId } = props;
+  const { type, data, questionId, defaultValue, onClose } = props;
   const { t } = useTranslation();
   const { appendDialog } = useDialog();
   const dispatch = useDispatch();
 
-  const { register, getValues, handleSubmit, reset } =
+  const { register, getValues, handleSubmit, reset, setValue } =
     useForm<InputInterface>();
 
   const { answer, isLoading, isError, isSuccess, message } = useSelector(
@@ -45,12 +50,26 @@ const CommentInput = (props: CommentInputInterface) => {
     );
   };
 
-  const handleSubmitForm = (data: InputInterface) => {
+  const handleSubmitForm = (inputData: InputInterface) => {
     if (questionId) {
-      const submitData = { content: data.content, questionId };
-      dispatch(createAnswer(submitData));
-      reset();
-      toast(t('toast.add_answer_success'));
+      if (!defaultValue) {
+        const submitData = {
+          content: inputData.content,
+          questionId,
+        };
+        dispatch(createAnswer(submitData));
+        reset();
+        toast(t('toast.add_answer_success'));
+      } else {
+        const submitData = {
+          id: data._id,
+          updatedData: { content: getValues('content') },
+        };
+        dispatch(updateAnswer(submitData));
+        setValue('content', '');
+        toast(t('toast.edit_answer_success'));
+        onClose && onClose();
+      }
     }
   };
 
@@ -74,23 +93,31 @@ const CommentInput = (props: CommentInputInterface) => {
             <TextArea
               placeholder={t('placeholder.add_answer')}
               rows={6}
-              defaultValue={data?.content || ''}
+              defaultValue={defaultValue || ''}
               {...register('content', {
                 required: 'Content is required',
               })}
             />
           </FormGroup>
           <div className={style.actions}>
-            <Button
-              label={t('questions.label.submit')}
-              loading={isLoading}
-              variant="primary"
-            />
+            {onClose && (
+              <Button
+                label={t('questions.label.cancel')}
+                type="button"
+                variant="outline"
+                handleFuncion={onClose}
+              />
+            )}
             <Button
               label={t('questions.label.preview')}
               type="button"
               variant="outline"
               handleFuncion={previewQuestion}
+            />
+            <Button
+              label={t('questions.label.submit')}
+              loading={isLoading}
+              variant="primary"
             />
           </div>
         </form>

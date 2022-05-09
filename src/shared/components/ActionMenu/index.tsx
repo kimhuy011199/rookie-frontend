@@ -9,10 +9,11 @@ import DeleteCommentDialog from '../Dialog/dialogs/delete-comment';
 interface ActionMenuInterface {
   data?: any;
   type?: string;
+  onEdit?: (event?: any) => void;
 }
 
 const ActionMenu = (props: ActionMenuInterface) => {
-  const { data, type } = props;
+  const { data, onEdit, type } = props;
 
   const actionMenuOptions = [
     { value: COMMENT_ACTIONS.EDIT, label: 'menu.edit' },
@@ -25,7 +26,7 @@ const ActionMenu = (props: ActionMenuInterface) => {
   const handleActionChange = (event: any) => {
     switch (event.target.value) {
       case COMMENT_ACTIONS.EDIT:
-        console.log('edit');
+        onEdit && onEdit();
         break;
       case COMMENT_ACTIONS.DELETE:
         appendDialog(<DeleteCommentDialog data={data} />);

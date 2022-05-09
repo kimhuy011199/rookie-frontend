@@ -11,9 +11,9 @@
 }
 
 .main {
-  @apply bg-white rounded-xl flex-1 border border-gray-200 p-5 pb-4;
+  @apply bg-white rounded-xl flex-1 border border-gray-200 p-4;
 }
 
 .actions {
-  @apply flex justify-between mt-4;
+  @apply flex justify-end mt-4 gap-3;
 }

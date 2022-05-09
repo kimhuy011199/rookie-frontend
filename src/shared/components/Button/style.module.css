@@ -1,5 +1,5 @@
 .button {
-  @apply px-5 py-2 rounded-md ease-in duration-200;
+  @apply px-5 py-1.5 rounded-md ease-in duration-200;
 }
 
 .primary {

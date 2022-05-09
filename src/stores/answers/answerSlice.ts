@@ -8,7 +8,7 @@ export interface AnswerInputInterface {
 }
 
 const initialState = {
-  answers: [],
+  answers: [] as Answer[],
   answer: null,
   isError: false,
   isSuccess: false,
@@ -24,6 +24,9 @@ export const createAnswer = createAsyncThunk(
       const data = await answerService.createAnswer(answerData);
       return data;
     } catch (error: any) {
+      if (!error.response) {
+        throw new Error('No internet connection');
+      }
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
     }
@@ -107,9 +110,17 @@ export const answerSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateAnswer.fulfilled, (state, action) => {
+        const updatedAnswer = state.answers.findIndex(
+          (answer: Answer) => answer._id === action.payload._id
+        );
+        if (updatedAnswer !== -1) {
+          const updatedAnswers = state.answers.map((answer: Answer) =>
+            answer._id === action.payload._id ? action.payload : answer
+          );
+          state.answers = updatedAnswers;
+        }
         state.isLoading = false;
         state.isSuccess = true;
-        state.answer = action.payload;
       })
       .addCase(updateAnswer.rejected, (state, action: any) => {
         state.isLoading = false;

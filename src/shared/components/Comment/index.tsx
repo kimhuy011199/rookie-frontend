@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from './style.module.css';
 import MarkdownRender from '../Markdown';
@@ -6,6 +6,7 @@ import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
 import { useSelector } from 'react-redux';
 import ActionMenu from '../ActionMenu';
 import { COMMENT_TYPE } from '../../constants/enums';
+import CommentInput from '../CommentInput';
 
 interface CommentInterface {
   type: number;
@@ -14,8 +15,17 @@ interface CommentInterface {
 
 const Comment = (props: CommentInterface) => {
   const { type, data } = props;
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
   const { t } = useTranslation();
   const { user } = useSelector((state: any) => state.auth);
+
+  const handleEditComment = () => {
+    setOpenEdit(true);
+  };
+
+  const handleCloseEditComment = () => {
+    setOpenEdit(false);
+  };
 
   const renderTime = () => {
     const formatedDate = new Date(data?.createdAt).toLocaleTimeString('en-EN', {
@@ -23,21 +33,28 @@ const Comment = (props: CommentInterface) => {
       month: 'short',
       day: 'numeric',
     });
-    return ` ${t('questions.asked')} at ${formatedDate}`;
+    let action = '';
+    switch (type) {
+      case COMMENT_TYPE.QUESTION:
+        action = 'questions.asked';
+        break;
+      case COMMENT_TYPE.COMMENT:
+        action = 'questions.answered';
+        break;
+    }
+    return ` ${t(action)} at ${formatedDate}`;
   };
-
-  useEffect(() => {}, []);
 
   return (
     <div className={style.comment}>
-      <div className={style.img}>
+      <div hidden={openEdit} className={style.img}>
         {data?.img ? (
           <img src={data?.img} alt={data?.displayName} />
         ) : (
           <Avatar className={style.avatar} />
         )}
       </div>
-      <div className={style.main}>
+      <div hidden={openEdit} className={style.main}>
         <div className={style.header}>
           <div className={style.info}>
             <span className={style.user}>{'displayName'}</span>
@@ -45,7 +62,7 @@ const Comment = (props: CommentInterface) => {
           </div>
           {data?.user === user.id && type !== COMMENT_TYPE.QUESTION && (
             <div className={style.action}>
-              <ActionMenu data={data} />
+              <ActionMenu data={data} onEdit={handleEditComment} />
             </div>
           )}
         </div>
@@ -57,6 +74,17 @@ const Comment = (props: CommentInterface) => {
           <div className={style.tags}></div>
         </div>
       </div>
+      {openEdit && (
+        <div className={style.edit}>
+          <CommentInput
+            data={data}
+            type={COMMENT_TYPE.COMMENT}
+            defaultValue={data.content}
+            questionId={data.question}
+            onClose={handleCloseEditComment}
+          />
+        </div>
+      )}
     </div>
   );
 };

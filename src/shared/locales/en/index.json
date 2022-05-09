@@ -39,7 +39,8 @@
       "tags": "Tags",
       "sub_tags": "Add up to 5 tags to describe what your question is about",
       "submit": "Submit",
-      "preview": "Preview"
+      "preview": "Preview",
+      "cancel": "Cancel"
     },
     "asked": "asked",
     "answered": "answered"
@@ -49,7 +50,8 @@
   },
   "toast": {
     "add_answer_success": "Your answer was added",
-    "delete_answer_success": "Your answer was deleted"
+    "delete_answer_success": "Your answer was deleted",
+    "edit_answer_success": "Your answer was updated"
   },
   "dialog": {
     "delete_answer": "Delete answer",

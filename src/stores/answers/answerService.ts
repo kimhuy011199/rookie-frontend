@@ -4,6 +4,10 @@ import { AnswerInputInterface } from './answerSlice';
 
 const endpoint = ENDPOINT.ANSWERS;
 
+export interface AnswerUpdateInputInterface {
+  content: string;
+}
+
 // Create new answer
 const createAnswer = async (answerData: AnswerInputInterface) => {
   const response = await api().post(endpoint, answerData);
@@ -17,7 +21,10 @@ const getAnswers = async (questionId: string) => {
 };
 
 // Update user answer
-const updateAnswer = async (answerId: string, data: AnswerInputInterface) => {
+const updateAnswer = async (
+  answerId: string,
+  data: AnswerUpdateInputInterface
+) => {
   const response = await api().put(`${endpoint}/${answerId}`, data);
   return response.data;
 };

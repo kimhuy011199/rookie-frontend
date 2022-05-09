@@ -33,3 +33,7 @@
 .date {
   @apply text-gray-500;
 }
+
+.edit {
+  @apply w-full;
+}
