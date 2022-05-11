@@ -27,7 +27,7 @@ function Questions() {
   return (
     <>
       <Spinner isLoading={isLoading} />
-      <h2>Questions page</h2>;
+      <h2>Questions page</h2>
     </>
   );
 }

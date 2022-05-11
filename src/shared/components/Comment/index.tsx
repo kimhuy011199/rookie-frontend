@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import ActionMenu from '../ActionMenu';
 import { COMMENT_TYPE } from '../../constants/enums';
 import CommentInput from '../CommentInput';
+import Like from '../Like';
 
 interface CommentInterface {
   type: number;
@@ -60,7 +61,7 @@ const Comment = (props: CommentInterface) => {
             <span className={style.user}>{'displayName'}</span>
             <span className={style.date}>{renderTime()}</span>
           </div>
-          {data?.user === user.id && type !== COMMENT_TYPE.QUESTION && (
+          {data?.userId === user.id && type !== COMMENT_TYPE.QUESTION && (
             <div className={style.action}>
               <ActionMenu data={data} onEdit={handleEditComment} />
             </div>
@@ -70,7 +71,15 @@ const Comment = (props: CommentInterface) => {
           <MarkdownRender content={data?.content} />
         </div>
         <div className={style.footer}>
-          <div className={style.like}></div>
+          <div className={style.likes}>
+            {type !== COMMENT_TYPE.QUESTION && (
+              <Like
+                id={data._id}
+                isLiked={data?.userLikes && data?.userLikes[user.id]}
+                likesCount={data?.likesCount}
+              />
+            )}
+          </div>
           <div className={style.tags}></div>
         </div>
       </div>
@@ -80,7 +89,7 @@ const Comment = (props: CommentInterface) => {
             data={data}
             type={COMMENT_TYPE.COMMENT}
             defaultValue={data.content}
-            questionId={data.question}
+            questionId={data.questionId}
             onClose={handleCloseEditComment}
           />
         </div>

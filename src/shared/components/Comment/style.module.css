@@ -37,3 +37,7 @@
 .edit {
   @apply w-full;
 }
+
+.footer {
+  @apply px-4 pb-3 flex justify-between;
+}

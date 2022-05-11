@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   getQuestionById,
   updateQuestion,
@@ -15,9 +15,10 @@ import { ERROR_CODE } from '../../../shared/constants/enums';
 const EditQuestion = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { question, isLoading, isError, message } = useSelector(
+  const { question, isLoading, isError, message, isSuccess } = useSelector(
     (state: any) => state.questions
   );
   const { user } = useSelector((state: any) => state.auth);
@@ -28,11 +29,17 @@ const EditQuestion = () => {
     }
   }, [id, dispatch]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(`/questions/${question._id}`);
+    }
+  }, [isSuccess, navigate, question]);
+
   const submitForm = (data: any) => {
     dispatch(updateQuestion({ id: question._id, updatedData: data }));
   };
 
-  if (question?.user && question.user !== user.id) {
+  if (question?.userId && question.userId !== user.id) {
     return <Error code={ERROR_CODE.FORBIDDEN} />;
   }
 

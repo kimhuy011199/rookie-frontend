@@ -35,11 +35,18 @@ const deleteAnswer = async (answerId: string) => {
   return response.data;
 };
 
+// Like or unlike answer
+const likeOrUnlikeAnswer = async (answerId: string) => {
+  const response = await api().put(`${endpoint}/${answerId}/likes`);
+  return response.data;
+};
+
 const answerService = {
   createAnswer,
   getAnswers,
   updateAnswer,
   deleteAnswer,
+  likeOrUnlikeAnswer,
 };
 
 export default answerService;

@@ -1,9 +1,10 @@
 export interface Answer {
   _id: string;
-  user: string;
-  question: string;
+  userId: string;
+  questionId: string;
   content: string;
-  votes: number;
+  userLikes: object;
+  likesCount: number;
   createdAt: string;
   updatedAt: string;
   __v: number;

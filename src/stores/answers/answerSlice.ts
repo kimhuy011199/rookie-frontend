@@ -72,6 +72,19 @@ export const deleteAnswer = createAsyncThunk(
   }
 );
 
+// Like or unlike answer
+export const likeOrUnlikeAnswer = createAsyncThunk(
+  'answers/likes',
+  async (answerid: string, thunkAPI) => {
+    try {
+      return await answerService.likeOrUnlikeAnswer(answerid);
+    } catch (error: any) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const answerSlice = createSlice({
   name: 'answer',
   initialState,
@@ -138,6 +151,27 @@ export const answerSlice = createSlice({
         );
       })
       .addCase(deleteAnswer.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(likeOrUnlikeAnswer.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(likeOrUnlikeAnswer.fulfilled, (state, action) => {
+        const updatedAnswer = state.answers.findIndex(
+          (answer: Answer) => answer._id === action.payload._id
+        );
+        if (updatedAnswer !== -1) {
+          const updatedAnswers = state.answers.map((answer: Answer) =>
+            answer._id === action.payload._id ? action.payload : answer
+          );
+          state.answers = updatedAnswers;
+        }
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(likeOrUnlikeAnswer.rejected, (state, action: any) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

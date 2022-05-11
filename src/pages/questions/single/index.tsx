@@ -36,7 +36,7 @@ const SingleQuestion = () => {
         show={isError && message?.errorCode === 404}
         code={ERROR_CODE.NOT_FOUND}
       />
-      {question && (
+      {question?._id && (
         <>
           <div className={style.container}>
             <div className={style.main}>
