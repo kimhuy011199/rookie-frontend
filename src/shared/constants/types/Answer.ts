@@ -1,3 +1,5 @@
+import { User } from './User';
+
 export interface Answer {
   _id: string;
   userId: string;
@@ -7,5 +9,6 @@ export interface Answer {
   likesCount: number;
   createdAt: string;
   updatedAt: string;
+  user?: User;
   __v: number;
 }

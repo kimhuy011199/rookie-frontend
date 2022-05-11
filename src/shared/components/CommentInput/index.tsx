@@ -87,8 +87,12 @@ const CommentInput = (props: CommentInputInterface) => {
   return (
     <div className={style.container}>
       <div className={style.img}>
-        {data?.img ? (
-          <img src={data?.img} alt={data?.displayName} />
+        {data?.user?.avatarImg ? (
+          <img
+            src={data?.user?.avatarImg}
+            alt={data?.user?.displayName}
+            className={style.avatarImg}
+          />
         ) : (
           <Avatar className={style.avatar} />
         )}

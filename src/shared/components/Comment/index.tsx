@@ -49,8 +49,12 @@ const Comment = (props: CommentInterface) => {
   return (
     <div className={style.comment}>
       <div hidden={openEdit} className={style.img}>
-        {data?.img ? (
-          <img src={data?.img} alt={data?.displayName} />
+        {data?.user?.avatarImg ? (
+          <img
+            src={data?.user?.avatarImg}
+            alt={data?.user?.displayName}
+            className={style.avatarImg}
+          />
         ) : (
           <Avatar className={style.avatar} />
         )}
@@ -58,7 +62,7 @@ const Comment = (props: CommentInterface) => {
       <div hidden={openEdit} className={style.main}>
         <div className={style.header}>
           <div className={style.info}>
-            <span className={style.user}>{'displayName'}</span>
+            <span className={style.user}>{data?.user?.displayName}</span>
             <span className={style.date}>{renderTime()}</span>
           </div>
           {data?.userId === user.id && type !== COMMENT_TYPE.QUESTION && (

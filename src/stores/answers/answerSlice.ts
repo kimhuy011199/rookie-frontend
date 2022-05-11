@@ -123,12 +123,16 @@ export const answerSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateAnswer.fulfilled, (state, action) => {
-        const updatedAnswer = state.answers.findIndex(
+        const answerIndex = state.answers.findIndex(
           (answer: Answer) => answer._id === action.payload._id
         );
-        if (updatedAnswer !== -1) {
+        if (answerIndex !== -1) {
+          const updatedAnswer = {
+            ...action.payload,
+            user: state.answers[answerIndex].user,
+          };
           const updatedAnswers = state.answers.map((answer: Answer) =>
-            answer._id === action.payload._id ? action.payload : answer
+            answer._id === action.payload._id ? updatedAnswer : answer
           );
           state.answers = updatedAnswers;
         }
@@ -159,12 +163,16 @@ export const answerSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(likeOrUnlikeAnswer.fulfilled, (state, action) => {
-        const updatedAnswer = state.answers.findIndex(
+        const answerIndex = state.answers.findIndex(
           (answer: Answer) => answer._id === action.payload._id
         );
-        if (updatedAnswer !== -1) {
+        if (answerIndex !== -1) {
+          const updatedAnswer = {
+            ...action.payload,
+            user: state.answers[answerIndex].user,
+          };
           const updatedAnswers = state.answers.map((answer: Answer) =>
-            answer._id === action.payload._id ? action.payload : answer
+            answer._id === action.payload._id ? updatedAnswer : answer
           );
           state.answers = updatedAnswers;
         }

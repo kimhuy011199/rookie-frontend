@@ -3,11 +3,15 @@
 }
 
 .img {
-  @apply w-10 h-10 pt-1 mr-3;
+  @apply w-10 h-10 mr-3;
 }
 
 .avatar {
   @apply w-10 h-10;
+}
+
+.avatarImg {
+  @apply rounded-full border border-gray-200;
 }
 
 .main {
