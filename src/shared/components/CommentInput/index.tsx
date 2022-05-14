@@ -23,13 +23,14 @@ export interface InputInterface {
 interface CommentInputInterface {
   type: number;
   data?: any;
+  avatarImg?: string;
   questionId?: string;
   defaultValue?: string;
   onClose?: (event?: any) => void;
 }
 
 const CommentInput = (props: CommentInputInterface) => {
-  const { type, data, questionId, defaultValue, onClose } = props;
+  const { type, data, questionId, defaultValue, onClose, avatarImg } = props;
   const { t } = useTranslation();
   const { appendDialog } = useDialog();
   const dispatch = useDispatch();
@@ -87,10 +88,10 @@ const CommentInput = (props: CommentInputInterface) => {
   return (
     <div className={style.container}>
       <div className={style.img}>
-        {data?.user?.avatarImg ? (
+        {data?.user?.avatarImg || avatarImg ? (
           <img
-            src={data?.user?.avatarImg}
-            alt={data?.user?.displayName}
+            src={data?.user?.avatarImg || avatarImg}
+            alt={data?.user?.displayName || 'user avatar'}
             className={style.avatarImg}
           />
         ) : (

@@ -14,6 +14,7 @@ export interface RegisterUserInterface {
 }
 
 // Get user from localStorage
+const token = authStorageService().getToken();
 const user = authStorageService().getUserInfo();
 
 const initialState = {
@@ -50,6 +51,20 @@ export const login = createAsyncThunk(
   }
 );
 
+// Get current user
+export const getUserMe = createAsyncThunk(
+  'auth/currentUser',
+  async (_, thunkAPI) => {
+    try {
+      return await authService.getUserMe();
+    } catch (error: any) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Logout
 export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout();
 });
@@ -90,6 +105,20 @@ export const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(login.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+      })
+      .addCase(getUserMe.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserMe.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = { token, ...action.payload };
+      })
+      .addCase(getUserMe.rejected, (state, action: any) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

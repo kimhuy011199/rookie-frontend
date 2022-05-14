@@ -25,6 +25,12 @@ const login = async (userData: LoginUserInterface) => {
   return response.data;
 };
 
+// Login user
+const getUserMe = async () => {
+  const response = await api().get(`${endpoint}/me`);
+  return response.data;
+};
+
 // Logout user
 const logout = () => {
   authStorageService().removeToken();
@@ -33,6 +39,7 @@ const logout = () => {
 const authService = {
   register,
   logout,
+  getUserMe,
   login,
 };
 

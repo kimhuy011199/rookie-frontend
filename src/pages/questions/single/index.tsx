@@ -21,6 +21,7 @@ const SingleQuestion = () => {
   const { answers, isAnswersLoading } = useSelector(
     (state: any) => state.answers
   );
+  const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
     if (id) {
@@ -54,7 +55,11 @@ const SingleQuestion = () => {
                 </ul>
               )}
               <div className={style.comment}>
-                <CommentInput type={COMMENT_TYPE.COMMENT} questionId={id} />
+                <CommentInput
+                  avatarImg={user.avatarImg}
+                  type={COMMENT_TYPE.COMMENT}
+                  questionId={id}
+                />
               </div>
             </div>
             <div className={style.suggestion}></div>
