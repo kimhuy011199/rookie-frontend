@@ -7,16 +7,18 @@ import Footer from './shared/layout/Footer';
 import Header from './shared/layout/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserMe } from './stores/auth/authSlice';
+import authStorageService from './core/authStorage.service';
 
 export default function App() {
+  const token = authStorageService().getToken();
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user._id) {
+    if (token && !user?._id) {
       dispatch(getUserMe());
     }
-  }, [user, dispatch]);
+  }, [user, dispatch, token]);
 
   return (
     <>

@@ -9,7 +9,7 @@ export interface QuestionInputInterface {
 }
 
 const initialState = {
-  questions: [],
+  questions: {},
   question: null,
   isError: false,
   isSuccess: false,
@@ -149,7 +149,7 @@ export const questionSlice = createSlice({
       .addCase(deleteQuestion.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.questions = state.questions.filter(
+        state.questions = state.questions.questionsList.filter(
           (question: Question) => question._id !== action.payload.id
         );
       })
