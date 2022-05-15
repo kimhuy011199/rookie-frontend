@@ -1,25 +1,28 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../../shared/components/Spinner';
 import { getQuestions, reset } from '../../stores/questions/questionSlice';
 import style from './style.module.css';
 import { Question } from '../../shared/constants/types/Question';
 import QuestionItem from '../../shared/components/QuestionItem';
+import Pagination from '../../shared/components/Pagination';
 
 function Questions() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get('page') || '1';
 
   const { questions, isLoading } = useSelector((state: any) => state.questions);
 
   useEffect(() => {
-    dispatch(getQuestions());
+    dispatch(getQuestions(+currentPage));
 
     return () => {
       dispatch(reset());
     };
-  }, [navigate, dispatch]);
+  }, [navigate, dispatch, currentPage]);
 
   return (
     <>
@@ -37,6 +40,7 @@ function Questions() {
               ))}
             </ul>
           </div>
+          <Pagination {...questions} />
         </>
       )}
     </>

@@ -1,0 +1,16 @@
+.list {
+  @apply flex gap-2 items-center mt-4;
+}
+
+.item,
+.active {
+  @apply block cursor-pointer px-3 py-1.5 rounded-md bg-gray-100 ease-in duration-100 font-medium;
+}
+
+.item {
+  @apply hover:bg-secondary hover:text-white;
+}
+
+.active {
+  @apply text-white bg-primary;
+}

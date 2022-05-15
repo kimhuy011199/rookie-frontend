@@ -33,9 +33,9 @@ export const createQuestion = createAsyncThunk(
 // Get all questions
 export const getQuestions = createAsyncThunk(
   'questions/getAll',
-  async (_, thunkAPI) => {
+  async (currentPage: number, thunkAPI) => {
     try {
-      return await questionService.getQuestions();
+      return await questionService.getQuestions(currentPage);
     } catch (error: any) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
