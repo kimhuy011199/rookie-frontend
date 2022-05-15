@@ -1,6 +1,7 @@
 import api from '../../core/api.service';
 import authStorageService from '../../core/authStorage.service';
 import { ENDPOINT } from '../../shared/constants/constants';
+import { User } from '../../shared/constants/types/User';
 import { LoginUserInterface, RegisterUserInterface } from './authSlice';
 
 const endpoint = ENDPOINT.USERS;
@@ -36,11 +37,21 @@ const logout = () => {
   authStorageService().removeToken();
 };
 
+// Update user
+const updateUser = async (updatedUserData: User) => {
+  const response = await api().put(
+    `${endpoint}/${updatedUserData._id}`,
+    updatedUserData
+  );
+  return response.data;
+};
+
 const authService = {
   register,
   logout,
   getUserMe,
   login,
+  updateUser,
 };
 
 export default authService;
