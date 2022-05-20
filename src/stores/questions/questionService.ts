@@ -22,6 +22,12 @@ const getQuestionById = async (questionId: string) => {
   return response.data;
 };
 
+// Get recommend questions
+const getRecommendQuestions = async (questionId: string) => {
+  const response = await api().get(`${endpoint}/${questionId}/recommendation`);
+  return response.data;
+};
+
 // Update user question
 const updateQuestion = async (
   questionId: string,
@@ -43,6 +49,7 @@ const questionService = {
   getQuestionById,
   updateQuestion,
   deleteQuestion,
+  getRecommendQuestions,
 };
 
 export default questionService;

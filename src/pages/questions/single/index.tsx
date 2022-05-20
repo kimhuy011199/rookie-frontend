@@ -10,9 +10,10 @@ import Comment from '../../../shared/components/Comment';
 import CommentInput from '../../../shared/components/CommentInput';
 import { getAnswers } from '../../../stores/answers/answerSlice';
 import { Answer } from '../../../shared/constants/types/Answer';
+import RecommendQuestion from '../../../shared/components/RecommendQuestion';
 
 const SingleQuestion = () => {
-  const { id } = useParams();
+  const { id = '' } = useParams();
   const dispatch = useDispatch();
 
   const { question, isLoading, isError, message } = useSelector(
@@ -62,7 +63,9 @@ const SingleQuestion = () => {
                 />
               </div>
             </div>
-            <div className={style.suggestion}></div>
+            <div className={style.recommandation}>
+              <RecommendQuestion questionId={id} />
+            </div>
           </div>
         </>
       )}
