@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authStorageService from '../../core/authStorage.service';
-import { User } from '../../shared/constants/types/User';
 import authService from './authService';
 
 export interface LoginUserInterface {
@@ -73,7 +72,7 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 // Update user
 export const updateUser = createAsyncThunk(
   'auth/updateUser',
-  async (updatedUserData: User, thunkAPI) => {
+  async (updatedUserData: any, thunkAPI) => {
     try {
       return await authService.updateUser(updatedUserData);
     } catch (error: any) {

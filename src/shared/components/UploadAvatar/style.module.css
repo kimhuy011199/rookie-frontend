@@ -1,0 +1,25 @@
+.container {
+  @apply rounded-full relative border border-gray-100;
+  width: 12rem;
+  height: 12rem;
+}
+
+.input {
+  @apply block w-full h-full opacity-0 z-20 cursor-pointer;
+}
+
+.submit {
+  @apply absolute bottom-2 right-2 w-10 h-10 rounded-full flex justify-center items-center border border-gray-200 bg-white z-10;
+}
+
+.icon {
+  @apply w-3/5 h-3/5 text-primary;
+}
+
+.imgContainer {
+  @apply overflow-hidden rounded-full absolute bottom-0 w-full h-full;
+}
+
+.preview {
+  @apply w-full;
+}

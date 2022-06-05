@@ -4,5 +4,6 @@ export const ENDPOINT = {
   QUESIONS: 'questions',
   USERS: 'users',
   ANSWERS: 'answers',
+  UPLOAD: 'upload',
 };
 export const ZINDEX_DEFAULT = 1000;

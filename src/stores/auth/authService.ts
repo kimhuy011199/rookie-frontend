@@ -38,7 +38,7 @@ const logout = () => {
 };
 
 // Update user
-const updateUser = async (updatedUserData: User) => {
+const updateUser = async (updatedUserData: any) => {
   const response = await api().put(
     `${endpoint}/${updatedUserData._id}`,
     updatedUserData
