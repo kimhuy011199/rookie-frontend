@@ -59,11 +59,11 @@ const CommentInput = (props: CommentInputInterface) => {
     const { displayName, avatarImg } = user;
     const type = NOTI_TYPE.ANSWER_QUESTION;
     const action = {
-      userId,
       displayName,
       avatarImg,
     };
     const destination = {
+      userId,
       title,
       url: _id,
     };

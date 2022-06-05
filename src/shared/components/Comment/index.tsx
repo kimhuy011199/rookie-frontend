@@ -79,6 +79,7 @@ const Comment = (props: CommentInterface) => {
             {type !== COMMENT_TYPE.QUESTION && (
               <Like
                 id={data._id}
+                answerData={data}
                 isLiked={data?.userLikes && data?.userLikes[user._id]}
                 likesCount={data?.likesCount}
               />

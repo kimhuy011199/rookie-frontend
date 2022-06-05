@@ -32,7 +32,7 @@ export default function App() {
           destination={destination}
         />,
         {
-          autoClose: 200000,
+          autoClose: 10000,
           className: 'notification-toast',
           closeButton: true,
         }
