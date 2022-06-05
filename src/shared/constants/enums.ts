@@ -19,3 +19,8 @@ export enum COMMENT_ACTIONS {
   EDIT = 1,
   DELETE = 2,
 }
+
+export enum NOTI_TYPE {
+  ANSWER_QUESTION = 1,
+  LIKE_ANSWER = 2,
+}

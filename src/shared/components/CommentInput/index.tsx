@@ -10,7 +10,7 @@ import { useDialog } from '../Dialog/Provider';
 import PreviewDialog from '../Dialog/dialogs/preview-dialog';
 import FormGroup from '../FormGroup';
 import TextArea from '../TextArea';
-import { COMMENT_TYPE } from '../../constants/enums';
+import { COMMENT_TYPE, NOTI_TYPE } from '../../constants/enums';
 import {
   createAnswer,
   updateAnswer,
@@ -55,9 +55,19 @@ const CommentInput = (props: CommentInputInterface) => {
   };
 
   const sendNotification = () => {
-    const { userId, content } = question;
-    const message = `${user.displayName} has commented on your question (${content})`;
-    socket.emit(NOTI_ACTIONS.SEND_NOTI, { message, userId });
+    const { userId, title, _id } = question;
+    const { displayName, avatarImg } = user;
+    const type = NOTI_TYPE.ANSWER_QUESTION;
+    const action = {
+      userId,
+      displayName,
+      avatarImg,
+    };
+    const destination = {
+      title,
+      url: _id,
+    };
+    socket.emit(NOTI_ACTIONS.SEND_NOTI, { type, action, destination });
   };
 
   const handleSubmitForm = (inputData: InputInterface) => {

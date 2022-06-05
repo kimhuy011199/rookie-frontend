@@ -1,7 +1,6 @@
 import api from '../../core/api.service';
 import authStorageService from '../../core/authStorage.service';
 import { ENDPOINT } from '../../shared/constants/constants';
-import { User } from '../../shared/constants/types/User';
 import { LoginUserInterface, RegisterUserInterface } from './authSlice';
 
 const endpoint = ENDPOINT.USERS;

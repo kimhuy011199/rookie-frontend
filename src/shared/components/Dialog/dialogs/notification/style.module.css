@@ -1,0 +1,12 @@
+.container {
+  @apply flex gap-4;
+}
+
+.content {
+  @apply text-gray-500;
+}
+
+.name,
+.title {
+  @apply font-semibold text-black;
+}

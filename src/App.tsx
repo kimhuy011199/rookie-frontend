@@ -14,6 +14,7 @@ import AuthRoutes from './pages/auth/auth.routes';
 import QuestionsRoutes from './pages/questions/questions.routes';
 import { SocketContext } from './shared/context/socket';
 import { NOTI_ACTIONS } from './shared/constants/constants';
+import NotificationDialog from './shared/components/Dialog/dialogs/notification';
 
 export default function App() {
   const token = authStorageService().getToken();
@@ -23,7 +24,19 @@ export default function App() {
 
   useEffect(() => {
     socket.on(NOTI_ACTIONS.RECEIVE_NOTI, (data: any) => {
-      toast(data);
+      const { type, action, destination } = data;
+      toast(
+        <NotificationDialog
+          type={type}
+          action={action}
+          destination={destination}
+        />,
+        {
+          autoClose: 200000,
+          className: 'notification-toast',
+          closeButton: true,
+        }
+      );
     });
   }, [socket]);
 

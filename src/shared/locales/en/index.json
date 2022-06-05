@@ -56,6 +56,8 @@
   "dialog": {
     "delete_answer": "Delete answer",
     "delete_answer_content": "Are you sure to delete your answer?",
+    "answer_question": "answered on your question",
+    "like_answer": "liked your answer",
     "submit": "Submit",
     "cancel": "Cancel"
   },

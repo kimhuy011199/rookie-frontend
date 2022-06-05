@@ -20,6 +20,10 @@
   @apply min-h-0 bg-primary text-white rounded-lg shadow-none !important;
 }
 
+.notification-toast {
+  @apply border border-gray-50 bg-white rounded-lg shadow-md leading-5 !important;
+}
+
 .prose :where(code):not(:where([class~='not-prose'] *)) {
   @apply px-1.5 py-1 bg-gray-200 rounded font-normal;
 }
