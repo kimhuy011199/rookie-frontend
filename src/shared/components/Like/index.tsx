@@ -5,7 +5,7 @@ import style from './style.module.css';
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi';
 import { NOTI_TYPE } from '../../constants/enums';
 import { SocketContext } from '../../context/socket';
-import { NOTI_ACTIONS } from '../../constants/constants';
+import { sendSocketNotification } from '../../../core/utils';
 
 interface LikeInterface {
   id: string;
@@ -21,26 +21,15 @@ const Like = (props: LikeInterface) => {
   const { question } = useSelector((state: any) => state.questions);
   const socket = useContext(SocketContext);
 
-  const sendNotification = () => {
+  const handleLike = () => {
+    dispatch(likeOrUnlikeAnswer(id));
     const { userId, content } = answerData;
-    const { displayName, avatarImg } = user;
-    const type = NOTI_TYPE.LIKE_ANSWER;
-    const action = {
-      displayName,
-      avatarImg,
-    };
     const destination = {
       userId,
       title: content,
       url: question._id,
     };
-    console.log({ type, action, destination });
-    socket.emit(NOTI_ACTIONS.SEND_NOTI, { type, action, destination });
-  };
-
-  const handleLike = () => {
-    dispatch(likeOrUnlikeAnswer(id));
-    sendNotification();
+    sendSocketNotification(socket, destination, user, NOTI_TYPE.LIKE_ANSWER);
   };
 
   return (

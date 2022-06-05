@@ -16,7 +16,7 @@ import {
   updateAnswer,
 } from '../../../stores/answers/answerSlice';
 import { SocketContext } from '../../context/socket';
-import { NOTI_ACTIONS } from '../../constants/constants';
+import { sendSocketNotification } from '../../../core/utils';
 
 export interface InputInterface {
   content: string;
@@ -54,22 +54,6 @@ const CommentInput = (props: CommentInputInterface) => {
     );
   };
 
-  const sendNotification = () => {
-    const { userId, title, _id } = question;
-    const { displayName, avatarImg } = user;
-    const type = NOTI_TYPE.ANSWER_QUESTION;
-    const action = {
-      displayName,
-      avatarImg,
-    };
-    const destination = {
-      userId,
-      title,
-      url: _id,
-    };
-    socket.emit(NOTI_ACTIONS.SEND_NOTI, { type, action, destination });
-  };
-
   const handleSubmitForm = (inputData: InputInterface) => {
     if (questionId) {
       // !defaultValue => create new answer
@@ -78,8 +62,19 @@ const CommentInput = (props: CommentInputInterface) => {
           content: inputData.content,
           questionId,
         };
+        const { userId, title, _id } = question;
+        const destination = {
+          userId,
+          title,
+          url: _id,
+        };
         dispatch(createAnswer(submitData));
-        sendNotification();
+        sendSocketNotification(
+          socket,
+          destination,
+          user,
+          NOTI_TYPE.ANSWER_QUESTION
+        );
         reset();
         toast(t('toast.add_answer_success'));
       } else {
