@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { generateNotificationTitle } from '../../../../../core/utils';
 import { COMMENT_TYPE, NOTI_TYPE } from '../../../../constants/enums';
 import style from './style.module.css';
 
@@ -19,7 +20,6 @@ interface NotificationDialogInterface {
 
 const NotificationDialog = (props: NotificationDialogInterface) => {
   const { action, destination, type = COMMENT_TYPE.QUESTION } = props;
-  console.log({ props });
 
   const { t } = useTranslation();
   const linkTo = `/questions/${destination.url}`;
@@ -27,6 +27,7 @@ const NotificationDialog = (props: NotificationDialogInterface) => {
     type === NOTI_TYPE.ANSWER_QUESTION
       ? t('dialog.answer_question')
       : t('dialog.like_answer');
+  const destinationTitle = generateNotificationTitle(destination.title, 10);
 
   return (
     <Link className={style.container} to={linkTo}>
@@ -34,7 +35,7 @@ const NotificationDialog = (props: NotificationDialogInterface) => {
       <div className={style.content}>
         <span className={style.name}>{action.displayName} </span>
         <span>{content} </span>
-        <span className={style.title}>{destination.title}</span>
+        <span className={style.title}>{destinationTitle}</span>
       </div>
     </Link>
   );

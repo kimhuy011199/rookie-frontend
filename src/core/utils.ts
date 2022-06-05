@@ -19,3 +19,10 @@ export const sendSocketNotification = (
   };
   socket.emit(NOTI_ACTIONS.SEND_NOTI, { type, action, destination });
 };
+
+export const generateNotificationTitle = (title: string, length: number) => {
+  const titleArr = title.split(' ');
+  return titleArr.length > length
+    ? titleArr.splice(0, length).join(' ') + ' ...'
+    : title;
+};

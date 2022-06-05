@@ -23,13 +23,15 @@ const Like = (props: LikeInterface) => {
 
   const handleLike = () => {
     dispatch(likeOrUnlikeAnswer(id));
-    const { userId, content } = answerData;
-    const destination = {
-      userId,
-      title: content,
-      url: question._id,
-    };
-    sendSocketNotification(socket, destination, user, NOTI_TYPE.LIKE_ANSWER);
+    if (!isLiked) {
+      const { userId, content } = answerData;
+      const destination = {
+        userId,
+        title: content,
+        url: question._id,
+      };
+      sendSocketNotification(socket, destination, user, NOTI_TYPE.LIKE_ANSWER);
+    }
   };
 
   return (
