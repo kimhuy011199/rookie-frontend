@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,8 @@ import {
   createAnswer,
   updateAnswer,
 } from '../../../stores/answers/answerSlice';
+import { SocketContext } from '../../context/socket';
+import { NOTI_ACTIONS } from '../../constants/constants';
 
 export interface InputInterface {
   content: string;
@@ -34,6 +36,7 @@ const CommentInput = (props: CommentInputInterface) => {
   const { t } = useTranslation();
   const { appendDialog } = useDialog();
   const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
 
   const { register, getValues, handleSubmit, reset, setValue } =
     useForm<InputInterface>();
@@ -41,7 +44,7 @@ const CommentInput = (props: CommentInputInterface) => {
   const { answer, isLoading, isError, isSuccess, message } = useSelector(
     (state: any) => state.answers
   );
-
+  const { question } = useSelector((state: any) => state.questions);
   const { user } = useSelector((state: any) => state.auth);
 
   const previewQuestion = () => {
@@ -49,6 +52,12 @@ const CommentInput = (props: CommentInputInterface) => {
     appendDialog(
       <PreviewDialog content={content} type={COMMENT_TYPE.COMMENT} />
     );
+  };
+
+  const sendNotification = () => {
+    const { userId, content } = question;
+    const message = `${user.displayName} has commented on your question (${content})`;
+    socket.emit(NOTI_ACTIONS.SEND_NOTI, { message, userId });
   };
 
   const handleSubmitForm = (inputData: InputInterface) => {
@@ -60,6 +69,7 @@ const CommentInput = (props: CommentInputInterface) => {
           questionId,
         };
         dispatch(createAnswer(submitData));
+        sendNotification();
         reset();
         toast(t('toast.add_answer_success'));
       } else {

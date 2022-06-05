@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 import { getUserMe } from './stores/auth/authSlice';
 import authStorageService from './core/authStorage.service';
@@ -11,17 +12,32 @@ import Home from './pages/home';
 import UsersRoutes from './pages/users/users.routes';
 import AuthRoutes from './pages/auth/auth.routes';
 import QuestionsRoutes from './pages/questions/questions.routes';
+import { SocketContext } from './shared/context/socket';
+import { NOTI_ACTIONS } from './shared/constants/constants';
 
 export default function App() {
   const token = authStorageService().getToken();
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
+  const socket = useContext(SocketContext);
+
+  useEffect(() => {
+    socket.on(NOTI_ACTIONS.RECEIVE_NOTI, (data: any) => {
+      toast(data);
+    });
+  }, [socket]);
 
   useEffect(() => {
     if (token && !user?._id) {
       dispatch(getUserMe());
     }
   }, [user, dispatch, token]);
+
+  useEffect(() => {
+    if (user?._id) {
+      socket.emit(NOTI_ACTIONS.JOIN_ROOM, user?._id.toString());
+    }
+  }, [user, token, socket]);
 
   return (
     <>
