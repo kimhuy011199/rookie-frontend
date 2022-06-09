@@ -9,6 +9,7 @@ import authStorageService from './core/authStorage.service';
 import Header from './shared/layout/Header';
 import Footer from './shared/layout/Footer';
 import Home from './pages/home';
+import Notification from './pages/notifications';
 import UsersRoutes from './pages/users/users.routes';
 import AuthRoutes from './pages/auth/auth.routes';
 import QuestionsRoutes from './pages/questions/questions.routes';
@@ -62,6 +63,7 @@ export default function App() {
             <Route path="/questions/*" element={<QuestionsRoutes />} />
             <Route path="/auth/*" element={<AuthRoutes />} />
             <Route path="/users/*" element={<UsersRoutes />} />
+            <Route path="/notifications" element={<Notification />} />
           </Routes>
         </main>
         <Footer />
