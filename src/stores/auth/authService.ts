@@ -45,12 +45,22 @@ const updateUser = async (updatedUserData: any) => {
   return response.data;
 };
 
+// Update user
+const changePassword = async (updatedUserData: any) => {
+  const response = await api().put(
+    `${endpoint}/${updatedUserData._id}/password`,
+    updatedUserData
+  );
+  return response.data;
+};
+
 const authService = {
   register,
   logout,
   getUserMe,
   login,
   updateUser,
+  changePassword,
 };
 
 export default authService;

@@ -118,7 +118,7 @@ function Register() {
                 required: 'Password is required',
                 validate: (val: string) => {
                   if (watch('password') !== val) {
-                    return 'Your passwords do no match';
+                    return 'Your password does not match';
                   }
                 },
               })}

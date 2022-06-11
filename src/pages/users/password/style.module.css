@@ -1,0 +1,16 @@
+.container {
+  @apply mx-auto mt-6;
+  max-width: 30rem;
+}
+
+.profile {
+  @apply bg-dark-1 rounded-xl border border-dark-3 px-5 py-5;
+}
+
+.heading {
+  @apply text-xl font-semibold border-b border-dark-3 pb-4 mb-6;
+}
+
+.actions {
+  @apply flex justify-end;
+}

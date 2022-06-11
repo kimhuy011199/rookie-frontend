@@ -58,11 +58,13 @@ const UserSetting = () => {
       <UploadAvatar />
       <div className={style.user}>
         <div className={style.profile}>
-          <h3 className={style.heading}>Personal information</h3>
+          <h3 className={style.heading}>
+            {t('settings.heading.personal_info')}
+          </h3>
           <div className={style.form}>
             <form onSubmit={handleSubmit(handleSubmitForm)}>
               <FormGroup
-                label={t('settings.label.displayName')}
+                label={t('settings.label.display_name')}
                 error={errors.displayName?.message}
                 flexRow
               >
