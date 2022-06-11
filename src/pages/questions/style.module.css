@@ -1,3 +1,24 @@
+.container {
+  @apply grid gap-10;
+  grid-template-columns: 3fr 1fr;
+}
+
 .questions {
   @apply mx-auto w-full max-w-7xl;
+}
+
+.questionsList {
+  @apply flex flex-col gap-4;
+}
+
+.heading {
+  @apply text-2xl font-semibold border-b border-dark-3 pb-4 mb-4;
+}
+
+.desc {
+  @apply mb-5 text-light-2;
+}
+
+.pagination {
+  @apply mt-2 flex justify-center;
 }

@@ -26,3 +26,11 @@ export const getWordsFromContent = (content: string, length: number) => {
     ? contentArr.splice(0, length).join(' ') + ' ...'
     : content;
 };
+
+export const formatMonthDateYear = (date: string) => {
+  return new Date(date).toLocaleDateString('en-EN', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};

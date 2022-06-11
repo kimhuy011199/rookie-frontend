@@ -1,0 +1,27 @@
+.main {
+  @apply bg-dark-1 rounded-xl p-4 flex-1 border border-dark-2 hover:bg-dark-2 hover:border-dark-3;
+}
+
+.link {
+  @apply flex flex-col gap-2;
+}
+
+.date {
+  min-width: 8rem;
+}
+
+.title {
+  @apply text-xl font-semibold;
+}
+
+.content {
+  @apply text-light-2 overflow-hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+}
+
+.footer {
+  @apply text-light-3 text-right mt-1;
+}

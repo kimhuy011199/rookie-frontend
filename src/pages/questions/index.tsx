@@ -7,6 +7,7 @@ import style from './style.module.css';
 import { Question } from '../../shared/constants/types/Question';
 import QuestionItem from '../../shared/components/QuestionItem';
 import Pagination from '../../shared/components/Pagination';
+import { t } from 'i18next';
 
 function Questions() {
   const navigate = useNavigate();
@@ -27,22 +28,31 @@ function Questions() {
   return (
     <>
       <Spinner isLoading={isLoading} />
-      {questions?.questionsList && (
-        <>
-          <h2 className={style.heading}>Questions page</h2>
+      <div className={style.container}>
+        <div className={style.main}>
+          <h2 className={style.heading}>{t('questions.all_questions')}</h2>
           <p className={style.desc}></p>
-          <div className={style.questions}>
-            <ul className={style.questionsList}>
-              {questions?.questionsList.map((question: Question) => (
-                <li key={question._id}>
-                  <QuestionItem question={question} />
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Pagination {...questions} />
-        </>
-      )}
+          {questions?.questionsList?.length > 0 ? (
+            <>
+              <div className={style.questions}>
+                <ul className={style.questionsList}>
+                  {questions?.questionsList.map((question: Question) => (
+                    <li key={question._id}>
+                      <QuestionItem question={question} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className={style.pagination}>
+                <Pagination {...questions} />
+              </div>
+            </>
+          ) : (
+            <p className={style.noQuestions}>{t('questions.no_questions')}</p>
+          )}
+        </div>
+        <div className={style.guide}></div>
+      </div>
     </>
   );
 }

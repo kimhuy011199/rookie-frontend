@@ -44,7 +44,9 @@
     "asked": "asked",
     "answered": "answered",
     "recommendation": "Recommendation",
-    "no_recommendation": "No recommendation questions"
+    "all_questions": "All questions",
+    "no_recommendation": "No recommendation questions",
+    "no_questions": "No questions to show"
   },
   "placeholder": {
     "add_answer": "Leave your answer"

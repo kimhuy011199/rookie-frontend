@@ -7,7 +7,7 @@
 }
 
 .heading {
-  @apply text-2xl font-semibold mb-6;
+  @apply text-2xl font-semibold mb-8;
 }
 
 .answers {

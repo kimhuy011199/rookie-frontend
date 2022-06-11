@@ -1,6 +1,7 @@
 export interface Question {
   _id: string;
-  user: string;
+  userId: string;
+  user?: any;
   title: string;
   content: string;
   createdAt: string;

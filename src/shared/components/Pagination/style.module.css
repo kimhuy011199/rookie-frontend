@@ -4,11 +4,11 @@
 
 .item,
 .active {
-  @apply block cursor-pointer px-3 py-1.5 rounded-md bg-gray-100 ease-in duration-100 font-medium;
+  @apply block cursor-pointer px-3 py-1.5 rounded-md bg-dark-1 ease-in duration-100 font-medium;
 }
 
 .item {
-  @apply hover:bg-secondary hover:text-white;
+  @apply hover:bg-dark-3 hover:text-white;
 }
 
 .active {
