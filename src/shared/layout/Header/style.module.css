@@ -1,5 +1,5 @@
 .header {
-  @apply py-3.5 fixed w-full z-10 border-b border-gray-200 bg-gray-50;
+  @apply py-3.5 fixed w-full z-10 border-b border-dark-3 bg-dark-2;
 }
 
 .container {

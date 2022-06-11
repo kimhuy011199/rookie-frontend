@@ -9,7 +9,7 @@
 }
 
 .submit {
-  @apply absolute bottom-2 right-2 w-10 h-10 rounded-full flex justify-center items-center border border-gray-200 bg-white z-10;
+  @apply absolute bottom-2 right-2 w-10 h-10 rounded-full flex justify-center items-center border border-dark-3 bg-dark-1 z-10;
 }
 
 .icon {

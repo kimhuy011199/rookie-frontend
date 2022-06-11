@@ -74,19 +74,19 @@ const Comment = (props: CommentInterface) => {
         <div className={style.content}>
           <MarkdownRender content={data?.content} />
         </div>
-        <div className={style.footer}>
-          <div className={style.likes}>
-            {type !== COMMENT_TYPE.QUESTION && (
+        {type !== COMMENT_TYPE.QUESTION && (
+          <div className={style.footer}>
+            <div className={style.likes}>
               <Like
                 id={data._id}
                 answerData={data}
                 isLiked={data?.userLikes && data?.userLikes[user._id]}
                 likesCount={data?.likesCount}
               />
-            )}
+            </div>
+            <div className={style.tags}></div>
           </div>
-          <div className={style.tags}></div>
-        </div>
+        )}
       </div>
       {openEdit && (
         <div className={style.edit}>

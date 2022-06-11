@@ -4,6 +4,7 @@
 
 .img {
   @apply w-10 h-10 mr-3;
+  min-width: 2.5rem;
 }
 
 .avatar {
@@ -11,15 +12,16 @@
 }
 
 .avatarImg {
-  @apply rounded-full border border-gray-200;
+  @apply rounded-full border border-dark-3;
 }
 
 .main {
-  @apply bg-white rounded-xl flex-1 border border-gray-200;
+  @apply bg-dark-1 rounded-xl flex-1 border border-dark-3;
+  width: calc(100% - 4.5rem);
 }
 
 .header {
-  @apply flex items-center bg-gray-50 px-4 py-3 rounded-t-xl border-b border-gray-200;
+  @apply flex items-center bg-dark-2 px-4 py-3 rounded-t-xl border-b border-dark-3;
 }
 
 .info {
@@ -35,7 +37,7 @@
 }
 
 .date {
-  @apply text-gray-500;
+  @apply text-light-3;
 }
 
 .edit {

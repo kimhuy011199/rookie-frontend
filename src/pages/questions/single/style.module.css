@@ -1,5 +1,5 @@
 .container {
-  @apply grid grid-cols-3 gap-4;
+  @apply grid grid-cols-3 gap-8;
 }
 
 .main {
@@ -7,7 +7,7 @@
 }
 
 .heading {
-  @apply text-2xl font-normal mb-6;
+  @apply text-2xl font-semibold mb-6;
 }
 
 .answers {

@@ -7,17 +7,17 @@
 }
 
 .sub {
-  @apply text-gray-500 text-xl mt-1.5;
+  @apply text-gray-400 text-xl mt-1.5;
 }
 
 .form {
-  @apply rounded-xl px-3.5 py-6 mt-5 mb-4 bg-white border-gray-200 border;
+  @apply rounded-xl px-3.5 py-6 mt-5 mb-4 bg-dark-1 border-dark-3 border;
   max-width: 20rem;
   width: 20rem;
 }
 
 .link {
-  @apply pl-1 font-normal text-primary;
+  @apply pl-1 font-semibold text-primary;
 }
 
 .logo {

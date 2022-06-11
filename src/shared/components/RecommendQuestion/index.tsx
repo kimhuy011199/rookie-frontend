@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getWordsFromContent } from '../../../core/utils';
 import { getRecommendQuestions } from '../../../stores/questions/questionSlice';
 import { Question } from '../../constants/types/Question';
 import style from './style.module.css';
@@ -8,6 +9,8 @@ import style from './style.module.css';
 interface RecommendQuestionInterface {
   questionId: string;
 }
+
+const CONTENT_LENGTH = 8;
 
 const RecommendQuestion = (props: RecommendQuestionInterface) => {
   const { questionId } = props;
@@ -26,14 +29,17 @@ const RecommendQuestion = (props: RecommendQuestionInterface) => {
 
   return (
     <div className={style.container}>
+      <h3 className={style.heading}>Recommendation</h3>
       {recommend.length > 0 && (
         <ul className={style.list}>
           {recommend.map((item: Question) => (
-            <li key={item._id}>
-              <div className={style.item}>
+            <li key={item._id} className={style.item}>
+              <div className={style.question}>
                 <Link className={style.link} to={generateLink(item._id)}>
                   <h3 className={style.title}>{item.title}</h3>
-                  <p className={style.content}>{item.content}</p>
+                  <p className={style.content}>
+                    {getWordsFromContent(item.content, CONTENT_LENGTH)}
+                  </p>
                 </Link>
               </div>
             </li>

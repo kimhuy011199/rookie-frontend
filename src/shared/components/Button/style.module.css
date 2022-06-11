@@ -3,15 +3,15 @@
 }
 
 .primary {
-  @apply bg-primary text-white disabled:bg-gray-300 hover:bg-secondary;
+  @apply bg-primary text-white disabled:bg-light-1 hover:bg-secondary;
 }
 
 .outline {
-  @apply border border-primary bg-white text-primary disabled:bg-gray-300 hover:border-secondary;
+  @apply bg-light-3 text-white disabled:bg-transparent;
 }
 
 .blank {
-  @apply text-dark;
+  @apply text-light-3;
 }
 
 .full {

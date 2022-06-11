@@ -1,5 +1,5 @@
 .container {
-  @apply flex border border-gray-200 rounded-md p-2 gap-2 items-center;
+  @apply flex border border-dark-3 rounded-md p-2 gap-2 items-center;
 }
 
 .tags {
@@ -7,5 +7,5 @@
 }
 
 .input {
-  @apply w-full focus:outline-none;
+  @apply w-full bg-dark-1 focus:outline-none;
 }

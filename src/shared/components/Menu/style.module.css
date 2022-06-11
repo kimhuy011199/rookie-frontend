@@ -7,7 +7,7 @@
 }
 
 .menuList {
-  @apply shadow-sm py-1 z-20 absolute -bottom-1 transform translate-y-full -right-2 rounded-md overflow-hidden bg-white border border-gray-200;
+  @apply shadow-sm py-1 z-20 absolute -bottom-1 transform translate-y-full -right-2 rounded-md overflow-hidden bg-dark-1 border border-dark-3;
 }
 
 .menuItem {

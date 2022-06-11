@@ -5,7 +5,3 @@
 .icon {
   @apply text-primary text-lg;
 }
-
-.text {
-  @apply text-gray-500;
-}

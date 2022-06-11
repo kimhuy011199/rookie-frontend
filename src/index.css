@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .page {
-  @apply flex flex-col min-h-screen text-sm text-dark;
+  @apply flex flex-col min-h-screen text-sm text-light-1 bg-black-default;
 }
 
 .main {
@@ -21,21 +21,25 @@
 }
 
 .notification-toast {
-  @apply border border-gray-50 bg-white rounded-lg shadow-md leading-5 !important;
+  @apply border border-gray-50 bg-dark-1 rounded-lg shadow-md leading-5 !important;
 }
 
 .prose :where(code):not(:where([class~='not-prose'] *)) {
-  @apply px-1.5 py-1 bg-gray-200 rounded font-normal;
+  @apply px-1.5 py-1 bg-dark-3 border border-dark-4 rounded font-normal;
 }
 
-.prose :where(code):not(:where([class~='not-prose'] *))::after,
+/* .prose :where(code):not(:where([class~='not-prose'] *))::after,
 .prose :where(code):not(:where([class~='not-prose'] *))::before {
   content: '';
-}
+} */
 
 .prose :where(pre):not(:where([class~='not-prose'] *)),
 .prose :where(p):not(:where([class~='not-prose'] *)) {
   line-height: 1.5;
+}
+
+.prose-pre\:text-white :is(:where(pre):not(:where([class~='not-prose'] *))) {
+  flex: 1;
 }
 
 .prose :where(pre code):not(:where([class~='not-prose'] *)) {

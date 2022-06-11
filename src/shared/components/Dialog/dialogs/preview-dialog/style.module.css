@@ -1,9 +1,9 @@
 .head {
-  @apply border-b border-gray-300 pb-4 mb-6;
+  @apply border-b border-dark-3 pb-4 mb-6;
 }
 
 .heading {
-  @apply text-2xl font-medium;
+  @apply text-2xl font-medium text-white;
 }
 
 .label {
