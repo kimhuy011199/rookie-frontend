@@ -128,7 +128,6 @@ export const authSlice = createSlice({
       })
       .addCase(getUserMe.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.user = { token, ...action.payload };
       })
       .addCase(getUserMe.rejected, (state, action: any) => {

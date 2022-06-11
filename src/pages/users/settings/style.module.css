@@ -1,0 +1,16 @@
+.container {
+  @apply grid mt-6;
+  grid-template-columns: 1fr 4fr;
+}
+
+.profile {
+  @apply bg-dark-1 rounded-xl border border-dark-3 px-5 py-5;
+}
+
+.heading {
+  @apply text-xl font-semibold border-b border-dark-3 pb-4 mb-6;
+}
+
+.actions {
+  @apply flex justify-end;
+}

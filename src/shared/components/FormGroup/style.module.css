@@ -1,5 +1,5 @@
 .errorMessage {
-  @apply text-red-500 text-sm;
+  @apply text-red-500 text-sm mt-1 block;
 }
 
 .formGroup {
@@ -8,4 +8,8 @@
 
 .subLabel {
   @apply text-gray-400 text-sm font-light;
+}
+
+.label {
+  min-width: 7rem;
 }

@@ -50,7 +50,10 @@
   "toast": {
     "add_answer_success": "Your answer was added",
     "delete_answer_success": "Your answer was deleted",
-    "edit_answer_success": "Your answer was updated"
+    "edit_answer_success": "Your answer was updated",
+    "update_user_success": "Your profile was updated",
+    "update_avatar_success": "Your avatar was updated",
+    "unsuccess": "There was an error. Try again!"
   },
   "dialog": {
     "delete_answer": "Delete answer",
@@ -77,5 +80,15 @@
     "title": "403",
     "content": "Access denied",
     "action": "Go to homepage"
+  },
+  "settings": {
+    "label": {
+      "displayName": "Display name",
+      "email": "Email",
+      "about": "About",
+      "github": "Github",
+      "linkedin": "Linkedin",
+      "submit": "Submit"
+    }
   }
 }

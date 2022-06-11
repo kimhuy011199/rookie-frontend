@@ -1,15 +1,139 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from '../../../shared/components/Button';
+import FormGroup from '../../../shared/components/FormGroup';
+import Input from '../../../shared/components/Input';
+import TextArea from '../../../shared/components/TextArea';
 import UploadAvatar from '../../../shared/components/UploadAvatar';
+import { EMAIL_PATTERN } from '../../../shared/constants/patterns';
+import { reset, updateUser } from '../../../stores/auth/authSlice';
+import style from './style.module.css';
+import { toast } from 'react-toastify';
+
+export interface UserInputInterface {
+  displayName: string;
+  email: string;
+  about?: string;
+  github?: string;
+  linkedin?: string;
+}
 
 const UserSetting = () => {
+  const { t } = useTranslation();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state: any) => state.auth
+  );
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<UserInputInterface>({});
+
   const dispatch = useDispatch();
-  const { user } = useSelector((state: any) => state.auth);
-  console.log(user);
+
+  const handleSubmitForm = (data: UserInputInterface) => {
+    dispatch(reset());
+    dispatch(updateUser({ ...user, ...data }));
+  };
+
+  useEffect(() => {
+    if (!isLoading && isSuccess) {
+      toast(t('toast.update_user_success'));
+    }
+    if (!isLoading && isError) {
+      setError('email', { type: 'custom', message });
+      toast(t('toast.unsuccess'));
+    }
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [dispatch, isSuccess, isError, isLoading, t, setError, message]);
 
   return (
-    <div>
+    <div className={style.container}>
       <UploadAvatar />
+      <div className={style.user}>
+        <div className={style.profile}>
+          <h3 className={style.heading}>Personal information</h3>
+          <div className={style.form}>
+            <form onSubmit={handleSubmit(handleSubmitForm)}>
+              <FormGroup
+                label={t('settings.label.displayName')}
+                error={errors.displayName?.message}
+                flexRow
+              >
+                <Input
+                  disabled
+                  type="text"
+                  defaultValue={user.displayName}
+                  {...register('displayName', {})}
+                />
+              </FormGroup>
+              <FormGroup
+                label={t('settings.label.email')}
+                error={errors.email?.message}
+                flexRow
+              >
+                <Input
+                  type="text"
+                  defaultValue={user.email}
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: EMAIL_PATTERN,
+                      message: 'Please enter a valid email',
+                    },
+                  })}
+                />
+              </FormGroup>
+              <FormGroup
+                label={t('settings.label.github')}
+                error={errors.github?.message}
+                flexRow
+              >
+                <Input
+                  type="text"
+                  defaultValue={user.linkGithub}
+                  {...register('github', {})}
+                />
+              </FormGroup>
+              <FormGroup
+                label={t('settings.label.linkedin')}
+                error={errors.linkedin?.message}
+                flexRow
+              >
+                <Input
+                  type="text"
+                  defaultValue={user.linkLinkedIn}
+                  {...register('linkedin', {})}
+                />
+              </FormGroup>
+              <FormGroup
+                label={t('settings.label.about')}
+                error={errors.about?.message}
+                flexRow
+              >
+                <TextArea
+                  rows={6}
+                  defaultValue={user.about || ''}
+                  {...register('about', {})}
+                />
+              </FormGroup>
+              <div className={style.actions}>
+                <Button
+                  label={t('settings.label.submit')}
+                  loading={isLoading}
+                  variant="primary"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

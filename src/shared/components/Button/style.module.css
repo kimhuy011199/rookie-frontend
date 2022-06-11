@@ -3,7 +3,7 @@
 }
 
 .primary {
-  @apply bg-primary text-white disabled:bg-light-1 hover:bg-secondary;
+  @apply bg-primary text-white disabled:bg-light-1 disabled:text-dark-1 hover:bg-secondary;
 }
 
 .outline {

@@ -7,15 +7,20 @@ interface FormGroupInterface {
   subLabel?: boolean;
   error?: string;
   type?: string;
+  flexRow?: boolean;
 }
 
 type FormGroupType = React.HTMLProps<HTMLInputElement> & FormGroupInterface;
 
 const FormGroup = (props: FormGroupType) => {
-  const { label, boldLabel, subLabel, error, children } = props;
+  const { label, boldLabel, subLabel, error, flexRow, children } = props;
 
   const renderLabel = label && (
-    <label className={`${style.label} ${boldLabel && 'font-medium'}`}>
+    <label
+      className={`${style.label} ${boldLabel && 'font-medium'} ${
+        flexRow && 'pt-2'
+      }`}
+    >
       {label}
     </label>
   );
@@ -27,11 +32,13 @@ const FormGroup = (props: FormGroupType) => {
   );
 
   return (
-    <div className={style.formGroup}>
+    <div className={`${style.formGroup} ${flexRow && '!flex-row'}`}>
       {renderLabel}
       {renderSubLabel}
-      {cloneElement(children as React.ReactElement, { error })}
-      {renderError}
+      <div className={`${flexRow && 'w-full'}`}>
+        {cloneElement(children as React.ReactElement, { error })}
+        {renderError}
+      </div>
     </div>
   );
 };
