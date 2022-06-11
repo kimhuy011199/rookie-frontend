@@ -20,9 +20,9 @@ export const sendSocketNotification = (
   socket.emit(NOTI_ACTIONS.SEND_NOTI, { type, action, destination });
 };
 
-export const generateNotificationTitle = (title: string, length: number) => {
-  const titleArr = title.split(' ');
-  return titleArr.length > length
-    ? titleArr.splice(0, length).join(' ') + ' ...'
-    : title;
+export const getWordsFromContent = (content: string, length: number) => {
+  const contentArr = content.split(' ');
+  return contentArr.length > length
+    ? contentArr.splice(0, length).join(' ') + ' ...'
+    : content;
 };
