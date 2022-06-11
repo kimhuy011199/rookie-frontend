@@ -1,10 +1,9 @@
 import React from 'react';
-import { User } from '../../constants/types/User';
 import style from './style.module.css';
 import { ReactComponent as DefaultAvatar } from '../../../assets/images/avatar.svg';
 
 interface AvatarInterface {
-  user: User;
+  user: any;
 }
 
 const Avatar = (props: AvatarInterface) => {

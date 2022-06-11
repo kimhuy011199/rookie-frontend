@@ -1,11 +1,3 @@
-.head {
-  @apply border-b border-dark-3 pb-4 mb-6;
-}
-
 .heading {
-  @apply text-2xl font-medium text-white;
-}
-
-.label {
-  @apply uppercase text-xs font-medium p-1 px-2 bg-primary rounded-md text-white inline-block mb-2;
+  @apply text-xl font-semibold border-b border-dark-3 pb-4;
 }

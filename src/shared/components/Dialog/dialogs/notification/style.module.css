@@ -1,12 +1,16 @@
 .container {
-  @apply flex gap-4;
+  @apply flex gap-4 !border-none;
 }
 
+.avatar {
+  @apply w-10 h-10 relative;
+  min-width: 2.5rem;
+}
 .content {
-  @apply text-gray-500;
+  @apply text-light-2 leading-6;
 }
 
 .name,
 .title {
-  @apply font-semibold text-black;
+  @apply font-semibold text-light-1;
 }

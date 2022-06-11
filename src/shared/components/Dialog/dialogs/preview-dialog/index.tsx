@@ -25,12 +25,7 @@ const PreviewDialog = (props: PreviewDialogInterface) => {
 
   return (
     <Dialog close={close} inlineStyle={inlineStyle}>
-      {type === COMMENT_TYPE.QUESTION && (
-        <div className={style.head}>
-          <span className={style.label}>{t('questions.label.question')}</span>
-          <h2 className={style.heading}>{title}</h2>
-        </div>
-      )}
+      <h3 className={style.heading}>{t('dialog.preview')}</h3>
       <MarkdownRender content={content} />
     </Dialog>
   );

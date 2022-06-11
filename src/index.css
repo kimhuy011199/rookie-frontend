@@ -4,8 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply text-light-1 bg-black-default;
+}
+
 .page {
-  @apply flex flex-col min-h-screen text-sm text-light-1 bg-black-default;
+  @apply flex flex-col min-h-screen text-sm;
 }
 
 .main {
@@ -21,7 +25,11 @@
 }
 
 .notification-toast {
-  @apply border border-gray-50 bg-dark-1 rounded-lg shadow-md leading-5 !important;
+  @apply border border-dark-3 bg-dark-1 rounded-lg shadow-md leading-5 !important;
+}
+
+.Toastify__close-button {
+  @apply !text-white !opacity-70;
 }
 
 .prose :where(code):not(:where([class~='not-prose'] *)) {

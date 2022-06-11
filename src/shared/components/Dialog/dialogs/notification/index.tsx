@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { getWordsFromContent } from '../../../../../core/utils';
 import { COMMENT_TYPE, NOTI_TYPE } from '../../../../constants/enums';
+import Avatar from '../../../Avatar';
 import style from './style.module.css';
 
 interface NotificationDialogInterface {
@@ -31,7 +32,9 @@ const NotificationDialog = (props: NotificationDialogInterface) => {
 
   return (
     <Link className={style.container} to={linkTo}>
-      <div>Avatar</div>
+      <div className={style.avatar}>
+        <Avatar user={action} />
+      </div>
       <div className={style.content}>
         <span className={style.name}>{action.displayName} </span>
         <span>{content} </span>
