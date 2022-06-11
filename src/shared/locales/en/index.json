@@ -42,7 +42,8 @@
       "cancel": "Cancel"
     },
     "asked": "asked",
-    "answered": "answered"
+    "answered": "answered",
+    "recommendation": "Recommendation"
   },
   "placeholder": {
     "add_answer": "Leave your answer"
@@ -87,7 +88,7 @@
       "email": "Email",
       "about": "About",
       "github": "Github",
-      "linkedin": "Linkedin",
+      "linkedin": "LinkedIn",
       "old_password": "Old password",
       "new_password": "New password",
       "confirm_password": "Confirm password",
