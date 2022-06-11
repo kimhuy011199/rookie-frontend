@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import style from './style.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, reset } from '../../../stores/auth/authSlice';
+import Avatar from '../Avatar';
 
 const UserMenu = () => {
   const navigate = useNavigate();
@@ -42,7 +43,9 @@ const UserMenu = () => {
   return (
     <Menu>
       <Menu.Button>
-        <FiMoreHorizontal />
+        <div className={style.avatar}>
+          <Avatar user={user} />
+        </div>
       </Menu.Button>
       <Menu.List>
         {actionMenuOptions.map((action, index) => (

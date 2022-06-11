@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from './style.module.css';
 import MarkdownRender from '../Markdown';
-import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
 import { useSelector } from 'react-redux';
 import ActionMenu from '../ActionMenu';
 import { COMMENT_TYPE } from '../../constants/enums';
 import CommentInput from '../CommentInput';
 import Like from '../Like';
+import Avatar from '../Avatar';
 
 interface CommentInterface {
   type: number;
@@ -48,16 +48,8 @@ const Comment = (props: CommentInterface) => {
 
   return (
     <div className={style.comment}>
-      <div hidden={openEdit} className={style.img}>
-        {data?.user?.avatarImg ? (
-          <img
-            src={data?.user?.avatarImg}
-            alt={data?.user?.displayName}
-            className={style.avatarImg}
-          />
-        ) : (
-          <Avatar className={style.avatar} />
-        )}
+      <div hidden={openEdit} className={style.avatar}>
+        <Avatar user={data.user} />
       </div>
       <div hidden={openEdit} className={style.main}>
         <div className={style.header}>

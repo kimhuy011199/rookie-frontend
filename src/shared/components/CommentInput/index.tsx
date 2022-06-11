@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import style from './style.module.css';
-import { ReactComponent as Avatar } from '../../../assets/images/avatar.svg';
 import Button from '../Button';
 import { useDialog } from '../Dialog/Provider';
 import PreviewDialog from '../Dialog/dialogs/preview-dialog';
@@ -17,6 +16,7 @@ import {
 } from '../../../stores/answers/answerSlice';
 import { SocketContext } from '../../context/socket';
 import { sendSocketNotification } from '../../../core/utils';
+import Avatar from '../Avatar';
 
 export interface InputInterface {
   content: string;
@@ -102,16 +102,8 @@ const CommentInput = (props: CommentInputInterface) => {
 
   return (
     <div className={style.container}>
-      <div className={style.img}>
-        {data?.user?.avatarImg || avatarImg ? (
-          <img
-            src={data?.user?.avatarImg || avatarImg}
-            alt={data?.user?.displayName || 'user avatar'}
-            className={style.avatarImg}
-          />
-        ) : (
-          <Avatar className={style.avatar} />
-        )}
+      <div className={style.avatar}>
+        <Avatar user={user} />
       </div>
       <div className={style.main}>
         <form onSubmit={handleSubmit(handleSubmitForm)}>
