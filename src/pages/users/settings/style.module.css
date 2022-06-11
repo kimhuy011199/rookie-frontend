@@ -1,14 +1,18 @@
 .container {
-  @apply grid mt-6;
+  @apply grid mt-6 gap-4;
   grid-template-columns: 1fr 4fr;
 }
 
 .profile {
-  @apply bg-dark-1 rounded-xl border border-dark-3 px-5 py-5;
+  @apply bg-dark-1 rounded-xl border border-dark-3;
 }
 
 .heading {
-  @apply text-xl font-semibold border-b border-dark-3 pb-4 mb-6;
+  @apply text-xl font-semibold border-b border-dark-3 px-5 py-4;
+}
+
+.form {
+  @apply p-5 pt-4;
 }
 
 .actions {

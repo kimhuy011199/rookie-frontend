@@ -98,6 +98,7 @@
     },
     "heading": {
       "personal_info": "Personal information",
+      "settings": "User settings",
       "change_pass": "Change password"
     }
   }
