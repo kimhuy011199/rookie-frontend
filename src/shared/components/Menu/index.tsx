@@ -48,13 +48,20 @@ const MenuList: FunctionComponent = (props) => {
 };
 
 const MenuItem: FunctionComponent<any> = (props: any) => {
-  const { children, as = 'li', onClick, className, ...otherProps } = props;
+  const {
+    children,
+    as = 'li',
+    onClick,
+    className,
+    value,
+    ...otherProps
+  } = props;
   const { open, setOpen } = useContext(MenuContext);
 
-  const handleChangeItem = (event: any) => {
+  const handleChangeItem = () => {
     setOpen(!open);
     if (onClick && typeof onClick === 'function') {
-      onClick(event);
+      onClick(value);
     }
   };
 

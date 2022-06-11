@@ -24,8 +24,8 @@ const ActionMenu = (props: ActionMenuInterface) => {
   const { appendDialog } = useDialog();
   const { t } = useTranslation();
 
-  const handleActionChange = (event: any) => {
-    switch (event.target.value) {
+  const handleActionChange = (value: number) => {
+    switch (value) {
       case COMMENT_ACTIONS.EDIT:
         onEdit && onEdit();
         break;
