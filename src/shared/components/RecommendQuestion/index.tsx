@@ -32,7 +32,7 @@ const RecommendQuestion = (props: RecommendQuestionInterface) => {
   return (
     <div className={style.container}>
       <h3 className={style.heading}>{t('questions.recommendation')}</h3>
-      {recommend.length > 0 && (
+      {recommend.length > 0 ? (
         <ul className={style.list}>
           {recommend.map((item: Question) => (
             <li key={item._id} className={style.item}>
@@ -47,6 +47,10 @@ const RecommendQuestion = (props: RecommendQuestionInterface) => {
             </li>
           ))}
         </ul>
+      ) : (
+        <h4 className={style.noRecommend}>
+          {t('questions.no_recommendation')}
+        </h4>
       )}
     </div>
   );

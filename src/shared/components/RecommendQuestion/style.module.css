@@ -21,3 +21,7 @@
 .content {
   @apply text-light-3;
 }
+
+.noRecommend {
+  @apply pt-3 pb-1 pl-5;
+}

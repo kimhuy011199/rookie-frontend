@@ -43,7 +43,8 @@
     },
     "asked": "asked",
     "answered": "answered",
-    "recommendation": "Recommendation"
+    "recommendation": "Recommendation",
+    "no_recommendation": "No recommendation questions"
   },
   "placeholder": {
     "add_answer": "Leave your answer"
