@@ -22,8 +22,7 @@
   },
   "header": {
     "login": "Login",
-    "register": "Register",
-    "logout": "Logout"
+    "register": "Register"
   },
   "footer": {
     "copyright": "Made by Nguyen Kim Huy"
@@ -63,7 +62,11 @@
   },
   "menu": {
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "view_profile": "View profile",
+    "settings": "User settings",
+    "change_pass": "Change password",
+    "logout": "Logout"
   },
   "not_found": {
     "title": "404",

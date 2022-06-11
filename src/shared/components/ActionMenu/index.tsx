@@ -5,6 +5,7 @@ import { useDialog } from '../Dialog/Provider';
 import { Menu } from '../Menu';
 import { FiMoreHorizontal } from 'react-icons/fi';
 import DeleteCommentDialog from '../Dialog/dialogs/delete-comment';
+import style from './style.module.css';
 
 interface ActionMenuInterface {
   data?: any;
@@ -48,7 +49,7 @@ const ActionMenu = (props: ActionMenuInterface) => {
             value={action.value}
             onClick={handleActionChange}
           >
-            {t(action.label)}
+            <span className={style.label}>{t(action.label)}</span>
           </Menu.Item>
         ))}
       </Menu.List>

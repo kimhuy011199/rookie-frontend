@@ -5,18 +5,11 @@ import styles from './style.module.css';
 import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
 import Button from '../../components/Button';
 import { useTranslation } from 'react-i18next';
+import UserMenu from '../../components/UserMenu';
 
 function Header() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
   const { t } = useTranslation();
-
-  const onLogout = () => {
-    dispatch(logout());
-    dispatch(reset());
-    navigate('/');
-  };
 
   return (
     <header className={styles.header}>
@@ -31,13 +24,9 @@ function Header() {
         <ul className={styles.list}>
           {user ? (
             <>
-              <li className={styles.item}>{user.email}</li>
+              <li className={styles.item}></li>
               <li className={styles.item}>
-                <Button
-                  label={t('header.logout')}
-                  variant="outline"
-                  handleFuncion={onLogout}
-                />
+                <UserMenu />
               </li>
             </>
           ) : (
