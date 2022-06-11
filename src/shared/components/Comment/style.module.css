@@ -3,7 +3,7 @@
 }
 
 .avatar {
-  @apply w-10 h-10 mr-3;
+  @apply w-10 h-10 mr-3 relative;
   min-width: 2.5rem;
 }
 

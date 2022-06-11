@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { MdCameraAlt } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadImg } from '../../../stores/uploads/uploadSlice';
-import { updateUser } from '../../../stores/auth/authSlice';
+import { reset, uploadImg } from '../../../stores/uploads/uploadSlice';
+import {
+  reset as resetUpdateUser,
+  updateUser,
+} from '../../../stores/auth/authSlice';
 import style from './style.module.css';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import { ReactComponent as DefaultAvatar } from '../../../assets/images/avatar.svg';
 
 const UploadAvatar = () => {
   const [inputValue, setInputValue] = useState<any>('');
@@ -11,7 +17,12 @@ const UploadAvatar = () => {
   const [selectedFile, setSelectedFile] = useState<any>();
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state: any) => state.auth);
+  const { t } = useTranslation();
+  const {
+    user,
+    isSuccess: isUpdateSuccess,
+    isLoading: isUpdateLoading,
+  } = useSelector((state: any) => state.auth);
   const { data, isLoading, isSuccess } = useSelector(
     (state: any) => state.upload
   );
@@ -62,14 +73,28 @@ const UploadAvatar = () => {
       // Update user when uploading image to cloudinary is done
       dispatch(updateUser({ _id: user._id, avatarImg: data.url }));
     }
+
+    return () => {
+      dispatch(reset());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
+
+  useEffect(() => {
+    if (!isUpdateLoading && isUpdateSuccess && isSuccess) {
+      toast(t('toast.update_user_success'));
+    }
+
+    return () => {
+      dispatch(resetUpdateUser());
+    };
+  }, [dispatch, isUpdateSuccess, isUpdateLoading, t, isSuccess]);
 
   return (
     <div className={style.container}>
       <div className={style.imgContainer}>
         {!user?.avatarImg && !previewImgSrc && (
-          <img src="" alt="avatar" className={style.preview} />
+          <DefaultAvatar className={style.preview} />
         )}
         {user?.avatarImg && !previewImgSrc && (
           <img src={user?.avatarImg} alt="avatar" className={style.preview} />
@@ -91,7 +116,7 @@ const UploadAvatar = () => {
       <button
         className={style.submit}
         onClick={handleSubmitFile}
-        disabled={!selectedFile || isLoading}
+        disabled={!selectedFile || isLoading || !inputValue}
       >
         <MdCameraAlt className={style.icon} />
       </button>
