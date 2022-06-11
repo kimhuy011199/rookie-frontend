@@ -16,8 +16,8 @@ export interface UserInputInterface {
   displayName: string;
   email: string;
   about?: string;
-  github?: string;
-  linkedin?: string;
+  linkGithub?: string;
+  linkLinkedIn?: string;
 }
 
 const UserSetting = () => {
@@ -92,24 +92,24 @@ const UserSetting = () => {
               </FormGroup>
               <FormGroup
                 label={t('settings.label.github')}
-                error={errors.github?.message}
+                error={errors.linkGithub?.message}
                 flexRow
               >
                 <Input
                   type="text"
                   defaultValue={user.linkGithub}
-                  {...register('github', {})}
+                  {...register('linkGithub', {})}
                 />
               </FormGroup>
               <FormGroup
                 label={t('settings.label.linkedin')}
-                error={errors.linkedin?.message}
+                error={errors.linkLinkedIn?.message}
                 flexRow
               >
                 <Input
                   type="text"
                   defaultValue={user.linkLinkedIn}
-                  {...register('linkedin', {})}
+                  {...register('linkLinkedIn', {})}
                 />
               </FormGroup>
               <FormGroup
