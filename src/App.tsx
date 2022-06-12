@@ -25,19 +25,11 @@ export default function App() {
 
   useEffect(() => {
     socket.on(NOTI_ACTIONS.RECEIVE_NOTI, (data: any) => {
-      const { type, action, destination } = data;
-      toast(
-        <NotificationDialog
-          type={type}
-          action={action}
-          destination={destination}
-        />,
-        {
-          autoClose: 10000,
-          className: 'notification-toast',
-          closeButton: true,
-        }
-      );
+      toast(<NotificationDialog {...data} />, {
+        autoClose: 10000,
+        className: 'notification-toast',
+        closeButton: true,
+      });
     });
   }, [socket]);
 

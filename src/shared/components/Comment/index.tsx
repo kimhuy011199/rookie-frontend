@@ -70,8 +70,8 @@ const Comment = (props: CommentInterface) => {
           <div className={style.footer}>
             <div className={style.likes}>
               <Like
+                userId={data?.userId}
                 id={data._id}
-                answerData={data}
                 isLiked={data?.userLikes && data?.userLikes[user._id]}
                 likesCount={data?.likesCount}
               />

@@ -3,7 +3,7 @@ import { Notification } from '../../shared/constants/types/Notification';
 import notificationService from './notificationService';
 
 const initialState = {
-  notifications: [],
+  notifications: [] as Notification[],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -50,7 +50,6 @@ export const notificationSlie = createSlice({
       .addCase(createNotification.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.notifications.push(action.payload);
       })
       .addCase(createNotification.rejected, (state, action: any) => {
         state.isLoading = false;

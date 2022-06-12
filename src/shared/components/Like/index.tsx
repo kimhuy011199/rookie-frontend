@@ -5,17 +5,17 @@ import style from './style.module.css';
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi';
 import { NOTI_TYPE } from '../../constants/enums';
 import { SocketContext } from '../../context/socket';
-import { sendSocketNotification } from '../../../core/utils';
+import { NOTI_ACTIONS } from '../../constants/constants';
 
 interface LikeInterface {
   id: string;
   isLiked: boolean;
   likesCount: number;
-  answerData: any;
+  userId: string;
 }
 
 const Like = (props: LikeInterface) => {
-  const { id, isLiked, likesCount, answerData } = props;
+  const { id, isLiked, likesCount, userId } = props;
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
   const { question } = useSelector((state: any) => state.questions);
@@ -24,13 +24,12 @@ const Like = (props: LikeInterface) => {
   const handleLike = () => {
     dispatch(likeOrUnlikeAnswer(id));
     if (!isLiked) {
-      const { userId, content } = answerData;
-      const destination = {
-        userId,
-        title: content,
-        url: question._id,
-      };
-      sendSocketNotification(socket, destination, user, NOTI_TYPE.LIKE_ANSWER);
+      socket.emit(NOTI_ACTIONS.SEND_NOTI, {
+        userId: userId,
+        action: { ...user, actionId: user._id },
+        question: { ...question, questionId: question._id },
+        type: NOTI_TYPE.LIKE_ANSWER,
+      });
     }
   };
 
