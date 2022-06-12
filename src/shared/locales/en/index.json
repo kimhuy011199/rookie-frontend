@@ -47,7 +47,20 @@
     "recommendation": "Recommendation",
     "all_questions": "All questions",
     "no_recommendation": "No recommendation questions",
-    "no_questions": "No questions to show"
+    "no_questions": "No questions to show",
+    "guide": {
+      "title": "Asking a good question",
+      "desc": "The community is here to help you with specific coding, algorithm, or language problems. Here are some tips for you:",
+      "tips": [
+        "Include details about your goal",
+        "Describe expected and actual results",
+        "Include any error messages",
+        "Describe what you tried",
+        "Show some code"
+      ],
+      "markdown": "We are using markdown for writing question content. You can preview your content before submitting. If you are not similar to markdown, find more information about it ",
+      "link": "here"
+    }
   },
   "placeholder": {
     "add_answer": "Leave your answer"

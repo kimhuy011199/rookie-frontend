@@ -15,3 +15,5 @@ export const NOTI_ACTIONS = {
   SEND_NOTI: 'send_notification',
   RECEIVE_NOTI: 'receive_notification',
 };
+export const MARKDOWN_LINK =
+  'https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax';

@@ -23,7 +23,7 @@
 }
 
 .circle {
-  @apply bg-dark-2 flex justify-center items-center rounded-full;
+  @apply bg-dark-2 flex justify-center items-center rounded-full hover:bg-dark-3;
   min-width: 2.5rem;
   min-height: 2.5rem;
 }
