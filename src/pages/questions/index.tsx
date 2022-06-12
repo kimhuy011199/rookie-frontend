@@ -16,7 +16,7 @@ function Questions() {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const currentPage = searchParams.get('page') || '1';
-  const searchValue = searchParams.get('search');
+  const searchValue = searchParams.get('search') || '';
 
   const { questions, isLoading } = useSelector((state: any) => state.questions);
 
@@ -37,12 +37,13 @@ function Questions() {
   };
 
   useEffect(() => {
-    dispatch(getQuestions(+currentPage));
+    const queryString = `page=${currentPage}&search=${searchValue}`;
+    dispatch(getQuestions(queryString));
 
     return () => {
       dispatch(reset());
     };
-  }, [navigate, dispatch, currentPage]);
+  }, [navigate, dispatch, currentPage, searchValue]);
 
   return (
     <>

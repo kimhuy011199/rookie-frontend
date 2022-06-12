@@ -11,8 +11,8 @@ const createQuestion = async (questionData: QuestionInputInterface) => {
 };
 
 // Get all questions
-const getQuestions = async (currentPage: number) => {
-  const response = await api().get(`${endpoint}?page=${currentPage}`);
+const getQuestions = async (queryString: string) => {
+  const response = await api().get(`${endpoint}?${queryString}`);
   return response.data;
 };
 
