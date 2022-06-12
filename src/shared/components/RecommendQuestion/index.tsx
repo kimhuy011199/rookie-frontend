@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getWordsFromContent } from '../../../core/utils';
 import { getRecommendQuestions } from '../../../stores/questions/questionSlice';
 import { Question } from '../../constants/types/Question';
 import style from './style.module.css';
@@ -10,8 +9,6 @@ import style from './style.module.css';
 interface RecommendQuestionInterface {
   questionId: string;
 }
-
-const CONTENT_LENGTH = 8;
 
 const RecommendQuestion = (props: RecommendQuestionInterface) => {
   const { questionId } = props;
@@ -39,9 +36,7 @@ const RecommendQuestion = (props: RecommendQuestionInterface) => {
               <div className={style.question}>
                 <Link className={style.link} to={generateLink(item._id)}>
                   <h3 className={style.title}>{item.title}</h3>
-                  <p className={style.content}>
-                    {getWordsFromContent(item.content, CONTENT_LENGTH)}
-                  </p>
+                  <p className={style.content}>{item.content}</p>
                 </Link>
               </div>
             </li>

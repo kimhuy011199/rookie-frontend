@@ -15,11 +15,15 @@
 }
 
 .title {
-  @apply font-semibold text-base;
+  @apply font-semibold;
 }
 
 .content {
-  @apply text-light-3;
+  @apply text-light-3 overflow-hidden text-sm mt-1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
 }
 
 .noRecommend {
