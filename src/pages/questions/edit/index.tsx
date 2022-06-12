@@ -11,6 +11,7 @@ import Error from '../../../shared/components/Error';
 import QuestionForm from '../../../shared/components/QuestionForm';
 import { useTranslation } from 'react-i18next';
 import { ERROR_CODE } from '../../../shared/constants/enums';
+import AskQuestionGuide from '../../../shared/components/AskQuestionGuide';
 
 const EditQuestion = () => {
   const { id } = useParams();
@@ -68,7 +69,7 @@ const EditQuestion = () => {
                 content={question.content}
               />
             </div>
-            <div className={style.suggestion}></div>
+            <AskQuestionGuide />
           </div>
         </>
       )}

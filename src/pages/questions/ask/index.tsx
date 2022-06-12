@@ -5,13 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { createQuestion } from '../../../stores/questions/questionSlice';
 import QuestionForm from '../../../shared/components/QuestionForm';
 import style from './style.module.css';
-import { MARKDOWN_LINK } from '../../../shared/constants/constants';
 import { ERROR_CODE } from '../../../shared/constants/enums';
 import Error from '../../../shared/components/Error';
+import AskQuestionGuide from '../../../shared/components/AskQuestionGuide';
 
 const AskQuestion = () => {
   const { t } = useTranslation();
-  const tips: [] = t('questions.guide.tips', { returnObjects: true });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,30 +39,7 @@ const AskQuestion = () => {
         <div className={style.form}>
           <QuestionForm submitFunc={submitForm} />
         </div>
-        <div className={style.guide}>
-          <h3 className={style.title}>{t('questions.guide.title')}</h3>
-          <div className={style.content}>
-            <p>{t('questions.guide.desc')}</p>
-            <ul className={style.list}>
-              {tips.map((item) => (
-                <li className={style.item} key={item}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p>
-              {t('questions.guide.markdown')}
-              <a
-                className={style.link}
-                href={MARKDOWN_LINK}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t('questions.guide.link')}
-              </a>
-            </p>
-          </div>
-        </div>
+        <AskQuestionGuide />
       </div>
     </>
   );
