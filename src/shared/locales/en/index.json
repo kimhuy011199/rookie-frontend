@@ -103,5 +103,9 @@
       "settings": "User settings",
       "change_pass": "Change password"
     }
+  },
+  "notifications": {
+    "heading": "All Notifications",
+    "no_notifications": "No notifications to show"
   }
 }

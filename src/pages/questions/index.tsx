@@ -7,9 +7,10 @@ import style from './style.module.css';
 import { Question } from '../../shared/constants/types/Question';
 import QuestionItem from '../../shared/components/QuestionItem';
 import Pagination from '../../shared/components/Pagination';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 function Questions() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();

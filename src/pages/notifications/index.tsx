@@ -9,10 +9,12 @@ import {
 } from '../../stores/notifications/notificationSlice';
 import style from './style.module.css';
 import NotificationItem from '../../shared/components/NotificationItem';
+import { useTranslation } from 'react-i18next';
 
 function Questions() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { notifications, isLoading } = useSelector(
     (state: any) => state.notifications
@@ -32,24 +34,27 @@ function Questions() {
   return (
     <>
       <Spinner isLoading={isLoading} />
-      {notifications &&
-        (notifications.length > 0 ? (
-          <>
-            <h2 className={style.heading}>Notifications page</h2>
-            <p className={style.desc}></p>
-            <div className={style.notifications}>
-              <ul className={style.notificationsList}>
-                {notifications?.map((notification: Notification) => (
-                  <li key={notification._id}>
-                    <NotificationItem notification={notification} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </>
-        ) : (
-          <p>No notifications</p>
-        ))}
+      <div className={style.container}>
+        <h2 className={style.heading}>{t('notifications.heading')}</h2>
+        {notifications &&
+          (notifications.length > 0 ? (
+            <>
+              <div className={style.notifications}>
+                <ul className={style.notificationsList}>
+                  {notifications?.map((notification: Notification) => (
+                    <li className={style.item} key={notification._id}>
+                      <NotificationItem notification={notification} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          ) : (
+            <p className={style.noNotifications}>
+              {t('notifications.no_notifications')}
+            </p>
+          ))}
+      </div>
     </>
   );
 }

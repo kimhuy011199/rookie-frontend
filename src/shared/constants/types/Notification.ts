@@ -4,11 +4,12 @@ export interface Notification {
   actionId: string;
   action: {
     displayName: string;
-    avatarImg: string;
+  };
+  questionId: string;
+  question: {
+    title: string;
   };
   type: number;
-  title: string;
-  url: string;
   updatedAt: string;
   createdAt: string;
   __v: number;
