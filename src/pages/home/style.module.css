@@ -1,3 +1,28 @@
+.container {
+  @apply text-center max-w-3xl mx-auto flex flex-col items-center;
+}
+
+.img {
+  @apply mt-6;
+  max-width: 16rem;
+}
+
 .heading {
-  @apply text-center text-2xl text-primary;
+  @apply text-4xl font-extrabold mb-6 mt-8 leading-snug;
+}
+
+.headingBold {
+  @apply text-primary;
+}
+
+.desc {
+  @apply max-w-xl mb-7 text-light-2;
+}
+
+.questions {
+  @apply mt-4;
+}
+
+.link {
+  @apply text-light-3 underline;
 }

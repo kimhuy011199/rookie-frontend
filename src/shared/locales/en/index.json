@@ -121,5 +121,13 @@
   "notifications": {
     "heading": "All Notifications",
     "no_notifications": "No notifications to show"
+  },
+  "home": {
+    "heading": "A public platform building the definitive collection of ",
+    "heading_bold": "coding questions & answers",
+    "desc": "A community-based space to find and contribute answers to technical challenges, and one of the most popular websites in the world.",
+    "login": "Join the community",
+    "link": "View questions",
+    "or": "or "
   }
 }
