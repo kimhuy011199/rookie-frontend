@@ -61,6 +61,10 @@
       "markdown": "We are using markdown for writing question content. You can preview your content before submitting. If you are not similar to markdown, find more information about it ",
       "link": "here"
     },
+    "search": {
+      "title": "Search question guide",
+      "desc": "Enter search terms in the search box that appears on the center of the header on every page, and press `Enter`.\n\nTo search within specific tag(s), enter them in square brackets: `[javascript] timestamp` searches for mentions of 'timestamp' within the `[javascript]` tag."
+    },
     "login_required": {
       "link": "join the community",
       "text_1": "You need ",
