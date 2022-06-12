@@ -24,8 +24,6 @@ const RecommendQuestion = (props: RecommendQuestionInterface) => {
     }
   }, [questionId, dispatch]);
 
-  console.log({ recommend });
-
   return (
     <div className={style.container}>
       <h3 className={style.heading}>{t('questions.recommendation')}</h3>

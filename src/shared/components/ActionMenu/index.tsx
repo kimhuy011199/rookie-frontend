@@ -14,7 +14,7 @@ interface ActionMenuInterface {
 }
 
 const ActionMenu = (props: ActionMenuInterface) => {
-  const { data, onEdit, type } = props;
+  const { data, onEdit } = props;
 
   const actionMenuOptions = [
     { value: COMMENT_ACTIONS.EDIT, label: 'menu.edit' },

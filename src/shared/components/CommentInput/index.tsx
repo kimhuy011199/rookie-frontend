@@ -34,7 +34,7 @@ interface CommentInputInterface {
 }
 
 const CommentInput = (props: CommentInputInterface) => {
-  const { type, data, questionId, defaultValue, onClose, avatarImg } = props;
+  const { data, questionId, defaultValue, onClose } = props;
   const { t } = useTranslation();
   const { appendDialog } = useDialog();
   const dispatch = useDispatch();
@@ -43,9 +43,7 @@ const CommentInput = (props: CommentInputInterface) => {
   const { register, getValues, handleSubmit, reset, setValue } =
     useForm<InputInterface>();
 
-  const { answer, isLoading, isError, isSuccess, message } = useSelector(
-    (state: any) => state.answers
-  );
+  const { isLoading } = useSelector((state: any) => state.answers);
   const { question } = useSelector((state: any) => state.questions);
   const { user } = useSelector((state: any) => state.auth);
 

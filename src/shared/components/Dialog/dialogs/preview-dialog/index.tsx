@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { COMMENT_TYPE } from '../../../../constants/enums';
 import MarkdownRender from '../../../Markdown';
 import { Dialog } from '../../Provider';
 import style from './style.module.css';
@@ -13,7 +12,7 @@ interface PreviewDialogInterface {
 }
 
 const PreviewDialog = (props: PreviewDialogInterface) => {
-  const { title, content, close, type = COMMENT_TYPE.QUESTION } = props;
+  const { content, close } = props;
   const inlineStyle = {
     maxWidth: '60rem',
     minHeight: '40rem',

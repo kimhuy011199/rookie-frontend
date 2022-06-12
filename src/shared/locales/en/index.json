@@ -45,7 +45,7 @@
     "asked": "asked",
     "answered": "answered",
     "recommendation": "Recommendation",
-    "all_questions": "All questions",
+    "all_questions": "All Questions",
     "no_recommendation": "No recommendation questions",
     "no_questions": "No questions to show",
     "guide": {
@@ -64,7 +64,7 @@
     "search": {
       "title": "Search question guide",
       "desc": "Enter search terms in the search box that appears on the center of the header on every page, and press `Enter`.\n\nTo search within specific tag(s), enter them in square brackets: `[javascript] timestamp` searches for mentions of 'timestamp' within the `[javascript]` tag.",
-      "result_title": "Search results",
+      "result_title": "Search Results",
       "result_for": "Result for "
     },
     "login_required": {

@@ -22,7 +22,6 @@ const SingleQuestion = () => {
   const { answers, isAnswersLoading } = useSelector(
     (state: any) => state.answers
   );
-  const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
     if (id) {
