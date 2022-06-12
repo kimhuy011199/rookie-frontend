@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from '../../../assets/images/logo.svg';
 import Button from '../../components/Button';
 import { useTranslation } from 'react-i18next';
 import UserMenu from '../../components/UserMenu';
+import { FaBell } from 'react-icons/fa';
 
 function Header() {
   const { user } = useSelector((state: any) => state.auth);
@@ -24,7 +25,13 @@ function Header() {
         <ul className={styles.list}>
           {user ? (
             <>
-              <li className={styles.item}></li>
+              <li className={styles.item}>
+                <Link className={styles.link} to="/notifications">
+                  <div className={styles.circle}>
+                    <FaBell />
+                  </div>
+                </Link>
+              </li>
               <li className={styles.item}>
                 <UserMenu />
               </li>

@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { USER_ACTIONS } from '../../constants/enums';
 import { Menu } from '../Menu';
-import { FiMoreHorizontal } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import style from './style.module.css';
 import { useDispatch, useSelector } from 'react-redux';

@@ -21,3 +21,9 @@
 .link {
   @apply flex items-center;
 }
+
+.circle {
+  @apply bg-dark-2 flex justify-center items-center rounded-full;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+}
