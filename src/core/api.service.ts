@@ -1,10 +1,9 @@
 import axios from 'axios';
-import { BASE_API_URL } from '../shared/constants/constants';
 import authStorageService from './authStorage.service';
 
 const apiService = () => {
   const defaultOptions = {
-    baseURL: BASE_API_URL,
+    baseURL: process.env.REACT_APP_BASE_API_URL,
     headers: {
       'Content-Type': 'application/json',
     },
