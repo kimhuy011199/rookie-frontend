@@ -26,7 +26,7 @@ const ChangePassword = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<PasswordInputInterface>({});
 
   const dispatch = useDispatch();
@@ -48,7 +48,8 @@ const ChangePassword = () => {
     return () => {
       dispatch(reset());
     };
-  }, [dispatch, isSuccess, isError, isLoading, t, setError, message]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isSuccess, isError, t, setError, message]);
 
   return (
     <div className={style.container}>
@@ -108,7 +109,7 @@ const ChangePassword = () => {
             <div className={style.actions}>
               <Button
                 label={t('settings.label.submit')}
-                loading={isLoading}
+                loading={isLoading || isSubmitting}
                 variant="primary"
               />
             </div>

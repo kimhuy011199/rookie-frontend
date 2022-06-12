@@ -29,7 +29,7 @@ const UserSetting = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<UserInputInterface>({});
 
   const dispatch = useDispatch();
@@ -51,7 +51,11 @@ const UserSetting = () => {
     return () => {
       dispatch(reset());
     };
-  }, [dispatch, isSuccess, isError, isLoading, t, setError, message]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isSuccess, isError, t, setError, message]);
+
+  console.log({ isLoading });
+  console.log({ isSubmitting });
 
   return (
     <div className={style.container}>
@@ -126,7 +130,7 @@ const UserSetting = () => {
               <div className={style.actions}>
                 <Button
                   label={t('settings.label.submit')}
-                  loading={isLoading}
+                  loading={isLoading || isSubmitting}
                   variant="primary"
                 />
               </div>
