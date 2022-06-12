@@ -54,9 +54,6 @@ const UserSetting = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isSuccess, isError, t, setError, message]);
 
-  console.log({ isLoading });
-  console.log({ isSubmitting });
-
   return (
     <div className={style.container}>
       <UploadAvatar />
