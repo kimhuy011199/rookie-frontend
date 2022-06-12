@@ -17,6 +17,7 @@ import {
 import { SocketContext } from '../../context/socket';
 import Avatar from '../Avatar';
 import { NOTI_ACTIONS } from '../../constants/constants';
+import { createNotification } from '../../../stores/notifications/notificationSlice';
 
 export interface InputInterface {
   content: string;
@@ -63,11 +64,22 @@ const CommentInput = (props: CommentInputInterface) => {
           questionId,
         };
         dispatch(createAnswer(submitData));
+        const type = NOTI_TYPE.ANSWER_QUESTION;
+        const { userId } = question;
+        const actionId = user._id;
+        dispatch(
+          createNotification({
+            userId,
+            actionId,
+            questionId,
+            type,
+          })
+        );
         socket.emit(NOTI_ACTIONS.SEND_NOTI, {
-          userId: question.userId,
-          action: { ...user, actionId: user._id },
+          userId,
+          action: { ...user, actionId },
           question: { ...question, questionId },
-          type: NOTI_TYPE.ANSWER_QUESTION,
+          type,
         });
         reset();
         toast(t('toast.add_answer_success'));

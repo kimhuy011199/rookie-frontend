@@ -6,6 +6,7 @@ import { HiHeart, HiOutlineHeart } from 'react-icons/hi';
 import { NOTI_TYPE } from '../../constants/enums';
 import { SocketContext } from '../../context/socket';
 import { NOTI_ACTIONS } from '../../constants/constants';
+import { createNotification } from '../../../stores/notifications/notificationSlice';
 
 interface LikeInterface {
   id: string;
@@ -24,12 +25,23 @@ const Like = (props: LikeInterface) => {
   const handleLike = () => {
     dispatch(likeOrUnlikeAnswer(id));
     if (!isLiked) {
+      const type = NOTI_TYPE.LIKE_ANSWER;
+      const { _id: questionId } = question;
+      const actionId = user._id;
       socket.emit(NOTI_ACTIONS.SEND_NOTI, {
-        userId: userId,
-        action: { ...user, actionId: user._id },
-        question: { ...question, questionId: question._id },
-        type: NOTI_TYPE.LIKE_ANSWER,
+        userId,
+        action: { ...user, actionId },
+        question: { ...question, questionId },
+        type,
       });
+      dispatch(
+        createNotification({
+          userId,
+          actionId,
+          questionId,
+          type,
+        })
+      );
     }
   };
 
