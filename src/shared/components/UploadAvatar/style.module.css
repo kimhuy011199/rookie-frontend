@@ -1,5 +1,5 @@
 .container {
-  @apply rounded-full relative border border-dark-3;
+  @apply rounded-full relative;
   width: 12rem;
   height: 12rem;
 }

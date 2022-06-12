@@ -9,7 +9,7 @@ body {
 }
 
 .page {
-  @apply flex flex-col min-h-screen text-sm;
+  @apply flex flex-col min-h-screen;
 }
 
 .main {

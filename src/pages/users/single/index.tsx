@@ -25,7 +25,6 @@ const SingleUser = () => {
     about: user.about,
   };
   const entries = Object.entries(userInfo);
-  console.log(entries);
 
   useEffect(() => {
     if (id) {

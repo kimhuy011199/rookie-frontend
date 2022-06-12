@@ -39,7 +39,7 @@ const EditQuestion = () => {
     dispatch(updateQuestion({ id: question._id, updatedData: data }));
   };
 
-  if (question?.userId && question.userId !== user.id) {
+  if (question?.userId && question.userId !== user._id) {
     return <Error code={ERROR_CODE.FORBIDDEN} />;
   }
 
@@ -52,7 +52,9 @@ const EditQuestion = () => {
       />
       {question && (
         <>
-          <h2 className={style.heading}>{t('questions.ask_question_title')}</h2>
+          <h2 className={style.heading}>
+            {t('questions.update_question_title')}
+          </h2>
           <div className={style.container}>
             <div className={style.form}>
               <QuestionForm

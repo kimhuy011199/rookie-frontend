@@ -1,5 +1,5 @@
 .heading {
-  @apply text-2xl font-normal py-2;
+  @apply text-2xl font-semibold py-1;
 }
 
 .container {

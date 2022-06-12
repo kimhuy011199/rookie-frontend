@@ -1,6 +1,6 @@
 .container {
   @apply mx-auto;
-  max-width: 30rem;
+  max-width: 35rem;
 }
 
 .profile {

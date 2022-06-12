@@ -1,5 +1,5 @@
 .inputText {
-  @apply text-sm bg-dark-2 border border-dark-3 rounded-md p-2.5 block w-full focus:outline-none focus:outline-primary;
+  @apply bg-dark-2 border border-dark-3 rounded-md p-2.5 block w-full focus:outline-none focus:outline-primary;
 }
 
 .errorInput {

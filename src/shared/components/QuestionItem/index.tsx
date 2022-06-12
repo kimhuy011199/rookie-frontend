@@ -10,7 +10,6 @@ interface QuestionItemInterface {
 
 const QuestionItem = (props: QuestionItemInterface) => {
   const { question } = props;
-  console.log({ question });
   const footer = `by ${
     question.user.displayName
   }, created on ${formatMonthDateYear(question.createdAt)}`;

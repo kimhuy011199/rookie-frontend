@@ -29,6 +29,7 @@
   },
   "questions": {
     "ask_question_title": "Ask a public question",
+    "update_question_title": "Update your question",
     "label": {
       "question": "Question",
       "title": "Title",
