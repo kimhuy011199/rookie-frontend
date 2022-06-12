@@ -16,8 +16,25 @@ function Questions() {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const currentPage = searchParams.get('page') || '1';
+  const searchValue = searchParams.get('search');
 
   const { questions, isLoading } = useSelector((state: any) => state.questions);
+
+  const resultContent = () => {
+    if (!searchValue) {
+      return <h2 className={style.heading}>{t('questions.all_questions')}</h2>;
+    }
+
+    return (
+      <>
+        <h2 className={style.heading}>{t('questions.search.result_title')}</h2>
+        <p className={style.desc}>
+          {t('questions.search.result_for')}
+          <span className={style.searchValue}>{searchValue}</span>
+        </p>
+      </>
+    );
+  };
 
   useEffect(() => {
     dispatch(getQuestions(+currentPage));
@@ -32,8 +49,7 @@ function Questions() {
       <Spinner isLoading={isLoading} />
       <div className={style.container}>
         <div className={style.main}>
-          <h2 className={style.heading}>{t('questions.all_questions')}</h2>
-          <p className={style.desc}></p>
+          <div className={style.header}>{resultContent()}</div>
           {questions?.questionsList?.length > 0 ? (
             <>
               <div className={style.questions}>

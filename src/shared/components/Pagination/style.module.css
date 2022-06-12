@@ -13,4 +13,5 @@
 
 .active {
   @apply text-white bg-primary;
+  pointer-events: none;
 }

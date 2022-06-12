@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import { useTranslation } from 'react-i18next';
 import UserMenu from '../../components/UserMenu';
 import { FaBell } from 'react-icons/fa';
+import SearchQuestion from '../../components/SearchQuestion';
 
 function Header() {
   const { user } = useSelector((state: any) => state.auth);
@@ -22,6 +23,7 @@ function Header() {
             </Link>
           </h1>
         </div>
+        <SearchQuestion />
         <ul className={styles.list}>
           {user ? (
             <>

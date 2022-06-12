@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { generatePageRange } from '../../../core/utils';
 import style from './style.module.css';
 
@@ -13,7 +13,12 @@ interface PaginationInterface {
 
 const Pagination = (props: PaginationInterface) => {
   const { totalPages, currentPage } = props;
-  const linkTo = (item: number) => `/questions?page=${item}`;
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search');
+  const linkTo = (item: number) =>
+    search
+      ? `/questions?search=${search}&page=${item}`
+      : `/questions?page=${item}`;
   let range: any = generatePageRange(1, totalPages);
 
   if (totalPages > 6) {
