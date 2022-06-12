@@ -7,6 +7,7 @@ export enum KEY_CODE {
 export enum ERROR_CODE {
   NOT_FOUND = 404,
   FORBIDDEN = 403,
+  UNAUTHENTICATED = 401,
 }
 
 export enum COMMENT_TYPE {

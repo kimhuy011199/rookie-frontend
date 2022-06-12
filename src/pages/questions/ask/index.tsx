@@ -6,6 +6,8 @@ import { createQuestion } from '../../../stores/questions/questionSlice';
 import QuestionForm from '../../../shared/components/QuestionForm';
 import style from './style.module.css';
 import { MARKDOWN_LINK } from '../../../shared/constants/constants';
+import { ERROR_CODE } from '../../../shared/constants/enums';
+import Error from '../../../shared/components/Error';
 
 const AskQuestion = () => {
   const { t } = useTranslation();
@@ -15,6 +17,7 @@ const AskQuestion = () => {
   const dispatch = useDispatch();
 
   const { question, isSuccess } = useSelector((state: any) => state.questions);
+  const { user } = useSelector((state: any) => state.auth);
 
   const submitForm = (data: any) => {
     dispatch(createQuestion(data));
@@ -25,6 +28,10 @@ const AskQuestion = () => {
       navigate(`/questions/${question._id}`);
     }
   }, [isSuccess, navigate, question]);
+
+  if (!user) {
+    return <Error code={ERROR_CODE.UNAUTHENTICATED} />;
+  }
 
   return (
     <>

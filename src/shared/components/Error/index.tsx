@@ -16,7 +16,11 @@ const Error = (props: ErrorInterface) => {
   const { t } = useTranslation();
 
   const onClick = () => {
-    navigate('/');
+    if (code === ERROR_CODE.UNAUTHENTICATED) {
+      navigate('/auth/login');
+    } else {
+      navigate('/');
+    }
   };
 
   const errorText = () => {
@@ -25,6 +29,8 @@ const Error = (props: ErrorInterface) => {
         return 'not_found';
       case ERROR_CODE.FORBIDDEN:
         return 'forbidden';
+      case ERROR_CODE.UNAUTHENTICATED:
+        return 'unauthenticated';
     }
   };
 

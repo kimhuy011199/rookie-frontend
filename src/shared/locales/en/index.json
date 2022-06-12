@@ -105,6 +105,11 @@
     "content": "Access denied",
     "action": "Go to homepage"
   },
+  "unauthenticated": {
+    "title": "401",
+    "content": "Unauthenticated",
+    "action": "Login now"
+  },
   "settings": {
     "label": {
       "display_name": "Display name",

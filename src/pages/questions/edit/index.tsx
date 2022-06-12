@@ -39,6 +39,10 @@ const EditQuestion = () => {
     dispatch(updateQuestion({ id: question._id, updatedData: data }));
   };
 
+  if (!user) {
+    return <Error code={ERROR_CODE.UNAUTHENTICATED} />;
+  }
+
   if (question?.userId && question.userId !== user._id) {
     return <Error code={ERROR_CODE.FORBIDDEN} />;
   }

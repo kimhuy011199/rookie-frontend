@@ -3,9 +3,9 @@
 }
 
 .title {
-  @apply text-4xl font-semibold;
+  @apply text-5xl font-semibold;
 }
 
 .content {
-  @apply text-2xl uppercase font-medium;
+  @apply text-4xl uppercase font-medium text-center;
 }

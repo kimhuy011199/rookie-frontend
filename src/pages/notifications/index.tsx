@@ -10,6 +10,8 @@ import {
 import style from './style.module.css';
 import NotificationItem from '../../shared/components/NotificationItem';
 import { useTranslation } from 'react-i18next';
+import { ERROR_CODE } from '../../shared/constants/enums';
+import Error from '../../shared/components/Error';
 
 function Questions() {
   const navigate = useNavigate();
@@ -22,14 +24,18 @@ function Questions() {
   const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    dispatch(getNotifications(user._id));
+    if (user) {
+      dispatch(getNotifications(user._id));
+    }
 
     return () => {
       dispatch(reset());
     };
   }, [navigate, dispatch, user]);
 
-  if (!user) return null;
+  if (!user) {
+    return <Error code={ERROR_CODE.UNAUTHENTICATED} />;
+  }
 
   return (
     <>
