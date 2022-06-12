@@ -56,11 +56,7 @@ const SingleQuestion = () => {
                 </ul>
               )}
               <div className={style.comment}>
-                <CommentInput
-                  avatarImg={user.avatarImg}
-                  type={COMMENT_TYPE.COMMENT}
-                  questionId={id}
-                />
+                <CommentInput type={COMMENT_TYPE.COMMENT} questionId={id} />
               </div>
             </div>
             <div className={style.recommandation}>

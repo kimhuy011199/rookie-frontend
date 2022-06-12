@@ -60,6 +60,11 @@
       ],
       "markdown": "We are using markdown for writing question content. You can preview your content before submitting. If you are not similar to markdown, find more information about it ",
       "link": "here"
+    },
+    "login_required": {
+      "link": "join the community",
+      "text_1": "You need ",
+      "text_2": " to answer on this question."
     }
   },
   "placeholder": {

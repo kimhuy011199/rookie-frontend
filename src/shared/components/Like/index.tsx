@@ -23,6 +23,10 @@ const Like = (props: LikeInterface) => {
   const socket = useContext(SocketContext);
 
   const handleLike = () => {
+    if (!user) {
+      return;
+    }
+
     dispatch(likeOrUnlikeAnswer(id));
     if (!isLiked) {
       const type = NOTI_TYPE.LIKE_ANSWER;

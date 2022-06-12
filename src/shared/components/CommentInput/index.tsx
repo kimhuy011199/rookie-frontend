@@ -18,6 +18,7 @@ import { SocketContext } from '../../context/socket';
 import Avatar from '../Avatar';
 import { NOTI_ACTIONS } from '../../constants/constants';
 import { createNotification } from '../../../stores/notifications/notificationSlice';
+import NeedLogin from './NeedLogin';
 
 export interface InputInterface {
   content: string;
@@ -101,9 +102,8 @@ const CommentInput = (props: CommentInputInterface) => {
     }
   };
 
-  // Check if user not login
   if (!user) {
-    return null;
+    return <NeedLogin />;
   }
 
   return (

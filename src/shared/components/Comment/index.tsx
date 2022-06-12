@@ -57,7 +57,7 @@ const Comment = (props: CommentInterface) => {
             <span className={style.user}>{data?.user?.displayName}</span>
             <span className={style.date}>{renderTime()}</span>
           </div>
-          {data?.userId === user._id && type !== COMMENT_TYPE.QUESTION && (
+          {data?.userId === user?._id && type !== COMMENT_TYPE.QUESTION && (
             <div className={style.action}>
               <ActionMenu data={data} onEdit={handleEditComment} />
             </div>
@@ -72,7 +72,7 @@ const Comment = (props: CommentInterface) => {
               <Like
                 userId={data?.userId}
                 id={data._id}
-                isLiked={data?.userLikes && data?.userLikes[user._id]}
+                isLiked={user && data?.userLikes && data?.userLikes[user._id]}
                 likesCount={data?.likesCount}
               />
             </div>

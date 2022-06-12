@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import style from './style.module.css';
 
 import Questions from '.';
@@ -9,13 +8,6 @@ import SingleQuestion from './single';
 import EditQuestion from './edit';
 
 const QuestionsRoutes = () => {
-  const { user } = useSelector((state: any) => state.auth);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    !user && navigate('/auth/login');
-  }, [user, navigate]);
-
   return (
     <div className={style.questions}>
       <Routes>
