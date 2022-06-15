@@ -22,7 +22,8 @@
   },
   "header": {
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "ask": "Ask question"
   },
   "footer": {
     "copyright": "Made by Nguyen Kim Huy"
