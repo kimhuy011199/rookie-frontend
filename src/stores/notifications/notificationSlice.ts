@@ -36,7 +36,7 @@ export const getNotifications = createAsyncThunk(
   }
 );
 
-export const notificationSlie = createSlice({
+export const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
@@ -72,5 +72,5 @@ export const notificationSlie = createSlice({
   },
 });
 
-export const { reset } = notificationSlie.actions;
-export default notificationSlie.reducer;
+export const { reset } = notificationSlice.actions;
+export default notificationSlice.reducer;

@@ -4,6 +4,7 @@ export const ENDPOINT = {
   ANSWERS: 'answers',
   UPLOAD: 'upload',
   NOTIFICATION: 'notifications',
+  TAGS: 'tags',
 };
 export const ZINDEX_DEFAULT = 1000;
 export const NOTI_ACTIONS = {
