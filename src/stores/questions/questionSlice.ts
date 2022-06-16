@@ -12,6 +12,7 @@ const initialState = {
   questions: {},
   question: null,
   recommend: [],
+  userQuestions: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -50,6 +51,21 @@ export const getQuestionById = createAsyncThunk(
   async (id: string, thunkAPI) => {
     try {
       return await questionService.getQuestionById(id);
+    } catch (error: any) {
+      const errorCode = error?.response?.status;
+      const message = error?.response?.data?.message;
+      const errorResponse = { errorCode, message };
+      return thunkAPI.rejectWithValue(errorResponse);
+    }
+  }
+);
+
+// Get question by user id
+export const getQuestionByUserId = createAsyncThunk(
+  'questions/getByUserId',
+  async (userId: string, thunkAPI) => {
+    try {
+      return await questionService.getQuestionByUserId(userId);
     } catch (error: any) {
       const errorCode = error?.response?.status;
       const message = error?.response?.data?.message;
@@ -155,6 +171,18 @@ export const questionSlice = createSlice({
         state.question = action.payload;
       })
       .addCase(getQuestionById.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getQuestionByUserId.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getQuestionByUserId.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userQuestions = action.payload;
+      })
+      .addCase(getQuestionByUserId.rejected, (state, action: any) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

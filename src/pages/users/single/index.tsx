@@ -7,6 +7,7 @@ import Error from '../../../shared/components/Error';
 import { ERROR_CODE } from '../../../shared/constants/enums';
 import { useTranslation } from 'react-i18next';
 import Avatar from '../../../shared/components/Avatar';
+import { getQuestionByUserId } from '../../../stores/questions/questionSlice';
 
 const SingleUser = () => {
   const { id } = useParams();
@@ -16,6 +17,8 @@ const SingleUser = () => {
   const { user, isLoading, isError, message } = useSelector(
     (state: any) => state.auth
   );
+
+  const { userQuestions } = useSelector((state: any) => state.questions);
 
   const userInfo = {
     display_name: user.displayName,
@@ -27,10 +30,13 @@ const SingleUser = () => {
   const entries = Object.entries(userInfo);
 
   useEffect(() => {
+    dispatch(getQuestionByUserId(user._id));
     if (id) {
       // dispatch();
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, user]);
+
+  console.log({ userQuestions });
 
   return (
     <>
