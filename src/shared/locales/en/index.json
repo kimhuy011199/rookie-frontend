@@ -132,9 +132,10 @@
       "submit": "Submit"
     },
     "heading": {
-      "personal_info": "Personal information",
-      "settings": "User settings",
-      "change_pass": "Change password"
+      "personal_info": "Personal Information",
+      "user_questions": "User Questions",
+      "settings": "User Settings",
+      "change_pass": "Change Password"
     }
   },
   "notifications": {
