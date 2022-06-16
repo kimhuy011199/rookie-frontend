@@ -8,6 +8,7 @@ import { COMMENT_TYPE } from '../../constants/enums';
 import CommentInput from '../CommentInput';
 import Like from '../Like';
 import Avatar from '../Avatar';
+import TagList from '../TagList';
 
 interface CommentInterface {
   type: number;
@@ -76,7 +77,13 @@ const Comment = (props: CommentInterface) => {
                 likesCount={data?.likesCount}
               />
             </div>
-            <div className={style.tags}></div>
+          </div>
+        )}
+        {type === COMMENT_TYPE.QUESTION && data.tags.length > 0 && (
+          <div className={style.footer}>
+            <div className={style.tags}>
+              <TagList tagList={data.tags} isLink={true} />
+            </div>
           </div>
         )}
       </div>

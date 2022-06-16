@@ -38,7 +38,7 @@
       "content": "Content",
       "sub_content": "Include all the information someone would need to answer your question",
       "tags": "Tags",
-      "sub_tags": "Add up to 5 tags to describe what your question is about",
+      "sub_tags": "Add up to 3 tags to describe what your question is about",
       "submit": "Submit",
       "preview": "Preview",
       "cancel": "Cancel"
@@ -92,6 +92,7 @@
     "answer_question": "answered on your question",
     "like_answer": "liked your answer on question",
     "preview": "Preview",
+    "tag": "Choose tags",
     "submit": "Submit",
     "cancel": "Cancel"
   },

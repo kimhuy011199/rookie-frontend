@@ -1,11 +1,10 @@
-.container {
-  @apply flex border border-dark-3 rounded-md p-2 gap-2 items-center;
-}
-
-.tags {
-  @apply flex-1;
-}
-
 .input {
-  @apply w-full bg-dark-1 focus:outline-none;
+  @apply relative flex justify-between border bg-dark-2 border-dark-3 rounded-md p-2.5 py-2 w-full focus:outline-none focus:outline-primary disabled:bg-dark-1;
+  min-height: 50px;
+}
+
+.icon {
+  @apply absolute right-3 text-2xl;
+  top: 50%;
+  transform: translateY(-50%);
 }

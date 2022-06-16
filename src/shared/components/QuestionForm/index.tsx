@@ -10,6 +10,7 @@ import Button from '../Button';
 import TextArea from '../TextArea';
 import TagInput from '../TagInput';
 import style from './style.module.css';
+import { Tag } from '../../constants/types/Tag';
 
 export interface InputInterface {
   title: string;
@@ -21,7 +22,7 @@ interface QuestionFormInterface {
   submitFunc: Function;
   title?: string;
   content?: string;
-  tags?: string[];
+  tags?: Tag[];
 }
 
 const QuestionForm = (props: QuestionFormInterface) => {
@@ -33,7 +34,7 @@ const QuestionForm = (props: QuestionFormInterface) => {
     formState: { errors },
   } = useForm<InputInterface>();
 
-  const [tags, setTags] = useState<string[]>(defaultTag ? defaultTag : []);
+  const [tags, setTags] = useState<Tag[]>(defaultTag ? defaultTag : []);
   const { appendDialog } = useDialog();
   const { t } = useTranslation();
 

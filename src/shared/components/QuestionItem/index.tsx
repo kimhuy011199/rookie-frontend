@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatMonthDateYear } from '../../../core/utils';
 import { Question } from '../../constants/types/Question';
+import TagList from '../TagList';
 import style from './style.module.css';
 
 interface QuestionItemInterface {
@@ -10,7 +11,7 @@ interface QuestionItemInterface {
 
 const QuestionItem = (props: QuestionItemInterface) => {
   const { question } = props;
-  const footer = `by ${
+  const info = `by ${
     question.user.displayName
   }, created on ${formatMonthDateYear(question.createdAt)}`;
   const linkTo = `/questions/${question._id}`;
@@ -20,7 +21,10 @@ const QuestionItem = (props: QuestionItemInterface) => {
       <Link className={style.link} to={linkTo}>
         <h3 className={style.title}>{question.title}</h3>
         <p className={style.content}>{question.content}</p>
-        <span className={style.footer}>{footer}</span>
+        <div className={style.footer}>
+          {question.tags?.length > 0 && <TagList tagList={question.tags} />}
+          <span className={style.info}>{info}</span>
+        </div>
       </Link>
     </div>
   );
