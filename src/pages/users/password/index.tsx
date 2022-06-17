@@ -10,6 +10,7 @@ import { changePassword, reset } from '../../../stores/auth/authSlice';
 import style from './style.module.css';
 import { toast } from 'react-toastify';
 import { authType } from '../../../stores/auth/authType';
+import Avatar from '../../../shared/components/Avatar';
 
 export interface PasswordInputInterface {
   oldPassword: string;
@@ -52,6 +53,9 @@ const ChangePassword = () => {
 
   return (
     <div className={style.container}>
+      <div className={style.avatar}>
+        <Avatar user={user} />
+      </div>
       <div className={style.profile}>
         <h3 className={style.heading}>{t('settings.heading.change_pass')}</h3>
         <div className={style.form}>
