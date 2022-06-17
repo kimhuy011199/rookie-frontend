@@ -9,6 +9,8 @@ import QuestionItem from '../../shared/components/QuestionItem';
 import Pagination from '../../shared/components/Pagination';
 import { useTranslation } from 'react-i18next';
 import SearchQuestionGuide from '../../shared/components/SearchQuestionGuide';
+import { questionAction } from '../../stores/questions/questionAction';
+import { toast } from 'react-toastify';
 
 function Questions() {
   const { t } = useTranslation();
@@ -18,7 +20,9 @@ function Questions() {
   const currentPage = searchParams.get('page') || '1';
   const searchValue = searchParams.get('search') || '';
 
-  const { questions, isLoading } = useSelector((state: any) => state.questions);
+  const { questions, isLoading, isError } = useSelector(
+    (state: any) => state.questions
+  );
 
   const resultContent = () => {
     if (!searchValue) {
@@ -35,6 +39,12 @@ function Questions() {
       </>
     );
   };
+
+  useEffect(() => {
+    if (isError === questionAction.GET_ALL_QUESTIONS) {
+      toast(t('toast.unsuccess'));
+    }
+  }, [isError, t]);
 
   useEffect(() => {
     const queryString = `page=${currentPage}&search=${searchValue}`;

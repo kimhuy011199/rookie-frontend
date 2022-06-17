@@ -11,10 +11,14 @@ import CommentInput from '../../../shared/components/CommentInput';
 import { getAnswers } from '../../../stores/answers/answerSlice';
 import { Answer } from '../../../shared/constants/types/Answer';
 import RecommendQuestion from '../../../shared/components/RecommendQuestion';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
+import { questionAction } from '../../../stores/questions/questionAction';
 
 const SingleQuestion = () => {
   const { id = '' } = useParams();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { question, isLoading, isError, message } = useSelector(
     (state: any) => state.questions
@@ -29,6 +33,12 @@ const SingleQuestion = () => {
       dispatch(getAnswers(id));
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (isError === questionAction.GET_QUESTION_BY_ID) {
+      toast(t('toast.unsuccess'));
+    }
+  }, [isError, t]);
 
   return (
     <>

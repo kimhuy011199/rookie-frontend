@@ -12,6 +12,8 @@ import QuestionForm from '../../../shared/components/QuestionForm';
 import { useTranslation } from 'react-i18next';
 import { ERROR_CODE } from '../../../shared/constants/enums';
 import AskQuestionGuide from '../../../shared/components/AskQuestionGuide';
+import { questionAction } from '../../../stores/questions/questionAction';
+import { toast } from 'react-toastify';
 
 const EditQuestion = () => {
   const { id } = useParams();
@@ -31,7 +33,13 @@ const EditQuestion = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isError === questionAction.GET_QUESTION_BY_ID) {
+      toast(t('toast.unsuccess'));
+    }
+  }, [isError, t]);
+
+  useEffect(() => {
+    if (isSuccess === questionAction.UPDATE_QUESTION) {
       navigate(`/questions/${question._id}`);
     }
   }, [isSuccess, navigate, question]);

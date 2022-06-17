@@ -8,6 +8,8 @@ import style from './style.module.css';
 import { ERROR_CODE } from '../../../shared/constants/enums';
 import Error from '../../../shared/components/Error';
 import AskQuestionGuide from '../../../shared/components/AskQuestionGuide';
+import { questionAction } from '../../../stores/questions/questionAction';
+import { toast } from 'react-toastify';
 
 const AskQuestion = () => {
   const { t } = useTranslation();
@@ -15,7 +17,9 @@ const AskQuestion = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { question, isSuccess } = useSelector((state: any) => state.questions);
+  const { question, isSuccess, isError } = useSelector(
+    (state: any) => state.questions
+  );
   const { user } = useSelector((state: any) => state.auth);
 
   const submitForm = (data: any) => {
@@ -23,10 +27,16 @@ const AskQuestion = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess === questionAction.CREATE_QUESTION) {
       navigate(`/questions/${question._id}`);
     }
   }, [isSuccess, navigate, question]);
+
+  useEffect(() => {
+    if (isError === questionAction.CREATE_QUESTION) {
+      toast(t('toast.unsuccess'));
+    }
+  }, [isError, t]);
 
   if (!user) {
     return <Error code={ERROR_CODE.UNAUTHENTICATED} />;
