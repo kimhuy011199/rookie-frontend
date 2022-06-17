@@ -9,27 +9,6 @@
   height: 12rem;
 }
 
-.right {
-  @apply bg-dark-1 rounded-xl border border-dark-3 flex-1;
-}
-
-.heading {
-  @apply text-xl font-semibold border-b border-dark-3 px-5 py-4;
-}
-
-.item {
-  @apply px-5 py-3.5 flex;
-}
-
-.item:nth-child(even) {
-  @apply bg-dark-2;
-}
-
-.title {
-  @apply font-semibold text-base whitespace-pre-line;
-}
-
-.label {
-  @apply pt-0.5;
-  min-width: 9rem;
+.information {
+  @apply flex-1 flex flex-col gap-6;
 }

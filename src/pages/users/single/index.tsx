@@ -8,6 +8,9 @@ import { ERROR_CODE } from '../../../shared/constants/enums';
 import { useTranslation } from 'react-i18next';
 import Avatar from '../../../shared/components/Avatar';
 import { getQuestionByUserId } from '../../../stores/questions/questionSlice';
+import List from '../../../shared/components/List';
+import QuestionLinkItem from '../../../shared/components/QuestionLinkItem';
+import UserInfoItem from './components/UserInfoItem';
 
 const SingleUser = () => {
   const { id } = useParams();
@@ -27,16 +30,13 @@ const SingleUser = () => {
     linkedin: user.linkLinkedIn,
     about: user.about,
   };
-  const entries = Object.entries(userInfo);
+  const userInfoEntries = Object.entries(userInfo);
 
   useEffect(() => {
-    dispatch(getQuestionByUserId(user._id));
-    if (id) {
-      // dispatch();
+    if (user._id) {
+      dispatch(getQuestionByUserId(user._id));
     }
   }, [id, dispatch, user]);
-
-  console.log({ userQuestions });
 
   return (
     <>
@@ -49,32 +49,20 @@ const SingleUser = () => {
         <div className={style.avatar}>
           <Avatar user={user} />
         </div>
-        <div className={style.right}>
-          <h3 className={style.heading}>
-            {t('settings.heading.personal_info')}
-          </h3>
-          <ul className={style.list}>
-            {entries.map((item: any, index) => (
-              <li key={index} className={style.item}>
-                <span className={style.label}>
-                  {t(`settings.label.${item[0]}`)}
-                </span>
-                {item[0] === 'github' || item[0] === 'linkedin' ? (
-                  // eslint-disable-next-line jsx-a11y/anchor-has-content
-                  <a
-                    className={style.title}
-                    href={item[1]}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {item[1]}
-                  </a>
-                ) : (
-                  <span className={style.title}>{item[1]}</span>
-                )}
-              </li>
-            ))}
-          </ul>
+        <div className={style.information}>
+          <List
+            data={userInfoEntries}
+            heading={t('settings.heading.personal_info')}
+          >
+            <UserInfoItem />
+          </List>
+          <List
+            data={userQuestions}
+            heading={t('settings.heading.user_questions')}
+            emptyListContent={t('questions.no_questions')}
+          >
+            <QuestionLinkItem />
+          </List>
         </div>
       </div>
     </>
