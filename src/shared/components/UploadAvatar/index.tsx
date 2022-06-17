@@ -10,6 +10,7 @@ import style from './style.module.css';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as DefaultAvatar } from '../../../assets/images/avatar.svg';
+import { authAction } from '../../../stores/auth/authAction';
 
 const UploadAvatar = () => {
   const [inputValue, setInputValue] = useState<any>('');
@@ -81,7 +82,11 @@ const UploadAvatar = () => {
   }, [isSuccess, data]);
 
   useEffect(() => {
-    if (!isUpdateLoading && isUpdateSuccess && isSuccess) {
+    if (
+      !isUpdateLoading &&
+      isUpdateSuccess === authAction.UPDATE_USER &&
+      isSuccess
+    ) {
       toast(t('toast.update_user_success'));
     }
 

@@ -9,6 +9,7 @@ import { PASSWORD_PATTERN } from '../../../shared/constants/patterns';
 import { changePassword, reset } from '../../../stores/auth/authSlice';
 import style from './style.module.css';
 import { toast } from 'react-toastify';
+import { authAction } from '../../../stores/auth/authAction';
 
 export interface PasswordInputInterface {
   oldPassword: string;
@@ -32,15 +33,14 @@ const ChangePassword = () => {
   const dispatch = useDispatch();
 
   const handleSubmitForm = (data: PasswordInputInterface) => {
-    dispatch(reset());
     dispatch(changePassword({ ...user, ...data }));
   };
 
   useEffect(() => {
-    if (!isLoading && isSuccess) {
+    if (isSuccess === authAction.CHANGE_PASSWORD) {
       toast(t('toast.update_user_success'));
     }
-    if (!isLoading && isError) {
+    if (isError === authAction.CHANGE_PASSWORD) {
       setError('oldPassword', { type: 'custom', message });
       toast(t('toast.unsuccess'));
     }
@@ -48,7 +48,6 @@ const ChangePassword = () => {
     return () => {
       dispatch(reset());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isSuccess, isError, t, setError, message]);
 
   return (

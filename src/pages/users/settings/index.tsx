@@ -11,6 +11,7 @@ import { EMAIL_PATTERN } from '../../../shared/constants/patterns';
 import { reset, updateUser } from '../../../stores/auth/authSlice';
 import style from './style.module.css';
 import { toast } from 'react-toastify';
+import { authAction } from '../../../stores/auth/authAction';
 
 export interface UserInputInterface {
   displayName: string;
@@ -35,15 +36,14 @@ const UserSetting = () => {
   const dispatch = useDispatch();
 
   const handleSubmitForm = (data: UserInputInterface) => {
-    dispatch(reset());
     dispatch(updateUser({ ...user, ...data }));
   };
 
   useEffect(() => {
-    if (!isLoading && isSuccess) {
+    if (isSuccess === authAction.UPDATE_USER) {
       toast(t('toast.update_user_success'));
     }
-    if (!isLoading && isError) {
+    if (isError === authAction.UPDATE_USER) {
       setError('email', { type: 'custom', message });
       toast(t('toast.unsuccess'));
     }
@@ -51,7 +51,6 @@ const UserSetting = () => {
     return () => {
       dispatch(reset());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, isSuccess, isError, t, setError, message]);
 
   return (

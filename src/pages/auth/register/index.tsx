@@ -17,6 +17,7 @@ import {
 } from '../../../shared/constants/patterns';
 import { ReactComponent as Logo } from '../../../assets/images/favicon.svg';
 import style from '../style.module.css';
+import { authAction } from '../../../stores/auth/authAction';
 
 export interface RegisterUserInterface {
   displayName: string;
@@ -42,7 +43,7 @@ function Register() {
   );
 
   useEffect(() => {
-    if (isSuccess || user) {
+    if (isSuccess === authAction.REGISTER || user) {
       navigate('/');
     }
 
@@ -130,7 +131,9 @@ function Register() {
             variant="primary"
             full
           />
-          {isError && <span className={style.serverError}>{message}</span>}
+          {isError === authAction.REGISTER && (
+            <span className={style.serverError}>{message}</span>
+          )}
         </form>
       </div>
       <span className={style.action}>

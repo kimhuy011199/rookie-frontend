@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authStorageService from '../../core/authStorage.service';
+import { authAction } from './authAction';
 import authService from './authService';
 
 export interface LoginUserInterface {
@@ -19,15 +20,15 @@ const user = authStorageService().getUserInfo();
 
 const initialState = {
   user: user,
-  isError: false,
-  isSuccess: false,
+  isError: '',
+  isSuccess: '',
   isLoading: false,
   message: '',
 };
 
 // Register user
 export const register = createAsyncThunk(
-  'auth/register',
+  authAction.REGISTER,
   async (user: RegisterUserInterface, thunkAPI) => {
     try {
       return await authService.register(user);
@@ -40,7 +41,7 @@ export const register = createAsyncThunk(
 
 // Login user
 export const login = createAsyncThunk(
-  'auth/login',
+  authAction.LOGIN,
   async (user: LoginUserInterface, thunkAPI) => {
     try {
       return await authService.login(user);
@@ -53,7 +54,7 @@ export const login = createAsyncThunk(
 
 // Get current user
 export const getUserMe = createAsyncThunk(
-  'auth/currentUser',
+  authAction.GET_USER_ME,
   async (_, thunkAPI) => {
     try {
       return await authService.getUserMe();
@@ -65,13 +66,13 @@ export const getUserMe = createAsyncThunk(
 );
 
 // Logout
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk(authAction.LOGOUT, async () => {
   await authService.logout();
 });
 
 // Update user
 export const updateUser = createAsyncThunk(
-  'auth/updateUser',
+  authAction.UPDATE_USER,
   async (updatedUserData: any, thunkAPI) => {
     try {
       return await authService.updateUser(updatedUserData);
@@ -84,7 +85,7 @@ export const updateUser = createAsyncThunk(
 
 // Change password
 export const changePassword = createAsyncThunk(
-  'auth/changePassword',
+  authAction.CHANGE_PASSWORD,
   async (updatedUserData: any, thunkAPI) => {
     try {
       return await authService.changePassword(updatedUserData);
@@ -101,8 +102,8 @@ export const authSlice = createSlice({
   reducers: {
     reset: (state) => {
       state.isLoading = false;
-      state.isSuccess = false;
-      state.isError = false;
+      state.isSuccess = '';
+      state.isError = '';
       state.message = '';
     },
   },
@@ -113,12 +114,12 @@ export const authSlice = createSlice({
       })
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = authAction.REGISTER;
         state.user = action.payload;
       })
       .addCase(register.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = authAction.REGISTER;
         state.message = action.payload;
         state.user = null;
       })
@@ -127,12 +128,12 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = authAction.LOGIN;
         state.user = action.payload;
       })
       .addCase(login.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = authAction.LOGIN;
         state.message = action.payload;
         state.user = null;
       })
@@ -141,11 +142,12 @@ export const authSlice = createSlice({
       })
       .addCase(getUserMe.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isSuccess = authAction.GET_USER_ME;
         state.user = { token, ...action.payload };
       })
       .addCase(getUserMe.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = authAction.GET_USER_ME;
         state.message = action.payload;
         state.user = null;
       })
@@ -157,12 +159,12 @@ export const authSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = authAction.UPDATE_USER;
         state.user = action.payload;
       })
       .addCase(updateUser.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = authAction.UPDATE_USER;
         state.message = action.payload;
       })
       .addCase(changePassword.pending, (state) => {
@@ -170,12 +172,12 @@ export const authSlice = createSlice({
       })
       .addCase(changePassword.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = authAction.CHANGE_PASSWORD;
         state.user = action.payload;
       })
       .addCase(changePassword.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = authAction.CHANGE_PASSWORD;
         state.message = action.payload;
       });
   },
