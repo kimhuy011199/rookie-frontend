@@ -17,7 +17,10 @@ const List = (props: ListInterface) => {
       {data.length > 0 ? (
         <ul className={style.list}>
           {data.map((item: any, index: number) => (
-            <li key={item?._id + index} className={style.item}>
+            <li
+              key={item?._id ? item?._id + index : index}
+              className={style.item}
+            >
               {React.cloneElement(children, { item })}
             </li>
           ))}

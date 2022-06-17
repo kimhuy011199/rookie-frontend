@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +19,7 @@ import Avatar from '../Avatar';
 import { NOTI_ACTIONS } from '../../constants/constants';
 import { createNotification } from '../../../stores/notifications/notificationSlice';
 import NeedLogin from './NeedLogin';
+import { answerAction } from '../../../stores/answers/answerAction';
 
 export interface InputInterface {
   content: string;
@@ -43,7 +44,9 @@ const CommentInput = (props: CommentInputInterface) => {
   const { register, getValues, handleSubmit, reset, setValue } =
     useForm<InputInterface>();
 
-  const { isLoading } = useSelector((state: any) => state.answers);
+  const { isLoading, isSuccess, isError } = useSelector(
+    (state: any) => state.answers
+  );
   const { question } = useSelector((state: any) => state.questions);
   const { user } = useSelector((state: any) => state.auth);
 
@@ -81,7 +84,6 @@ const CommentInput = (props: CommentInputInterface) => {
           type,
         });
         reset();
-        toast(t('toast.add_answer_success'));
       } else {
         const newContent = getValues('content').trim();
         if (newContent === defaultValue || newContent === '') {
@@ -94,11 +96,26 @@ const CommentInput = (props: CommentInputInterface) => {
         };
         dispatch(updateAnswer(submitData));
         setValue('content', '');
-        toast(t('toast.edit_answer_success'));
         onClose && onClose();
       }
     }
   };
+
+  useEffect(() => {
+    if (isSuccess === answerAction.CREATE_ANSWER) {
+      toast(t('toast.add_answer_success'));
+    }
+    if (isSuccess === answerAction.UPDATE_ANSWER) {
+      toast(t('toast.edit_answer_success'));
+    }
+    if (isError === answerAction.CREATE_ANSWER) {
+      toast(t('toast.unsuccess'));
+    }
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [dispatch, isSuccess, isError, t, reset]);
 
   if (!user) {
     return <NeedLogin />;

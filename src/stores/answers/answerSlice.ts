@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Answer } from '../../shared/constants/types/Answer';
+import { answerAction } from './answerAction';
 import answerService from './answerService';
 
 export interface AnswerInputInterface {
@@ -10,15 +11,15 @@ export interface AnswerInputInterface {
 const initialState = {
   answers: [] as Answer[],
   answer: null,
-  isError: false,
-  isSuccess: false,
+  isError: '',
+  isSuccess: '',
   isLoading: false,
   message: '',
 };
 
 // Create new answer
 export const createAnswer = createAsyncThunk(
-  'answers/create',
+  answerAction.CREATE_ANSWER,
   async (answerData: AnswerInputInterface, thunkAPI) => {
     try {
       const data = await answerService.createAnswer(answerData);
@@ -35,7 +36,7 @@ export const createAnswer = createAsyncThunk(
 
 // Get all answers by question id
 export const getAnswers = createAsyncThunk(
-  'answers/getAll',
+  answerAction.GET_ALL_ANSWERS,
   async (questionId: string, thunkAPI) => {
     try {
       return await answerService.getAnswers(questionId);
@@ -48,7 +49,7 @@ export const getAnswers = createAsyncThunk(
 
 // Update user answer
 export const updateAnswer = createAsyncThunk(
-  'answers/update',
+  answerAction.UPDATE_ANSWER,
   async (data: any, thunkAPI) => {
     try {
       return await answerService.updateAnswer(data.id, data.updatedData);
@@ -61,7 +62,7 @@ export const updateAnswer = createAsyncThunk(
 
 // Delete user answer
 export const deleteAnswer = createAsyncThunk(
-  'answers/delete',
+  answerAction.DELETE_ANSWER,
   async (id: string, thunkAPI) => {
     try {
       return await answerService.deleteAnswer(id);
@@ -74,7 +75,7 @@ export const deleteAnswer = createAsyncThunk(
 
 // Like or unlike answer
 export const likeOrUnlikeAnswer = createAsyncThunk(
-  'answers/likes',
+  answerAction.LIKE_UNLIKE_ANSWER,
   async (answerid: string, thunkAPI) => {
     try {
       return await answerService.likeOrUnlikeAnswer(answerid);
@@ -98,12 +99,12 @@ export const answerSlice = createSlice({
       })
       .addCase(createAnswer.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = answerAction.CREATE_ANSWER;
         state.answers = [...state.answers, action.payload];
       })
       .addCase(createAnswer.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = answerAction.CREATE_ANSWER;
         state.message = action.payload;
       })
       .addCase(getAnswers.pending, (state) => {
@@ -111,12 +112,12 @@ export const answerSlice = createSlice({
       })
       .addCase(getAnswers.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = answerAction.GET_ALL_ANSWERS;
         state.answers = action.payload;
       })
       .addCase(getAnswers.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = answerAction.GET_ALL_ANSWERS;
         state.message = action.payload;
       })
       .addCase(updateAnswer.pending, (state) => {
@@ -137,11 +138,11 @@ export const answerSlice = createSlice({
           state.answers = updatedAnswers;
         }
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = answerAction.UPDATE_ANSWER;
       })
       .addCase(updateAnswer.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = answerAction.UPDATE_ANSWER;
         state.message = action.payload;
       })
       .addCase(deleteAnswer.pending, (state) => {
@@ -149,14 +150,14 @@ export const answerSlice = createSlice({
       })
       .addCase(deleteAnswer.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = answerAction.DELETE_ANSWER;
         state.answers = state.answers.filter(
           (answer: Answer) => answer._id !== action.payload.id
         );
       })
       .addCase(deleteAnswer.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = answerAction.DELETE_ANSWER;
         state.message = action.payload;
       })
       .addCase(likeOrUnlikeAnswer.pending, (state) => {
@@ -177,11 +178,11 @@ export const answerSlice = createSlice({
           state.answers = updatedAnswers;
         }
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = answerAction.LIKE_UNLIKE_ANSWER;
       })
       .addCase(likeOrUnlikeAnswer.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = answerAction.LIKE_UNLIKE_ANSWER;
         state.message = action.payload;
       });
   },

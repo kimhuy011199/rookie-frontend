@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { answerAction } from '../../../../../stores/answers/answerAction';
 import { deleteAnswer } from '../../../../../stores/answers/answerSlice';
 import ConfirmDialog from '../confirm';
 
@@ -14,13 +15,20 @@ const DeleteCommentDialog = (props: DeleteCommentDialogInterface) => {
   const { data, close } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { isSuccess, isError } = useSelector((state: any) => state.answers);
 
   const submitDelete = () => {
-    try {
-      dispatch(deleteAnswer(data?._id));
-      toast(t('toast.delete_answer_success'));
-    } catch (error: any) {}
+    dispatch(deleteAnswer(data?._id));
   };
+
+  useEffect(() => {
+    if (isSuccess === answerAction.DELETE_ANSWER) {
+      toast(t('toast.delete_answer_success'));
+    }
+    if (isError === answerAction.DELETE_ANSWER) {
+      toast(t('toast.unsuccess'));
+    }
+  }, [isError, isSuccess, t]);
 
   return (
     <ConfirmDialog
