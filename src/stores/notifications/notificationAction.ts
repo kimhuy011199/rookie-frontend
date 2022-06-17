@@ -1,0 +1,4 @@
+export const notificationAction = {
+  CREATE_NOTIFICATION: 'CREATE_NOTIFICATION',
+  GET_NOTIFICATIONS: 'GET_NOTIFICATIONS',
+};

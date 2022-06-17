@@ -1,18 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Notification } from '../../shared/constants/types/Notification';
+import { notificationAction } from './notificationAction';
 import notificationService from './notificationService';
 
 const initialState = {
   notifications: [] as Notification[],
-  isError: false,
-  isSuccess: false,
+  isError: '',
+  isSuccess: '',
   isLoading: false,
   message: '',
 };
 
 // Create new notification
 export const createNotification = createAsyncThunk(
-  'notifications/create',
+  notificationAction.CREATE_NOTIFICATION,
   async (notificationData: any, thunkAPI) => {
     try {
       return await notificationService.createNotification(notificationData);
@@ -25,7 +26,7 @@ export const createNotification = createAsyncThunk(
 
 // Get all notifications
 export const getNotifications = createAsyncThunk(
-  'notifications/getAll',
+  notificationAction.GET_NOTIFICATIONS,
   async (userId: string, thunkAPI) => {
     try {
       return await notificationService.getNotifications(userId);
@@ -49,11 +50,11 @@ export const notificationSlice = createSlice({
       })
       .addCase(createNotification.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = notificationAction.CREATE_NOTIFICATION;
       })
       .addCase(createNotification.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = notificationAction.CREATE_NOTIFICATION;
         state.message = action.payload;
       })
       .addCase(getNotifications.pending, (state) => {
@@ -61,12 +62,12 @@ export const notificationSlice = createSlice({
       })
       .addCase(getNotifications.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = notificationAction.GET_NOTIFICATIONS;
         state.notifications = action.payload;
       })
       .addCase(getNotifications.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = notificationAction.GET_NOTIFICATIONS;
         state.message = action.payload;
       });
   },
