@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Notification } from '../../shared/constants/types/Notification';
-import { notificationAction } from './notificationAction';
+import { notificationType } from './notificationType';
 import notificationService from './notificationService';
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 
 // Create new notification
 export const createNotification = createAsyncThunk(
-  notificationAction.CREATE_NOTIFICATION,
+  `notification/${notificationType.CREATE_NOTIFICATION}`,
   async (notificationData: any, thunkAPI) => {
     try {
       return await notificationService.createNotification(notificationData);
@@ -26,7 +26,7 @@ export const createNotification = createAsyncThunk(
 
 // Get all notifications
 export const getNotifications = createAsyncThunk(
-  notificationAction.GET_NOTIFICATIONS,
+  `notification/${notificationType.GET_NOTIFICATIONS}`,
   async (userId: string, thunkAPI) => {
     try {
       return await notificationService.getNotifications(userId);
@@ -41,7 +41,12 @@ export const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = '';
+      state.isError = '';
+      state.message = '';
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -50,11 +55,11 @@ export const notificationSlice = createSlice({
       })
       .addCase(createNotification.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        state.isSuccess = notificationAction.CREATE_NOTIFICATION;
+        state.isSuccess = notificationType.CREATE_NOTIFICATION;
       })
       .addCase(createNotification.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = notificationAction.CREATE_NOTIFICATION;
+        state.isError = notificationType.CREATE_NOTIFICATION;
         state.message = action.payload;
       })
       .addCase(getNotifications.pending, (state) => {
@@ -62,12 +67,12 @@ export const notificationSlice = createSlice({
       })
       .addCase(getNotifications.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = notificationAction.GET_NOTIFICATIONS;
+        state.isSuccess = notificationType.GET_NOTIFICATIONS;
         state.notifications = action.payload;
       })
       .addCase(getNotifications.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = notificationAction.GET_NOTIFICATIONS;
+        state.isError = notificationType.GET_NOTIFICATIONS;
         state.message = action.payload;
       });
   },

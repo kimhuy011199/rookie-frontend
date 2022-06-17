@@ -9,7 +9,7 @@ import { PASSWORD_PATTERN } from '../../../shared/constants/patterns';
 import { changePassword, reset } from '../../../stores/auth/authSlice';
 import style from './style.module.css';
 import { toast } from 'react-toastify';
-import { authAction } from '../../../stores/auth/authAction';
+import { authType } from '../../../stores/auth/authType';
 
 export interface PasswordInputInterface {
   oldPassword: string;
@@ -37,10 +37,10 @@ const ChangePassword = () => {
   };
 
   useEffect(() => {
-    if (isSuccess === authAction.CHANGE_PASSWORD) {
+    if (isSuccess === authType.CHANGE_PASSWORD) {
       toast(t('toast.update_user_success'));
     }
-    if (isError === authAction.CHANGE_PASSWORD) {
+    if (isError === authType.CHANGE_PASSWORD) {
       setError('oldPassword', { type: 'custom', message });
       toast(t('toast.unsuccess'));
     }

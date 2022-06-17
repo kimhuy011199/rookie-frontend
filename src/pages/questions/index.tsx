@@ -9,7 +9,7 @@ import QuestionItem from '../../shared/components/QuestionItem';
 import Pagination from '../../shared/components/Pagination';
 import { useTranslation } from 'react-i18next';
 import SearchQuestionGuide from '../../shared/components/SearchQuestionGuide';
-import { questionAction } from '../../stores/questions/questionAction';
+import { questionType } from '../../stores/questions/questionType';
 import { toast } from 'react-toastify';
 
 function Questions() {
@@ -41,7 +41,7 @@ function Questions() {
   };
 
   useEffect(() => {
-    if (isError === questionAction.GET_ALL_QUESTIONS) {
+    if (isError === questionType.GET_ALL_QUESTIONS) {
       toast(t('toast.unsuccess'));
     }
   }, [isError, t]);

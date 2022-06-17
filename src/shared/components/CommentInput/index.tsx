@@ -13,13 +13,14 @@ import { COMMENT_TYPE, NOTI_TYPE } from '../../constants/enums';
 import {
   createAnswer,
   updateAnswer,
+  reset,
 } from '../../../stores/answers/answerSlice';
 import { SocketContext } from '../../context/socket';
 import Avatar from '../Avatar';
 import { NOTI_ACTIONS } from '../../constants/constants';
 import { createNotification } from '../../../stores/notifications/notificationSlice';
 import NeedLogin from './NeedLogin';
-import { answerAction } from '../../../stores/answers/answerAction';
+import { answerType } from '../../../stores/answers/answerType';
 
 export interface InputInterface {
   content: string;
@@ -41,8 +42,13 @@ const CommentInput = (props: CommentInputInterface) => {
   const dispatch = useDispatch();
   const socket = useContext(SocketContext);
 
-  const { register, getValues, handleSubmit, reset, setValue } =
-    useForm<InputInterface>();
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    reset: resetForm,
+    setValue,
+  } = useForm<InputInterface>();
 
   const { isLoading, isSuccess, isError } = useSelector(
     (state: any) => state.answers
@@ -83,7 +89,7 @@ const CommentInput = (props: CommentInputInterface) => {
           question: { ...question, questionId },
           type,
         });
-        reset();
+        resetForm();
       } else {
         const newContent = getValues('content').trim();
         if (newContent === defaultValue || newContent === '') {
@@ -102,20 +108,20 @@ const CommentInput = (props: CommentInputInterface) => {
   };
 
   useEffect(() => {
-    if (isSuccess === answerAction.CREATE_ANSWER) {
+    if (isSuccess === answerType.CREATE_ANSWER) {
       toast(t('toast.add_answer_success'));
     }
-    if (isSuccess === answerAction.UPDATE_ANSWER) {
+    if (isSuccess === answerType.UPDATE_ANSWER) {
       toast(t('toast.edit_answer_success'));
     }
-    if (isError === answerAction.CREATE_ANSWER) {
+    if (isError === answerType.CREATE_ANSWER) {
       toast(t('toast.unsuccess'));
     }
 
     return () => {
       dispatch(reset());
     };
-  }, [dispatch, isSuccess, isError, t, reset]);
+  }, [dispatch, isSuccess, isError, t]);
 
   if (!user) {
     return <NeedLogin />;

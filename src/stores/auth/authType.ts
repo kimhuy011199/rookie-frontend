@@ -1,4 +1,4 @@
-export const authAction = {
+export const authType = {
   REGISTER: 'REGISTER',
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',

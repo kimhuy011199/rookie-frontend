@@ -11,7 +11,7 @@ import { getQuestionByUserId } from '../../../stores/questions/questionSlice';
 import List from '../../../shared/components/List';
 import QuestionLinkItem from '../../../shared/components/QuestionLinkItem';
 import UserInfoItem from './components/UserInfoItem';
-import { authAction } from '../../../stores/auth/authAction';
+import { authType } from '../../../stores/auth/authType';
 
 const SingleUser = () => {
   const { id } = useParams();
@@ -43,7 +43,7 @@ const SingleUser = () => {
     <>
       <Spinner isLoading={isLoading} />
       <Error
-        show={isError === authAction.GET_USER_ME && message?.errorCode === 404}
+        show={isError === authType.GET_USER_ME && message?.errorCode === 404}
         code={ERROR_CODE.NOT_FOUND}
       />
       <div className={style.container}>

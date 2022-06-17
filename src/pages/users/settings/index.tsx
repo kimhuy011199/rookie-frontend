@@ -11,7 +11,7 @@ import { EMAIL_PATTERN } from '../../../shared/constants/patterns';
 import { reset, updateUser } from '../../../stores/auth/authSlice';
 import style from './style.module.css';
 import { toast } from 'react-toastify';
-import { authAction } from '../../../stores/auth/authAction';
+import { authType } from '../../../stores/auth/authType';
 
 export interface UserInputInterface {
   displayName: string;
@@ -40,10 +40,10 @@ const UserSetting = () => {
   };
 
   useEffect(() => {
-    if (isSuccess === authAction.UPDATE_USER) {
+    if (isSuccess === authType.UPDATE_USER) {
       toast(t('toast.update_user_success'));
     }
-    if (isError === authAction.UPDATE_USER) {
+    if (isError === authType.UPDATE_USER) {
       setError('email', { type: 'custom', message });
       toast(t('toast.unsuccess'));
     }

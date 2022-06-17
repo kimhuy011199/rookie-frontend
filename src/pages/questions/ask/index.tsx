@@ -8,7 +8,7 @@ import style from './style.module.css';
 import { ERROR_CODE } from '../../../shared/constants/enums';
 import Error from '../../../shared/components/Error';
 import AskQuestionGuide from '../../../shared/components/AskQuestionGuide';
-import { questionAction } from '../../../stores/questions/questionAction';
+import { questionType } from '../../../stores/questions/questionType';
 import { toast } from 'react-toastify';
 
 const AskQuestion = () => {
@@ -27,13 +27,13 @@ const AskQuestion = () => {
   };
 
   useEffect(() => {
-    if (isSuccess === questionAction.CREATE_QUESTION) {
+    if (isSuccess === questionType.CREATE_QUESTION) {
       navigate(`/questions/${question._id}`);
     }
   }, [isSuccess, navigate, question]);
 
   useEffect(() => {
-    if (isError === questionAction.CREATE_QUESTION) {
+    if (isError === questionType.CREATE_QUESTION) {
       toast(t('toast.unsuccess'));
     }
   }, [isError, t]);

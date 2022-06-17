@@ -13,7 +13,7 @@ import { Answer } from '../../../shared/constants/types/Answer';
 import RecommendQuestion from '../../../shared/components/RecommendQuestion';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { questionAction } from '../../../stores/questions/questionAction';
+import { questionType } from '../../../stores/questions/questionType';
 
 const SingleQuestion = () => {
   const { id = '' } = useParams();
@@ -35,7 +35,7 @@ const SingleQuestion = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (isError === questionAction.GET_QUESTION_BY_ID) {
+    if (isError === questionType.GET_QUESTION_BY_ID) {
       toast(t('toast.unsuccess'));
     }
   }, [isError, t]);

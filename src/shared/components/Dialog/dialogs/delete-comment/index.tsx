@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { answerAction } from '../../../../../stores/answers/answerAction';
+import { answerType } from '../../../../../stores/answers/answerType';
 import { deleteAnswer } from '../../../../../stores/answers/answerSlice';
 import ConfirmDialog from '../confirm';
 
@@ -22,10 +22,10 @@ const DeleteCommentDialog = (props: DeleteCommentDialogInterface) => {
   };
 
   useEffect(() => {
-    if (isSuccess === answerAction.DELETE_ANSWER) {
+    if (isSuccess === answerType.DELETE_ANSWER) {
       toast(t('toast.delete_answer_success'));
     }
-    if (isError === answerAction.DELETE_ANSWER) {
+    if (isError === answerType.DELETE_ANSWER) {
       toast(t('toast.unsuccess'));
     }
   }, [isError, isSuccess, t]);

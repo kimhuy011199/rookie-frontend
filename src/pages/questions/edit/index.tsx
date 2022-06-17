@@ -12,7 +12,7 @@ import QuestionForm from '../../../shared/components/QuestionForm';
 import { useTranslation } from 'react-i18next';
 import { ERROR_CODE } from '../../../shared/constants/enums';
 import AskQuestionGuide from '../../../shared/components/AskQuestionGuide';
-import { questionAction } from '../../../stores/questions/questionAction';
+import { questionType } from '../../../stores/questions/questionType';
 import { toast } from 'react-toastify';
 
 const EditQuestion = () => {
@@ -33,13 +33,13 @@ const EditQuestion = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (isError === questionAction.GET_QUESTION_BY_ID) {
+    if (isError === questionType.GET_QUESTION_BY_ID) {
       toast(t('toast.unsuccess'));
     }
   }, [isError, t]);
 
   useEffect(() => {
-    if (isSuccess === questionAction.UPDATE_QUESTION) {
+    if (isSuccess === questionType.UPDATE_QUESTION) {
       navigate(`/questions/${question._id}`);
     }
   }, [isSuccess, navigate, question]);

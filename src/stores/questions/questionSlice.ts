@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Question } from '../../shared/constants/types/Question';
-import { questionAction } from './questionAction';
+import { questionType } from './questionType';
 import questionService from './questionService';
 
 export interface QuestionInputInterface {
@@ -22,7 +22,7 @@ const initialState = {
 
 // Create new question
 export const createQuestion = createAsyncThunk(
-  questionAction.CREATE_QUESTION,
+  `question/${questionType.CREATE_QUESTION}`,
   async (questionData: QuestionInputInterface, thunkAPI) => {
     try {
       return await questionService.createQuestion(questionData);
@@ -35,7 +35,7 @@ export const createQuestion = createAsyncThunk(
 
 // Get all questions
 export const getQuestions = createAsyncThunk(
-  questionAction.GET_ALL_QUESTIONS,
+  `question/${questionType.GET_ALL_QUESTIONS}`,
   async (queryString: string, thunkAPI) => {
     try {
       return await questionService.getQuestions(queryString);
@@ -48,7 +48,7 @@ export const getQuestions = createAsyncThunk(
 
 // Get question by id
 export const getQuestionById = createAsyncThunk(
-  questionAction.GET_QUESTION_BY_ID,
+  `question/${questionType.GET_QUESTION_BY_ID}`,
   async (id: string, thunkAPI) => {
     try {
       return await questionService.getQuestionById(id);
@@ -63,7 +63,7 @@ export const getQuestionById = createAsyncThunk(
 
 // Get question by user id
 export const getQuestionByUserId = createAsyncThunk(
-  questionAction.GET_QUESTION_BY_USER_ID,
+  `question/${questionType.GET_QUESTION_BY_USER_ID}`,
   async (userId: string, thunkAPI) => {
     try {
       return await questionService.getQuestionByUserId(userId);
@@ -78,7 +78,7 @@ export const getQuestionByUserId = createAsyncThunk(
 
 // Get recommend questions by question id
 export const getRecommendQuestions = createAsyncThunk(
-  questionAction.GET_RECOMMENDATION,
+  `question/${questionType.GET_RECOMMENDATION}`,
   async (id: string, thunkAPI) => {
     try {
       return await questionService.getRecommendQuestions(id);
@@ -93,7 +93,7 @@ export const getRecommendQuestions = createAsyncThunk(
 
 // Update user question
 export const updateQuestion = createAsyncThunk(
-  questionAction.UPDATE_QUESTION,
+  `question/${questionType.UPDATE_QUESTION}`,
   async (data: any, thunkAPI) => {
     try {
       return await questionService.updateQuestion(data.id, data.updatedData);
@@ -106,7 +106,7 @@ export const updateQuestion = createAsyncThunk(
 
 // Delete user question
 export const deleteQuestion = createAsyncThunk(
-  questionAction.DELETE_QUESTION,
+  `question/${questionType.DELETE_QUESTION}`,
   async (id: string, thunkAPI) => {
     try {
       return await questionService.deleteQuestion(id);
@@ -121,7 +121,12 @@ export const questionSlice = createSlice({
   name: 'question',
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = '';
+      state.isError = '';
+      state.message = '';
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -130,12 +135,12 @@ export const questionSlice = createSlice({
       })
       .addCase(createQuestion.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        state.isSuccess = questionAction.CREATE_QUESTION;
+        state.isSuccess = questionType.CREATE_QUESTION;
         state.question = action.payload;
       })
       .addCase(createQuestion.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionAction.CREATE_QUESTION;
+        state.isError = questionType.CREATE_QUESTION;
         state.message = action.payload;
       })
       .addCase(getQuestions.pending, (state) => {
@@ -143,12 +148,12 @@ export const questionSlice = createSlice({
       })
       .addCase(getQuestions.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = questionAction.GET_ALL_QUESTIONS;
+        state.isSuccess = questionType.GET_ALL_QUESTIONS;
         state.questions = action.payload;
       })
       .addCase(getQuestions.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionAction.GET_ALL_QUESTIONS;
+        state.isError = questionType.GET_ALL_QUESTIONS;
         state.message = action.payload;
       })
       .addCase(getRecommendQuestions.pending, (state) => {
@@ -156,12 +161,12 @@ export const questionSlice = createSlice({
       })
       .addCase(getRecommendQuestions.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = questionAction.GET_RECOMMENDATION;
+        state.isSuccess = questionType.GET_RECOMMENDATION;
         state.recommend = action.payload;
       })
       .addCase(getRecommendQuestions.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionAction.GET_RECOMMENDATION;
+        state.isError = questionType.GET_RECOMMENDATION;
         state.message = action.payload;
       })
       .addCase(getQuestionById.pending, (state) => {
@@ -169,12 +174,12 @@ export const questionSlice = createSlice({
       })
       .addCase(getQuestionById.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = questionAction.GET_QUESTION_BY_ID;
+        state.isSuccess = questionType.GET_QUESTION_BY_ID;
         state.question = action.payload;
       })
       .addCase(getQuestionById.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionAction.GET_QUESTION_BY_ID;
+        state.isError = questionType.GET_QUESTION_BY_ID;
         state.message = action.payload;
       })
       .addCase(getQuestionByUserId.pending, (state) => {
@@ -182,12 +187,12 @@ export const questionSlice = createSlice({
       })
       .addCase(getQuestionByUserId.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = questionAction.GET_QUESTION_BY_USER_ID;
+        state.isSuccess = questionType.GET_QUESTION_BY_USER_ID;
         state.userQuestions = action.payload;
       })
       .addCase(getQuestionByUserId.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionAction.GET_QUESTION_BY_USER_ID;
+        state.isError = questionType.GET_QUESTION_BY_USER_ID;
         state.message = action.payload;
       })
       .addCase(updateQuestion.pending, (state) => {
@@ -195,12 +200,12 @@ export const questionSlice = createSlice({
       })
       .addCase(updateQuestion.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = questionAction.UPDATE_QUESTION;
+        state.isSuccess = questionType.UPDATE_QUESTION;
         state.question = action.payload;
       })
       .addCase(updateQuestion.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionAction.UPDATE_QUESTION;
+        state.isError = questionType.UPDATE_QUESTION;
         state.message = action.payload;
       })
       .addCase(deleteQuestion.pending, (state) => {
@@ -208,14 +213,14 @@ export const questionSlice = createSlice({
       })
       .addCase(deleteQuestion.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        state.isSuccess = questionAction.DELETE_QUESTION;
+        state.isSuccess = questionType.DELETE_QUESTION;
         state.questions = state.questions.questionsList.filter(
           (question: Question) => question._id !== action.payload.id
         );
       })
       .addCase(deleteQuestion.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionAction.DELETE_QUESTION;
+        state.isError = questionType.DELETE_QUESTION;
         state.message = action.payload;
       });
   },

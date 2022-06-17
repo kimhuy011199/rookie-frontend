@@ -1,4 +1,4 @@
-export const answerAction = {
+export const answerType = {
   CREATE_ANSWER: 'CREATE_ANSWER',
   GET_ALL_ANSWERS: 'GET_ALL_ANSWERS',
   UPDATE_ANSWER: 'UPDATE_ANSWER',

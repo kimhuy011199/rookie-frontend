@@ -13,7 +13,7 @@ import {
 } from '../../../shared/constants/patterns';
 import { ReactComponent as Logo } from '../../../assets/images/favicon.svg';
 import style from '../style.module.css';
-import { authAction } from '../../../stores/auth/authAction';
+import { authType } from '../../../stores/auth/authType';
 
 export interface LoginUserInterface {
   email: string;
@@ -36,7 +36,7 @@ function Login() {
   );
 
   useEffect(() => {
-    if (isSuccess === authAction.LOGIN || user) {
+    if (isSuccess === authType.LOGIN || user) {
       navigate('/');
     }
 
@@ -92,7 +92,7 @@ function Login() {
             variant="primary"
             full
           />
-          {isError === authAction.LOGIN && (
+          {isError === authType.LOGIN && (
             <span className={style.serverError}>{message}</span>
           )}
         </form>

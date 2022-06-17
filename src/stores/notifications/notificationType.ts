@@ -1,4 +1,4 @@
-export const notificationAction = {
+export const notificationType = {
   CREATE_NOTIFICATION: 'CREATE_NOTIFICATION',
   GET_NOTIFICATIONS: 'GET_NOTIFICATIONS',
 };

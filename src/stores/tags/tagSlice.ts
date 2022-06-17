@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Tag } from '../../shared/constants/types/Tag';
-import { notificationAction } from '../notifications/notificationAction';
-import { tagAction } from './tagAction';
+import { tagType } from './tagType';
 import tagService from './tagService';
 
 const initialState = {
@@ -14,7 +13,7 @@ const initialState = {
 
 // Get all tags
 export const getTags = createAsyncThunk(
-  notificationAction.GET_NOTIFICATIONS,
+  `tags/${tagType.GET_TAGS}`,
   async (_, thunkAPI) => {
     try {
       return await tagService.getTags();
@@ -29,7 +28,12 @@ export const tagSlice = createSlice({
   name: 'tags',
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = '';
+      state.isError = '';
+      state.message = '';
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,12 +42,12 @@ export const tagSlice = createSlice({
       })
       .addCase(getTags.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = tagAction.GET_TAGS;
+        state.isSuccess = tagType.GET_TAGS;
         state.tags = action.payload;
       })
       .addCase(getTags.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = tagAction.GET_TAGS;
+        state.isError = tagType.GET_TAGS;
         state.message = action.payload;
       });
   },

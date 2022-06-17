@@ -10,8 +10,8 @@ import style from './style.module.css';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as DefaultAvatar } from '../../../assets/images/avatar.svg';
-import { authAction } from '../../../stores/auth/authAction';
-import { uploadAction } from '../../../stores/uploads/uploadAction';
+import { authType } from '../../../stores/auth/authType';
+import { uploadType } from '../../../stores/uploads/uploadType';
 
 const UploadAvatar = () => {
   const [inputValue, setInputValue] = useState<any>('');
@@ -71,7 +71,7 @@ const UploadAvatar = () => {
   };
 
   useEffect(() => {
-    if (isSuccess === uploadAction.UPLOAD_IMG) {
+    if (isSuccess === uploadType.UPLOAD_IMG) {
       // Update user when uploading image to cloudinary is done
       dispatch(updateUser({ _id: user._id, avatarImg: data.url }));
     }
@@ -85,8 +85,8 @@ const UploadAvatar = () => {
   useEffect(() => {
     if (
       !isUpdateLoading &&
-      isUpdateSuccess === authAction.UPDATE_USER &&
-      isSuccess === uploadAction.UPLOAD_IMG
+      isUpdateSuccess === authType.UPDATE_USER &&
+      isSuccess === uploadType.UPLOAD_IMG
     ) {
       toast(t('toast.update_user_success'));
     }
