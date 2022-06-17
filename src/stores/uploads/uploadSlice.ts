@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { uploadAction } from './uploadAction';
 import uploadService from './uploadService';
 
 export interface AvatarImgInterface {
@@ -7,15 +8,15 @@ export interface AvatarImgInterface {
 
 const initialState = {
   data: null,
-  isError: false,
-  isSuccess: false,
+  isError: '',
+  isSuccess: '',
   isLoading: false,
   message: '',
 };
 
 // Upload image to cloudinary
 export const uploadImg = createAsyncThunk(
-  'upload',
+  uploadAction.UPLOAD_IMG,
   async (imgData: AvatarImgInterface, thunkAPI) => {
     try {
       const data = await uploadService.uploadImg(imgData);
@@ -40,12 +41,12 @@ export const uploadSlice = createSlice({
       })
       .addCase(uploadImg.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = uploadAction.UPLOAD_IMG;
         state.data = action.payload;
       })
       .addCase(uploadImg.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = true;
+        state.isError = uploadAction.UPLOAD_IMG;
         state.message = action.payload;
       });
   },
