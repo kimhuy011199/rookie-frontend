@@ -15,4 +15,5 @@ export const store = configureStore({
     notifications: notificationReducer,
     tags: tagReducer,
   },
+  middleware: (getDefaultMiddleware) => [...getDefaultMiddleware()],
 });
