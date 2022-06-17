@@ -129,6 +129,7 @@
       "old_password": "Old password",
       "new_password": "New password",
       "confirm_password": "Confirm password",
+      "choose_image": "Choose image",
       "submit": "Submit"
     },
     "heading": {

@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { ReactComponent as DefaultAvatar } from '../../../assets/images/avatar.svg';
 import { authType } from '../../../stores/auth/authType';
 import { uploadType } from '../../../stores/uploads/uploadType';
+import LoadingIcon from '../LoadingIcon';
 
 const UploadAvatar = () => {
   const [inputValue, setInputValue] = useState<any>('');
@@ -109,7 +110,17 @@ const UploadAvatar = () => {
           <img src={previewImgSrc} alt="avatar" className={style.preview} />
         )}
       </div>
-      {!isLoading && <label htmlFor="avatar" className={style.input}></label>}
+      {!isLoading ? (
+        <label htmlFor="avatar" className={style.input}>
+          <span className={style.tooltip}>
+            {t('settings.label.choose_image')}
+          </span>
+        </label>
+      ) : (
+        <div className={style.loading}>
+          <LoadingIcon />
+        </div>
+      )}
       <input
         hidden
         type="file"
