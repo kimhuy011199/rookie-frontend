@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../../shared/components/Spinner';
-import { Notification } from '../../shared/constants/types/Notification';
 import {
   getNotifications,
   reset,
 } from '../../stores/notifications/notificationSlice';
 import style from './style.module.css';
-import NotificationItem from '../../shared/components/NotificationItem';
+import NotificationItem from './components/NotificationItem';
 import { useTranslation } from 'react-i18next';
 import { ERROR_CODE } from '../../shared/constants/enums';
 import Error from '../../shared/components/Error';
+import List from '../../shared/components/List';
 
 function Questions() {
   const navigate = useNavigate();
@@ -41,25 +41,13 @@ function Questions() {
     <>
       <Spinner isLoading={isLoading} />
       <div className={style.container}>
-        <h2 className={style.heading}>{t('notifications.heading')}</h2>
-        {notifications &&
-          (notifications.length > 0 ? (
-            <>
-              <div className={style.notifications}>
-                <ul className={style.notificationsList}>
-                  {notifications?.map((notification: Notification) => (
-                    <li className={style.item} key={notification._id}>
-                      <NotificationItem notification={notification} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          ) : (
-            <p className={style.noNotifications}>
-              {t('notifications.no_notifications')}
-            </p>
-          ))}
+        <List
+          data={notifications}
+          heading={t('notifications.heading')}
+          emptyListContent={t('notifications.no_notifications')}
+        >
+          <NotificationItem />
+        </List>
       </div>
     </>
   );
