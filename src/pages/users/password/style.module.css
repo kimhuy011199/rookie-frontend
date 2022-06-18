@@ -1,16 +1,15 @@
 .container {
-  @apply grid gap-4;
-  grid-template-columns: 1fr 4fr;
+  @apply flex gap-8;
 }
 
 .avatar {
-  @apply mr-3 relative;
+  @apply relative;
   width: 12rem;
   height: 12rem;
 }
 
 .profile {
-  @apply bg-dark-1 rounded-xl border border-dark-3;
+  @apply bg-dark-1 rounded-xl border border-dark-3 flex-1;
 }
 
 .heading {

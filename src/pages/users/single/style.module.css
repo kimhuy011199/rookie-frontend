@@ -1,10 +1,9 @@
 .container {
-  @apply grid gap-4;
-  grid-template-columns: 1fr 4fr;
+  @apply flex gap-8;
 }
 
 .avatar {
-  @apply mr-3 relative;
+  @apply relative;
   width: 12rem;
   height: 12rem;
 }

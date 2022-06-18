@@ -3,7 +3,7 @@
 }
 
 .container {
-  @apply max-w-7xl mx-auto flex justify-between items-center;
+  @apply max-w-7xl mx-auto flex justify-between items-center px-8;
 }
 
 .logo {

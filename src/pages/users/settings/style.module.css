@@ -1,6 +1,9 @@
 .container {
-  @apply grid gap-4;
-  grid-template-columns: 1fr 4fr;
+  @apply flex gap-8;
+}
+
+.user {
+  @apply flex-1;
 }
 
 .profile {
