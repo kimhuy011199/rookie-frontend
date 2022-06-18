@@ -89,6 +89,8 @@
   "dialog": {
     "delete_answer": "Delete answer",
     "delete_answer_content": "Are you sure to delete your answer?",
+    "delete_question": "Delete question",
+    "delete_question_content": "Are you sure to delete your question?",
     "answer_question": "answered on your question",
     "like_answer": "liked your answer on question",
     "preview": "Preview",

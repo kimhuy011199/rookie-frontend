@@ -9,6 +9,7 @@ import CommentInput from '../CommentInput';
 import Like from '../Like';
 import Avatar from '../Avatar';
 import TagList from '../TagList';
+import { useNavigate } from 'react-router-dom';
 
 interface CommentInterface {
   type: number;
@@ -19,10 +20,15 @@ const Comment = (props: CommentInterface) => {
   const { type, data } = props;
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const { user } = useSelector((state: any) => state.auth);
 
   const handleEditComment = () => {
-    setOpenEdit(true);
+    if (type === COMMENT_TYPE.COMMENT) {
+      setOpenEdit(true);
+    } else {
+      navigate('edit');
+    }
   };
 
   const handleCloseEditComment = () => {
@@ -58,9 +64,9 @@ const Comment = (props: CommentInterface) => {
             <span className={style.user}>{data?.user?.displayName}</span>
             <span className={style.date}>{renderTime()}</span>
           </div>
-          {data?.userId === user?._id && type !== COMMENT_TYPE.QUESTION && (
+          {data?.userId === user?._id && (
             <div className={style.action}>
-              <ActionMenu data={data} onEdit={handleEditComment} />
+              <ActionMenu data={data} onEdit={handleEditComment} type={type} />
             </div>
           )}
         </div>

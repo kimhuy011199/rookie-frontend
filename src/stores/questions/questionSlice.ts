@@ -217,6 +217,9 @@ export const questionSlice = createSlice({
         state.questions = state.questions.questionsList.filter(
           (question: Question) => question._id !== action.payload.id
         );
+        state.userQuestions = state.userQuestions.filter(
+          (question: Question) => question._id !== action.payload.id
+        );
       })
       .addCase(deleteQuestion.rejected, (state, action: any) => {
         state.isLoading = false;
