@@ -5,3 +5,7 @@
 .label {
   min-width: 9rem;
 }
+
+.title {
+  @apply whitespace-pre-wrap;
+}
