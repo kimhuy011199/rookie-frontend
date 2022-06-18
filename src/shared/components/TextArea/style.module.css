@@ -3,7 +3,7 @@
 }
 
 .errorInput {
-  @apply border-red-500 focus:outline-1 focus:outline-red-500;
+  @apply border-red-500 focus:outline-none;
 }
 
 .resize {

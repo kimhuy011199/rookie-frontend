@@ -48,6 +48,7 @@ const CommentInput = (props: CommentInputInterface) => {
     handleSubmit,
     reset: resetForm,
     setValue,
+    formState: { errors },
   } = useForm<InputInterface>();
 
   const { isLoading, isSuccess, isError } = useSelector(
@@ -134,7 +135,7 @@ const CommentInput = (props: CommentInputInterface) => {
       </div>
       <div className={style.main}>
         <form onSubmit={handleSubmit(handleSubmitForm)}>
-          <FormGroup>
+          <FormGroup error={errors.content?.message}>
             <TextArea
               placeholder={t('placeholder.add_answer')}
               rows={6}
@@ -142,8 +143,8 @@ const CommentInput = (props: CommentInputInterface) => {
               {...register('content', {
                 required: 'Content is required',
                 minLength: {
-                  value: 50,
-                  message: 'Content must be have at least 50 characters',
+                  value: 20,
+                  message: 'Content must be have at least 20 characters',
                 },
               })}
             />
