@@ -69,6 +69,10 @@ const QuestionForm = (props: QuestionFormInterface) => {
             defaultValue={title}
             {...register('title', {
               required: 'Title is required',
+              minLength: {
+                value: 20,
+                message: 'Title must be have at least 20 characters',
+              },
             })}
           />
         </FormGroup>
@@ -84,6 +88,10 @@ const QuestionForm = (props: QuestionFormInterface) => {
             defaultValue={content}
             {...register('content', {
               required: 'Content is required',
+              minLength: {
+                value: 50,
+                message: 'Content must be have at least 50 characters',
+              },
             })}
           />
         </FormGroup>

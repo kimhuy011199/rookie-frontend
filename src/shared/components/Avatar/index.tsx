@@ -4,10 +4,11 @@ import { ReactComponent as DefaultAvatar } from '../../../assets/images/avatar.s
 
 interface AvatarInterface {
   user: any;
+  size?: 'sm' | 'lg';
 }
 
 const Avatar = (props: AvatarInterface) => {
-  const { user } = props;
+  const { user, size = 'sm' } = props;
 
   return (
     <div className={style.img}>
@@ -15,7 +16,7 @@ const Avatar = (props: AvatarInterface) => {
         <img
           src={user?.avatarImg}
           alt={user?.displayName}
-          className={style.avatarImg}
+          className={`${style.avatarImg} ${style[size]}`}
         />
       ) : (
         <DefaultAvatar className={style.avatar} />

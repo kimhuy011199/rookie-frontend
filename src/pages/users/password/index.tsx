@@ -54,7 +54,7 @@ const ChangePassword = () => {
   return (
     <div className={style.container}>
       <div className={style.avatar}>
-        <Avatar user={user} />
+        <Avatar user={user} size="lg" />
       </div>
       <div className={style.profile}>
         <h3 className={style.heading}>{t('settings.heading.change_pass')}</h3>
@@ -69,9 +69,17 @@ const ChangePassword = () => {
                 type="password"
                 {...register('oldPassword', {
                   required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be 6 to 18 character long',
+                  },
+                  maxLength: {
+                    value: 18,
+                    message: 'Password must be 6 to 18 character long',
+                  },
                   pattern: {
                     value: PASSWORD_PATTERN,
-                    message: 'Please enter a valid password',
+                    message: 'Password includes characters and numbers',
                   },
                 })}
               />
@@ -85,9 +93,17 @@ const ChangePassword = () => {
                 type="password"
                 {...register('newPassword', {
                   required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be 6 to 18 character long',
+                  },
+                  maxLength: {
+                    value: 18,
+                    message: 'Password must be 6 to 18 character long',
+                  },
                   pattern: {
                     value: PASSWORD_PATTERN,
-                    message: 'Please enter a valid password',
+                    message: 'Password includes characters and numbers',
                   },
                 })}
               />

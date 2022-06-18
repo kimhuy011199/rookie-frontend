@@ -141,6 +141,10 @@ const CommentInput = (props: CommentInputInterface) => {
               defaultValue={defaultValue || ''}
               {...register('content', {
                 required: 'Content is required',
+                minLength: {
+                  value: 50,
+                  message: 'Content must be have at least 50 characters',
+                },
               })}
             />
           </FormGroup>

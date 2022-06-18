@@ -72,6 +72,14 @@ function Register() {
               type="text"
               {...register('displayName', {
                 required: 'Display name is required',
+                minLength: {
+                  value: 6,
+                  message: 'Name must be 6 to 18 character long',
+                },
+                maxLength: {
+                  value: 22,
+                  message: 'Name must be 6 to 22 character long',
+                },
                 pattern: {
                   value: DISPLAYNAME_PATTERN,
                   message: 'Please enter a valid display name',
@@ -102,9 +110,17 @@ function Register() {
               type="password"
               {...register('password', {
                 required: 'Password is required',
+                minLength: {
+                  value: 6,
+                  message: 'Password must be 6 to 18 character long',
+                },
+                maxLength: {
+                  value: 18,
+                  message: 'Password must be 6 to 18 character long',
+                },
                 pattern: {
                   value: PASSWORD_PATTERN,
-                  message: 'Please enter a valid password',
+                  message: 'Password includes characters and numbers',
                 },
               })}
             />

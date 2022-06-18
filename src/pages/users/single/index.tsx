@@ -48,7 +48,7 @@ const SingleUser = () => {
       />
       <div className={style.container}>
         <div className={style.avatar}>
-          <Avatar user={user} />
+          <Avatar user={user} size="lg" />
         </div>
         <div className={style.information}>
           <List

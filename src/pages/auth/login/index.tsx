@@ -79,9 +79,17 @@ function Login() {
               type="password"
               {...register('password', {
                 required: 'Password is required',
+                minLength: {
+                  value: 6,
+                  message: 'Password must be 6 to 18 character long',
+                },
+                maxLength: {
+                  value: 18,
+                  message: 'Password must be 6 to 18 character long',
+                },
                 pattern: {
                   value: PASSWORD_PATTERN,
-                  message: 'Please enter a valid password',
+                  message: 'Password includes characters and numbers',
                 },
               })}
             />
