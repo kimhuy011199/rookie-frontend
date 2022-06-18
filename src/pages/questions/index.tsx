@@ -72,9 +72,11 @@ function Questions() {
                   ))}
                 </ul>
               </div>
-              <div className={style.pagination}>
-                <Pagination {...questions} />
-              </div>
+              {questions.totalPages > 1 && (
+                <div className={style.pagination}>
+                  <Pagination {...questions} />
+                </div>
+              )}
             </>
           ) : (
             <p className={style.noQuestions}>{t('questions.no_questions')}</p>
