@@ -8,12 +8,13 @@ import Error from '../../../shared/components/Error';
 import { COMMENT_TYPE, ERROR_CODE } from '../../../shared/constants/enums';
 import Comment from '../../../shared/components/Comment';
 import CommentInput from '../../../shared/components/CommentInput';
-import { getAnswers } from '../../../stores/answers/answerSlice';
+import { getAnswers, reset } from '../../../stores/answers/answerSlice';
 import { Answer } from '../../../shared/constants/types/Answer';
 import RecommendQuestion from '../../../shared/components/RecommendQuestion';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { questionType } from '../../../stores/questions/questionType';
+import { answerType } from '../../../stores/answers/answerType';
 
 const SingleQuestion = () => {
   const { id = '' } = useParams();
@@ -24,6 +25,9 @@ const SingleQuestion = () => {
     (state: any) => state.questions
   );
   const { answers, isAnswersLoading } = useSelector(
+    (state: any) => state.answers
+  );
+  const { isSuccess: isAnswerSuccess, isError: isAnswerError } = useSelector(
     (state: any) => state.answers
   );
 
@@ -39,6 +43,19 @@ const SingleQuestion = () => {
       toast(t('toast.unsuccess'));
     }
   }, [isError, t]);
+
+  useEffect(() => {
+    if (isAnswerSuccess === answerType.DELETE_ANSWER) {
+      toast(t('toast.delete_answer_success'));
+    }
+    if (isAnswerError === answerType.DELETE_ANSWER) {
+      toast(t('toast.unsuccess'));
+    }
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [isAnswerError, isAnswerSuccess, t, dispatch]);
 
   return (
     <>
