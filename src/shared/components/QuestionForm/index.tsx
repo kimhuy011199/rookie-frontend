@@ -102,20 +102,24 @@ const QuestionForm = (props: QuestionFormInterface) => {
         >
           <TagInput tags={tags} setTags={setTags} />
         </FormGroup>
-        <div className={style.action}>
-          <Button
-            label={t('questions.label.submit')}
-            loading={isLoading}
-            variant="primary"
-          />
-          <Button
-            label={t('questions.label.preview')}
-            type="button"
-            variant="outline"
-            handleFuncion={previewQuestion}
-          />
+        <div className={style.footer}>
+          <div>
+            {isError && <span className={style.serverError}>{message}</span>}
+          </div>
+          <div className={style.action}>
+            <Button
+              label={t('questions.label.submit')}
+              loading={isLoading}
+              variant="primary"
+            />
+            <Button
+              label={t('questions.label.preview')}
+              type="button"
+              variant="outline"
+              handleFuncion={previewQuestion}
+            />
+          </div>
         </div>
-        {isError && <span className={style.serverError}>{message}</span>}
       </form>
     </>
   );
