@@ -40,9 +40,10 @@ const EditQuestion = () => {
 
   useEffect(() => {
     if (isSuccess === questionType.UPDATE_QUESTION) {
+      toast(t('toast.edit_question_sucess'));
       navigate(`/questions/${question._id}`);
     }
-  }, [isSuccess, navigate, question]);
+  }, [isSuccess, navigate, question, t]);
 
   const submitForm = (data: any) => {
     dispatch(updateQuestion({ id: question._id, updatedData: data }));

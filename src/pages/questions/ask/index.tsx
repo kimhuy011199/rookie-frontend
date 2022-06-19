@@ -28,9 +28,10 @@ const AskQuestion = () => {
 
   useEffect(() => {
     if (isSuccess === questionType.CREATE_QUESTION) {
+      toast(t('toast.add_question_sucess'));
       navigate(`/questions/${question._id}`);
     }
-  }, [isSuccess, navigate, question]);
+  }, [isSuccess, navigate, question, t]);
 
   useEffect(() => {
     if (isError === questionType.CREATE_QUESTION) {

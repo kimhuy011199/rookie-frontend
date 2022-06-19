@@ -12,6 +12,9 @@ import List from '../../../shared/components/List';
 import QuestionLinkItem from '../../../shared/components/QuestionLinkItem';
 import UserInfoItem from './components/UserInfoItem';
 import { authType } from '../../../stores/auth/authType';
+import { reset } from '../../../stores/answers/answerSlice';
+import { questionType } from '../../../stores/questions/questionType';
+import { toast } from 'react-toastify';
 
 const SingleUser = () => {
   const { id } = useParams();
@@ -22,7 +25,11 @@ const SingleUser = () => {
     (state: any) => state.auth
   );
 
-  const { userQuestions } = useSelector((state: any) => state.questions);
+  const {
+    userQuestions,
+    isSuccess: isQuestionSuccess,
+    isError: isQuestionError,
+  } = useSelector((state: any) => state.questions);
 
   const userInfo = {
     display_name: user.displayName,
@@ -38,6 +45,19 @@ const SingleUser = () => {
       dispatch(getQuestionByUserId(user._id));
     }
   }, [id, dispatch, user]);
+
+  useEffect(() => {
+    if (isQuestionSuccess === questionType.DELETE_QUESTION) {
+      toast(t('toast.delete_question_success'));
+    }
+    if (isQuestionError === questionType.DELETE_QUESTION) {
+      toast(t('toast.unsuccess'));
+    }
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [isQuestionError, isQuestionSuccess, t, dispatch]);
 
   return (
     <>

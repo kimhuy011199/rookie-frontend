@@ -79,9 +79,12 @@
     "search": "Search ..."
   },
   "toast": {
+    "add_question_sucess": "Your question was added",
+    "edit_question_sucess": "Your question was updated",
+    "delete_question_success": "Your question was deleted",
     "add_answer_success": "Your answer was added",
-    "delete_answer_success": "Your answer was deleted",
     "edit_answer_success": "Your answer was updated",
+    "delete_answer_success": "Your answer was deleted",
     "update_user_success": "Your profile was updated",
     "update_avatar_success": "Your avatar was updated",
     "unsuccess": "There was an error. Try again!"
