@@ -7,12 +7,14 @@ import Error from '../../../shared/components/Error';
 import { ERROR_CODE } from '../../../shared/constants/enums';
 import { useTranslation } from 'react-i18next';
 import Avatar from '../../../shared/components/Avatar';
-import { getQuestionByUserId } from '../../../stores/questions/questionSlice';
+import {
+  getQuestionByUserId,
+  reset,
+} from '../../../stores/questions/questionSlice';
 import List from '../../../shared/components/List';
 import QuestionLinkItem from '../../../shared/components/QuestionLinkItem';
 import UserInfoItem from './components/UserInfoItem';
 import { authType } from '../../../stores/auth/authType';
-import { reset } from '../../../stores/answers/answerSlice';
 import { questionType } from '../../../stores/questions/questionType';
 import { toast } from 'react-toastify';
 
