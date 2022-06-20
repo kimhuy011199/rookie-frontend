@@ -87,6 +87,7 @@
     "delete_answer_success": "Your answer was deleted",
     "update_user_success": "Your profile was updated",
     "update_avatar_success": "Your avatar was updated",
+    "change_password_success": "Your password was updated",
     "unsuccess": "There was an error. Try again!"
   },
   "dialog": {

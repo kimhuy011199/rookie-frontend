@@ -39,7 +39,7 @@ const ChangePassword = () => {
 
   useEffect(() => {
     if (isSuccess === authType.CHANGE_PASSWORD) {
-      toast(t('toast.update_user_success'));
+      toast(t('toast.change_password_success'));
     }
     if (isError === authType.CHANGE_PASSWORD) {
       setError('oldPassword', { type: 'custom', message });
