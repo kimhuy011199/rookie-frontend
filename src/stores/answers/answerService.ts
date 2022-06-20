@@ -15,8 +15,8 @@ const createAnswer = async (answerData: AnswerInputInterface) => {
 };
 
 // Get all answers by question id
-const getAnswers = async (questionId: string) => {
-  const response = await api().get(`${endpoint}/${questionId}`);
+const getAnswersById = async (questionId: string) => {
+  const response = await api().get(`${endpoint}/questions/${questionId}`);
   return response.data;
 };
 
@@ -43,7 +43,7 @@ const likeOrUnlikeAnswer = async (answerId: string) => {
 
 const answerService = {
   createAnswer,
-  getAnswers,
+  getAnswersById,
   updateAnswer,
   deleteAnswer,
   likeOrUnlikeAnswer,

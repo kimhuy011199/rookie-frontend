@@ -35,11 +35,11 @@ export const createAnswer = createAsyncThunk(
 );
 
 // Get all answers by question id
-export const getAnswers = createAsyncThunk(
+export const getAnswersById = createAsyncThunk(
   `answer/${answerType.GET_ALL_ANSWERS}`,
   async (questionId: string, thunkAPI) => {
     try {
-      return await answerService.getAnswers(questionId);
+      return await answerService.getAnswersById(questionId);
     } catch (error: any) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -112,15 +112,15 @@ export const answerSlice = createSlice({
         state.isError = answerType.CREATE_ANSWER;
         state.message = action.payload;
       })
-      .addCase(getAnswers.pending, (state) => {
+      .addCase(getAnswersById.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAnswers.fulfilled, (state, action) => {
+      .addCase(getAnswersById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = answerType.GET_ALL_ANSWERS;
         state.answers = action.payload;
       })
-      .addCase(getAnswers.rejected, (state, action: any) => {
+      .addCase(getAnswersById.rejected, (state, action: any) => {
         state.isLoading = false;
         state.isError = answerType.GET_ALL_ANSWERS;
         state.message = action.payload;

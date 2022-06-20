@@ -8,7 +8,7 @@ import Error from '../../../shared/components/Error';
 import { COMMENT_TYPE, ERROR_CODE } from '../../../shared/constants/enums';
 import Comment from '../../../shared/components/Comment';
 import CommentInput from '../../../shared/components/CommentInput';
-import { getAnswers, reset } from '../../../stores/answers/answerSlice';
+import { getAnswersById, reset } from '../../../stores/answers/answerSlice';
 import { Answer } from '../../../shared/constants/types/Answer';
 import RecommendQuestion from '../../../shared/components/RecommendQuestion';
 import { toast } from 'react-toastify';
@@ -34,7 +34,7 @@ const SingleQuestion = () => {
   useEffect(() => {
     if (id) {
       dispatch(getQuestionById(id));
-      dispatch(getAnswers(id));
+      dispatch(getAnswersById(id));
     }
   }, [id, dispatch]);
 
