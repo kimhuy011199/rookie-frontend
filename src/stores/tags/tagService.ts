@@ -5,7 +5,7 @@ const endpoint = ENDPOINT.TAGS;
 
 // Get all tags
 const getTags = async () => {
-  const response = await api().get(endpoint);
+  const response = await api().get(`${endpoint}/all`);
   return response.data;
 };
 

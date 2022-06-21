@@ -11,7 +11,7 @@ const createNotification = async (data: any) => {
 
 // Get all notifications
 const getNotifications = async (userId: string) => {
-  const response = await api().get(`${endpoint}/${userId}`);
+  const response = await api().get(`${endpoint}/users/${userId}`);
   return response.data;
 };
 
