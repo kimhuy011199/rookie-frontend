@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteAnswer } from '../../../../../stores/answers/answerSlice';
 import ConfirmDialog from '../confirm';
 import { COMMENT_TYPE } from '../../../../constants/enums';
@@ -18,13 +18,14 @@ const DeleteCommentDialog = (props: DeleteCommentDialogInterface) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useSelector((state: any) => state.auth);
 
   const submitDelete = () => {
     if (type === COMMENT_TYPE.COMMENT) {
       dispatch(deleteAnswer(data?._id));
     } else {
       dispatch(deleteQuestion(data?._id));
-      navigate('./users/me');
+      navigate(`./users/${user._id}`);
     }
   };
 

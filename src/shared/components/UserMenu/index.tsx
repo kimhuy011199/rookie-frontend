@@ -18,7 +18,7 @@ const UserMenu = () => {
     {
       value: USER_ACTIONS.VIEW_PROFILE,
       label: 'menu.view_profile',
-      link: '/users/me',
+      link: `/users/${user?._id}`,
     },
     {
       value: USER_ACTIONS.SETTINGS,

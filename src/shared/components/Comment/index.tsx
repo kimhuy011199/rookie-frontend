@@ -9,7 +9,7 @@ import CommentInput from '../CommentInput';
 import Like from '../Like';
 import Avatar from '../Avatar';
 import TagList from '../TagList';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface CommentInterface {
   type: number;
@@ -61,7 +61,9 @@ const Comment = (props: CommentInterface) => {
       <div hidden={openEdit} className={style.main}>
         <div className={style.header}>
           <div className={style.info}>
-            <span className={style.user}>{data?.user?.displayName}</span>
+            <Link to={`/users/${data.user?._id}`}>
+              <span className={style.user}>{data?.user?.displayName}</span>
+            </Link>
             <span className={style.date}>{renderTime()}</span>
           </div>
           {data?.userId === user?._id && (
