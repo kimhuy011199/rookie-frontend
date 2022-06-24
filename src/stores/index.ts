@@ -5,6 +5,7 @@ import answerReducer from './answers/answerSlice';
 import uploadReducer from './uploads/uploadSlice';
 import notificationReducer from './notifications/notificationSlice';
 import tagReducer from './tags/tagSlice';
+import userReducer from './users/userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     upload: uploadReducer,
     notifications: notificationReducer,
     tags: tagReducer,
+    users: userReducer,
   },
 });
