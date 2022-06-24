@@ -164,5 +164,8 @@
     "lowest_likes": "Lowest likes",
     "newest_answer": "Newest first",
     "oldest_answer": "Oldest first"
+  },
+  "upload": {
+    "limit_size": "Maximum size of image: 200kb"
   }
 }

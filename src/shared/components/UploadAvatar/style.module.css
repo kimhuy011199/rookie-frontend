@@ -33,3 +33,7 @@
 .loading {
   @apply flex items-center justify-center w-full h-full z-20 rounded-full;
 }
+
+.largeFile {
+  @apply text-center mt-4 px-2 text-red-500;
+}

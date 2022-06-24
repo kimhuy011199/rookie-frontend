@@ -18,6 +18,7 @@ const UploadAvatar = () => {
   const [inputValue, setInputValue] = useState<any>('');
   const [previewImgSrc, setPreviewImgSrc] = useState<any>('');
   const [selectedFile, setSelectedFile] = useState<any>();
+  const [isLargeFile, setIsLargeFile] = useState(false);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -26,7 +27,7 @@ const UploadAvatar = () => {
     isSuccess: isUpdateSuccess,
     isLoading: isUpdateLoading,
   } = useSelector((state: any) => state.auth);
-  const { data, isLoading, isSuccess } = useSelector(
+  const { data, isLoading, isSuccess, isError } = useSelector(
     (state: any) => state.upload
   );
 
@@ -35,6 +36,7 @@ const UploadAvatar = () => {
     if (!file) {
       return;
     }
+    setIsLargeFile(file.size >= 200000);
     previewFile(file);
     setSelectedFile(file);
     setInputValue(e.target.value);
@@ -75,6 +77,9 @@ const UploadAvatar = () => {
     if (isSuccess === uploadType.UPLOAD_IMG) {
       // Update user when uploading image to cloudinary is done
       dispatch(updateUser({ _id: user._id, avatarImg: data.url }));
+    }
+    if (isError === uploadType.UPLOAD_IMG) {
+      toast(t('toast.un_success'));
     }
 
     return () => {
@@ -133,10 +138,15 @@ const UploadAvatar = () => {
       <button
         className={style.submit}
         onClick={handleSubmitFile}
-        disabled={!selectedFile || isLoading || !inputValue}
+        disabled={!selectedFile || isLoading || !inputValue || isLargeFile}
       >
         <MdCameraAlt className={style.icon} />
       </button>
+      {isLargeFile && (
+        <div className={style.largeFile}>
+          <span>{t('upload.limit_size')}</span>
+        </div>
+      )}
     </div>
   );
 };
