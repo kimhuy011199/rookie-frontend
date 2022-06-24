@@ -56,84 +56,86 @@ const UserSetting = () => {
   return (
     <div className={style.container}>
       <UploadAvatar />
-      <div className={style.user}>
-        <div className={style.profile}>
-          <h3 className={style.heading}>{t('settings.heading.settings')}</h3>
-          <div className={style.form}>
-            <form onSubmit={handleSubmit(handleSubmitForm)}>
-              <FormGroup
-                label={t('settings.label.display_name')}
-                error={errors.displayName?.message}
-                flexRow
-              >
-                <Input
-                  disabled
-                  type="text"
-                  defaultValue={user.displayName}
-                  {...register('displayName', {})}
-                />
-              </FormGroup>
-              <FormGroup
-                label={t('settings.label.email')}
-                error={errors.email?.message}
-                flexRow
-              >
-                <Input
-                  type="text"
-                  defaultValue={user.email}
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: EMAIL_PATTERN,
-                      message: 'Please enter a valid email',
-                    },
-                  })}
-                />
-              </FormGroup>
-              <FormGroup
-                label={t('settings.label.github')}
-                error={errors.linkGithub?.message}
-                flexRow
-              >
-                <Input
-                  type="text"
-                  defaultValue={user.linkGithub}
-                  {...register('linkGithub', {})}
-                />
-              </FormGroup>
-              <FormGroup
-                label={t('settings.label.linkedin')}
-                error={errors.linkLinkedIn?.message}
-                flexRow
-              >
-                <Input
-                  type="text"
-                  defaultValue={user.linkLinkedIn}
-                  {...register('linkLinkedIn', {})}
-                />
-              </FormGroup>
-              <FormGroup
-                label={t('settings.label.about')}
-                error={errors.about?.message}
-                flexRow
-              >
-                <TextArea
-                  rows={6}
-                  defaultValue={user.about || ''}
-                  {...register('about', {})}
-                />
-              </FormGroup>
-              <div className={style.actions}>
-                <Button
-                  label={t('settings.label.submit')}
-                  loading={isLoading || isSubmitting}
-                  variant="primary"
-                />
-              </div>
-            </form>
+      {user._id && (
+        <div className={style.user}>
+          <div className={style.profile}>
+            <h3 className={style.heading}>{t('settings.heading.settings')}</h3>
+            <div className={style.form}>
+              <form onSubmit={handleSubmit(handleSubmitForm)}>
+                <FormGroup
+                  label={t('settings.label.display_name')}
+                  error={errors.displayName?.message}
+                  flexRow
+                >
+                  <Input
+                    disabled
+                    type="text"
+                    defaultValue={user.displayName}
+                    {...register('displayName', {})}
+                  />
+                </FormGroup>
+                <FormGroup
+                  label={t('settings.label.email')}
+                  error={errors.email?.message}
+                  flexRow
+                >
+                  <Input
+                    type="text"
+                    defaultValue={user.email}
+                    {...register('email', {
+                      required: 'Email is required',
+                      pattern: {
+                        value: EMAIL_PATTERN,
+                        message: 'Please enter a valid email',
+                      },
+                    })}
+                  />
+                </FormGroup>
+                <FormGroup
+                  label={t('settings.label.github')}
+                  error={errors.linkGithub?.message}
+                  flexRow
+                >
+                  <Input
+                    type="text"
+                    defaultValue={user.linkGithub}
+                    {...register('linkGithub', {})}
+                  />
+                </FormGroup>
+                <FormGroup
+                  label={t('settings.label.linkedin')}
+                  error={errors.linkLinkedIn?.message}
+                  flexRow
+                >
+                  <Input
+                    type="text"
+                    defaultValue={user.linkLinkedIn}
+                    {...register('linkLinkedIn', {})}
+                  />
+                </FormGroup>
+                <FormGroup
+                  label={t('settings.label.about')}
+                  error={errors.about?.message}
+                  flexRow
+                >
+                  <TextArea
+                    rows={6}
+                    defaultValue={user.about || ''}
+                    {...register('about', {})}
+                  />
+                </FormGroup>
+                <div className={style.actions}>
+                  <Button
+                    label={t('settings.label.submit')}
+                    loading={isLoading || isSubmitting}
+                    variant="primary"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
