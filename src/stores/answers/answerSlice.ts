@@ -1,7 +1,8 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { Answer } from '../../shared/constants/types/Answer';
 import { answerType } from './answerType';
 import answerService from './answerService';
+import { FILTER_TYPE } from '../../shared/constants/enums';
 
 export interface AnswerInputInterface {
   content: string;
@@ -84,6 +85,12 @@ export const likeOrUnlikeAnswer = createAsyncThunk(
       return thunkAPI.rejectWithValue(message);
     }
   }
+);
+
+// Filter answers
+export const filterAnswer = createAction(
+  answerType.FILTER_ANSWERS,
+  (payload: any) => ({ payload })
 );
 
 export const answerSlice = createSlice({
@@ -189,6 +196,36 @@ export const answerSlice = createSlice({
         state.isLoading = false;
         state.isError = answerType.LIKE_UNLIKE_ANSWER;
         state.message = action.payload;
+      })
+      .addCase(filterAnswer, (state, action) => {
+        switch (action.payload) {
+          case FILTER_TYPE.MOST_LIKES:
+            state.answers.sort(
+              (a: Answer, b: Answer) => b.likesCount - a.likesCount
+            );
+            break;
+          case FILTER_TYPE.LOWEST_LIKES:
+            state.answers
+              .sort((a: Answer, b: Answer) => b.likesCount - a.likesCount)
+              .reverse();
+            break;
+          case FILTER_TYPE.NEWEST_ANSWER:
+            state.answers.sort(
+              (a: Answer, b: Answer) =>
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime()
+            );
+            break;
+          case FILTER_TYPE.OLDEST_ANSWER:
+            state.answers
+              .sort(
+                (a: Answer, b: Answer) =>
+                  new Date(a.createdAt).getTime() -
+                  new Date(b.createdAt).getTime()
+              )
+              .reverse();
+            break;
+        }
       });
   },
 });

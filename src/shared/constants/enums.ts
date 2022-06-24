@@ -32,3 +32,11 @@ export enum USER_ACTIONS {
   CHANGE_PASS = 3,
   LOG_OUT = 4,
 }
+
+export enum FILTER_TYPE {
+  RESET_FILTER = 0,
+  MOST_LIKES = 1,
+  LOWEST_LIKES = 2,
+  NEWEST_ANSWER = 3,
+  OLDEST_ANSWER = 4,
+}

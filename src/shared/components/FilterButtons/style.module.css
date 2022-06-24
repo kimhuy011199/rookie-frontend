@@ -1,0 +1,19 @@
+.filterContainer {
+  @apply flex ml-auto justify-end items-center my-5;
+}
+
+.heading {
+  @apply pr-4;
+}
+
+.list {
+  @apply flex gap-2;
+}
+
+.btn {
+  @apply font-semibold uppercase flex items-center content-center gap-1 px-2.5 py-1.5 rounded-md  bg-dark-1 border border-dark-3;
+}
+
+.active {
+  @apply bg-primary text-dark-1;
+}

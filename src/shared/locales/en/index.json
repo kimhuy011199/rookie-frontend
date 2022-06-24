@@ -157,5 +157,12 @@
     "login": "Join the community",
     "link": "View questions",
     "or": "or "
+  },
+  "filter": {
+    "heading": "Filter by",
+    "most_likes": "Highest likes",
+    "lowest_likes": "Lowest likes",
+    "newest_answer": "Newest first",
+    "oldest_answer": "Oldest first"
   }
 }

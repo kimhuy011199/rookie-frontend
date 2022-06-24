@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getQuestionById } from '../../../stores/questions/questionSlice';
+import {
+  getQuestionById,
+  reset as resetQuestion,
+} from '../../../stores/questions/questionSlice';
 import style from './style.module.css';
 import Spinner from '../../../shared/components/Spinner';
 import Error from '../../../shared/components/Error';
@@ -15,6 +18,7 @@ import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { questionType } from '../../../stores/questions/questionType';
 import { answerType } from '../../../stores/answers/answerType';
+import FilterButtons from '../../../shared/components/FilterButtons';
 
 const SingleQuestion = () => {
   const { id = '' } = useParams();
@@ -24,18 +28,23 @@ const SingleQuestion = () => {
   const { question, isLoading, isError, message } = useSelector(
     (state: any) => state.questions
   );
-  const { answers, isAnswersLoading } = useSelector(
-    (state: any) => state.answers
-  );
-  const { isSuccess: isAnswerSuccess, isError: isAnswerError } = useSelector(
-    (state: any) => state.answers
-  );
+  const {
+    answers,
+    isAnswersLoading,
+    isSuccess: isAnswerSuccess,
+    isError: isAnswerError,
+  } = useSelector((state: any) => state.answers);
 
   useEffect(() => {
     if (id) {
       dispatch(getQuestionById(id));
       dispatch(getAnswersById(id));
     }
+
+    return () => {
+      reset();
+      resetQuestion();
+    };
   }, [id, dispatch]);
 
   useEffect(() => {
@@ -64,7 +73,7 @@ const SingleQuestion = () => {
         show={isError && message?.errorCode === 404}
         code={ERROR_CODE.NOT_FOUND}
       />
-      {question?._id && (
+      {question?._id && question?._id === id && (
         <>
           <div className={style.container}>
             <div className={style.main}>
@@ -72,6 +81,7 @@ const SingleQuestion = () => {
               <div className={style.question}>
                 <Comment type={COMMENT_TYPE.QUESTION} data={question} />
               </div>
+              <FilterButtons />
               {answers.length > 0 && (
                 <ul className={style.answers}>
                   {answers.map((answer: Answer) => (
