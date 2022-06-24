@@ -14,6 +14,8 @@ interface TagsCheckDialogInterface {
 
 const TagsCheckDialog = (props: TagsCheckDialogInterface) => {
   const { currentTags, setTags, close } = props;
+  const [searchValue, setSearchValue] = useState('');
+  const [filterTags, setFilterTags] = useState(currentTags);
   const [tagsOnDialog, setTagsOnDialog] = useState(currentTags);
   const { t } = useTranslation();
   const { tags: allTags } = useSelector((state: any) => state.tags);
@@ -39,12 +41,26 @@ const TagsCheckDialog = (props: TagsCheckDialogInterface) => {
     }
   };
 
+  const handleChangeValue = (event: any) => {
+    const value = event.target.value;
+    const searchTags = allTags.filter((item: Tag) => item.name.includes(value));
+    setSearchValue(value);
+    setFilterTags(searchTags);
+  };
+
   return (
     <Dialog close={close}>
       <h3 className={style.heading}>{t('dialog.tag')}</h3>
+      <input
+        className={style.input}
+        type="text"
+        placeholder={t('dialog.search_tag')}
+        value={searchValue}
+        onChange={handleChangeValue}
+      />
       <div>
-        {allTags.length > 0 &&
-          allTags.map((tag: Tag) => (
+        {filterTags.length > 0 &&
+          filterTags.map((tag: Tag) => (
             <button
               className={`${style.button} ${
                 isTagIncluded(tag) && style.active
