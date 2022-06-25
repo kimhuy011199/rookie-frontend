@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -21,6 +21,7 @@ export default function App() {
   const token = authStorageService().getToken();
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const socket = useContext(SocketContext);
 
   useEffect(() => {
@@ -44,6 +45,10 @@ export default function App() {
       socket.emit(NOTI_ACTIONS.JOIN_ROOM, user?._id.toString());
     }
   }, [user, token, socket]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
 
   return (
     <>
