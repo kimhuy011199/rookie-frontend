@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getWordsFromContent } from '../../../../../core/utils';
 import { COMMENT_TYPE, NOTI_TYPE } from '../../../../constants/enums';
 import Avatar from '../../../Avatar';
@@ -22,9 +22,18 @@ interface NotificationDialogInterface {
 
 const NotificationDialog = (props: NotificationDialogInterface) => {
   const { action, question, type = COMMENT_TYPE.QUESTION } = props;
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
-  const linkTo = `/questions/${question.questionId}`;
+  const handleNavigate = () => {
+    if (pathname.includes(question.questionId)) {
+      navigate(0);
+    } else {
+      navigate(`/questions/${question.questionId}`);
+    }
+  };
+
   const content =
     type === NOTI_TYPE.ANSWER_QUESTION
       ? t('dialog.answer_question')
@@ -32,7 +41,7 @@ const NotificationDialog = (props: NotificationDialogInterface) => {
   const questionTitle = getWordsFromContent(question.title, 10);
 
   return (
-    <Link className={style.container} to={linkTo}>
+    <button className={style.container} onClick={handleNavigate}>
       <div className={style.avatar}>
         <Avatar user={action} />
       </div>
@@ -41,7 +50,7 @@ const NotificationDialog = (props: NotificationDialogInterface) => {
         <span>{content} </span>
         <span className={style.title}>{questionTitle}</span>
       </div>
-    </Link>
+    </button>
   );
 };
 

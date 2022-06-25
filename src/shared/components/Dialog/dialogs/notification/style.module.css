@@ -1,9 +1,9 @@
 .container {
-  @apply flex gap-4 !border-none;
+  @apply flex gap-4 !border-none text-left;
 }
 
 .avatar {
-  @apply w-10 h-10 relative;
+  @apply w-10 h-10 relative mt-2;
   min-width: 2.5rem;
 }
 .content {
