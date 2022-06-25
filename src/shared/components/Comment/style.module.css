@@ -25,7 +25,7 @@
 }
 
 .user {
-  @apply font-medium;
+  @apply font-medium text-primary;
 }
 
 .date {
