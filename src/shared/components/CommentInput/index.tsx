@@ -72,24 +72,26 @@ const CommentInput = (props: CommentInputInterface) => {
           content: inputData.content,
           questionId,
         };
-        dispatch(createAnswer(submitData));
-        const type = NOTI_TYPE.ANSWER_QUESTION;
         const { userId } = question;
-        const actionId = user._id;
-        dispatch(
-          createNotification({
+        if (user._id !== userId) {
+          dispatch(createAnswer(submitData));
+          const type = NOTI_TYPE.ANSWER_QUESTION;
+          const actionId = user._id;
+          dispatch(
+            createNotification({
+              userId,
+              actionId,
+              questionId,
+              type,
+            })
+          );
+          socket.emit(NOTI_ACTIONS.SEND_NOTI, {
             userId,
-            actionId,
-            questionId,
+            action: { ...user, actionId },
+            question: { ...question, questionId },
             type,
-          })
-        );
-        socket.emit(NOTI_ACTIONS.SEND_NOTI, {
-          userId,
-          action: { ...user, actionId },
-          question: { ...question, questionId },
-          type,
-        });
+          });
+        }
         resetForm();
       } else {
         const newContent = getValues('content').trim();

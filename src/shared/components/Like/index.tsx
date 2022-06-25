@@ -26,9 +26,8 @@ const Like = (props: LikeInterface) => {
     if (!user) {
       return;
     }
-
     dispatch(likeOrUnlikeAnswer(id));
-    if (!isLiked) {
+    if (user._id !== userId && !isLiked) {
       const type = NOTI_TYPE.LIKE_ANSWER;
       const { _id: questionId } = question;
       const actionId = user._id;
