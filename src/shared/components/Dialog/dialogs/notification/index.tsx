@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getWordsFromContent } from '../../../../../core/utils';
 import { COMMENT_TYPE, NOTI_TYPE } from '../../../../constants/enums';
 import Avatar from '../../../Avatar';
