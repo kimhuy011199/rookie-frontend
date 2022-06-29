@@ -40,3 +40,9 @@ export enum FILTER_TYPE {
   NEWEST_ANSWER = 3,
   OLDEST_ANSWER = 4,
 }
+
+export enum DIALOG_SIZE {
+  SM = 0,
+  MD = 1,
+  LG = 2,
+}

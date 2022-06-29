@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { DIALOG_SIZE } from '../../../../constants/enums';
 import MarkdownRender from '../../../Markdown';
 import { Dialog } from '../../Provider';
 import style from './style.module.css';
@@ -13,19 +14,16 @@ interface PreviewDialogInterface {
 
 const PreviewDialog = (props: PreviewDialogInterface) => {
   const { content, close } = props;
-  const inlineStyle = {
-    maxWidth: '60rem',
-    minHeight: '40rem',
-    height: '40rem',
-    width: '90%',
-    overflowY: 'auto',
-  };
   const { t } = useTranslation();
 
   return (
-    <Dialog close={close} inlineStyle={inlineStyle}>
-      <h3 className={style.heading}>{t('dialog.preview')}</h3>
-      <MarkdownRender content={content} />
+    <Dialog size={DIALOG_SIZE.LG}>
+      <Dialog.Header heading={t('dialog.preview')} close={close} />
+      <Dialog.Body>
+        <div className={style.content}>
+          <MarkdownRender content={content} />
+        </div>
+      </Dialog.Body>
     </Dialog>
   );
 };
