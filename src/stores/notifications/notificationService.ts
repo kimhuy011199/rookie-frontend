@@ -10,14 +10,14 @@ const createNotification = async (data: any) => {
 };
 
 // Get all notifications
-const getNotifications = async (userId: string) => {
+const getNotificationsByUserId = async (userId: string) => {
   const response = await api().get(`${endpoint}/users/${userId}`);
   return response.data;
 };
 
 const notificationService = {
   createNotification,
-  getNotifications,
+  getNotificationsByUserId,
 };
 
 export default notificationService;

@@ -11,7 +11,7 @@ const initialState = {
   message: '',
 };
 
-// Create new notification
+// Create notification
 export const createNotification = createAsyncThunk(
   `notification/${notificationType.CREATE_NOTIFICATION}`,
   async (notificationData: any, thunkAPI) => {
@@ -24,12 +24,12 @@ export const createNotification = createAsyncThunk(
   }
 );
 
-// Get all notifications
-export const getNotifications = createAsyncThunk(
-  `notification/${notificationType.GET_NOTIFICATIONS}`,
+// Get notifications by user id
+export const getNotificationsByUserId = createAsyncThunk(
+  `notification/${notificationType.GET_NOTIFICATIONS_BY_USER_ID}`,
   async (userId: string, thunkAPI) => {
     try {
-      return await notificationService.getNotifications(userId);
+      return await notificationService.getNotificationsByUserId(userId);
     } catch (error: any) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -62,17 +62,17 @@ export const notificationSlice = createSlice({
         state.isError = notificationType.CREATE_NOTIFICATION;
         state.message = action.payload;
       })
-      .addCase(getNotifications.pending, (state) => {
+      .addCase(getNotificationsByUserId.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getNotifications.fulfilled, (state, action) => {
+      .addCase(getNotificationsByUserId.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = notificationType.GET_NOTIFICATIONS;
+        state.isSuccess = notificationType.GET_NOTIFICATIONS_BY_USER_ID;
         state.notifications = action.payload;
       })
-      .addCase(getNotifications.rejected, (state, action: any) => {
+      .addCase(getNotificationsByUserId.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = notificationType.GET_NOTIFICATIONS;
+        state.isError = notificationType.GET_NOTIFICATIONS_BY_USER_ID;
         state.message = action.payload;
       });
   },

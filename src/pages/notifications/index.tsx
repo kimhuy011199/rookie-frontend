@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../../shared/components/Spinner';
 import {
-  getNotifications,
+  getNotificationsByUserId,
   reset,
 } from '../../stores/notifications/notificationSlice';
 import style from './style.module.css';
@@ -25,7 +25,7 @@ function Questions() {
 
   useEffect(() => {
     if (user) {
-      dispatch(getNotifications(user._id));
+      dispatch(getNotificationsByUserId(user._id));
     }
 
     return () => {
