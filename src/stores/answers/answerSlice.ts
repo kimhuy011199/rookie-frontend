@@ -18,7 +18,7 @@ const initialState = {
   message: '',
 };
 
-// Create new answer
+// Create answer
 export const createAnswer = createAsyncThunk(
   `answer/${answerType.CREATE_ANSWER}`,
   async (answerData: AnswerInputInterface, thunkAPI) => {
@@ -35,12 +35,12 @@ export const createAnswer = createAsyncThunk(
   }
 );
 
-// Get all answers by question id
-export const getAnswersById = createAsyncThunk(
-  `answer/${answerType.GET_ALL_ANSWERS}`,
+// Get answers by question id
+export const getAnswersByQuestionId = createAsyncThunk(
+  `answer/${answerType.GET_ANSWERS_BY_QUESTION_ID}`,
   async (questionId: string, thunkAPI) => {
     try {
-      return await answerService.getAnswersById(questionId);
+      return await answerService.getAnswersByQuestionId(questionId);
     } catch (error: any) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -48,7 +48,7 @@ export const getAnswersById = createAsyncThunk(
   }
 );
 
-// Update user answer
+// Update answer
 export const updateAnswer = createAsyncThunk(
   `answer/${answerType.UPDATE_ANSWER}`,
   async (data: any, thunkAPI) => {
@@ -61,7 +61,7 @@ export const updateAnswer = createAsyncThunk(
   }
 );
 
-// Delete user answer
+// Delete answer
 export const deleteAnswer = createAsyncThunk(
   `answer/${answerType.DELETE_ANSWER}`,
   async (id: string, thunkAPI) => {
@@ -76,7 +76,7 @@ export const deleteAnswer = createAsyncThunk(
 
 // Like or unlike answer
 export const likeOrUnlikeAnswer = createAsyncThunk(
-  `answer/${answerType.LIKE_UNLIKE_ANSWER}`,
+  `answer/${answerType.LIKE_OR_UNLIKE_ANSWER}`,
   async (answerid: string, thunkAPI) => {
     try {
       return await answerService.likeOrUnlikeAnswer(answerid);
@@ -119,17 +119,17 @@ export const answerSlice = createSlice({
         state.isError = answerType.CREATE_ANSWER;
         state.message = action.payload;
       })
-      .addCase(getAnswersById.pending, (state) => {
+      .addCase(getAnswersByQuestionId.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAnswersById.fulfilled, (state, action) => {
+      .addCase(getAnswersByQuestionId.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = answerType.GET_ALL_ANSWERS;
+        state.isSuccess = answerType.GET_ANSWERS_BY_QUESTION_ID;
         state.answers = action.payload;
       })
-      .addCase(getAnswersById.rejected, (state, action: any) => {
+      .addCase(getAnswersByQuestionId.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = answerType.GET_ALL_ANSWERS;
+        state.isError = answerType.GET_ANSWERS_BY_QUESTION_ID;
         state.message = action.payload;
       })
       .addCase(updateAnswer.pending, (state) => {
@@ -190,11 +190,11 @@ export const answerSlice = createSlice({
           state.answers = updatedAnswers;
         }
         state.isLoading = false;
-        state.isSuccess = answerType.LIKE_UNLIKE_ANSWER;
+        state.isSuccess = answerType.LIKE_OR_UNLIKE_ANSWER;
       })
       .addCase(likeOrUnlikeAnswer.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = answerType.LIKE_UNLIKE_ANSWER;
+        state.isError = answerType.LIKE_OR_UNLIKE_ANSWER;
         state.message = action.payload;
       })
       .addCase(filterAnswer, (state, action) => {

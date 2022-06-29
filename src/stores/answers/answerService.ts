@@ -14,13 +14,13 @@ const createAnswer = async (answerData: AnswerInputInterface) => {
   return response.data;
 };
 
-// Get all answers by question id
-const getAnswersById = async (questionId: string) => {
+// Get answers by question id
+const getAnswersByQuestionId = async (questionId: string) => {
   const response = await api().get(`${endpoint}/questions/${questionId}`);
   return response.data;
 };
 
-// Update user answer
+// Update answer
 const updateAnswer = async (
   answerId: string,
   data: AnswerUpdateInputInterface
@@ -29,7 +29,7 @@ const updateAnswer = async (
   return response.data;
 };
 
-// Delete user answer
+// Delete answer
 const deleteAnswer = async (answerId: string) => {
   const response = await api().delete(`${endpoint}/${answerId}`);
   return response.data;
@@ -43,7 +43,7 @@ const likeOrUnlikeAnswer = async (answerId: string) => {
 
 const answerService = {
   createAnswer,
-  getAnswersById,
+  getAnswersByQuestionId,
   updateAnswer,
   deleteAnswer,
   likeOrUnlikeAnswer,
