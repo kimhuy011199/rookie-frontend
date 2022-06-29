@@ -11,7 +11,7 @@ const initialState = {
   message: '',
 };
 
-// Get all tags
+// Get tags
 export const getTags = createAsyncThunk(
   `tags/${tagType.GET_TAGS}`,
   async (_, thunkAPI) => {

@@ -3,7 +3,7 @@ import { ENDPOINT } from '../../shared/constants/constants';
 
 const endpoint = ENDPOINT.TAGS;
 
-// Get all tags
+// Get tags
 const getTags = async () => {
   const response = await api().get(`${endpoint}/all`);
   return response.data;
