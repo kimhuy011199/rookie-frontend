@@ -11,7 +11,7 @@ const createQuestion = async (questionData: QuestionInputInterface) => {
 };
 
 // Get all questions
-const getQuestions = async (queryString: string) => {
+const paginateQuestions = async (queryString: string) => {
   const response = await api().get(`${endpoint}?${queryString}`);
   return response.data;
 };
@@ -51,7 +51,7 @@ const deleteQuestion = async (questionId: string) => {
 
 const questionService = {
   createQuestion,
-  getQuestions,
+  paginateQuestions,
   getQuestionById,
   getQuestionByUserId,
   updateQuestion,

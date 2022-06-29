@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../../shared/components/Spinner';
-import { getQuestions, reset } from '../../stores/questions/questionSlice';
+import { paginateQuestions, reset } from '../../stores/questions/questionSlice';
 import style from './style.module.css';
 import { Question } from '../../shared/constants/types/Question';
 import QuestionItem from '../../shared/components/QuestionItem';
@@ -41,14 +41,14 @@ function Questions() {
   };
 
   useEffect(() => {
-    if (isError === questionType.GET_ALL_QUESTIONS) {
+    if (isError === questionType.PAGINATE_QUESTIONS) {
       toast(t('toast.unsuccess'));
     }
   }, [isError, t]);
 
   useEffect(() => {
     const queryString = `page=${currentPage}&search=${searchValue}`;
-    dispatch(getQuestions(queryString));
+    dispatch(paginateQuestions(queryString));
 
     return () => {
       dispatch(reset());

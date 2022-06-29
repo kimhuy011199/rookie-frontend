@@ -20,7 +20,7 @@ const initialState = {
   message: '',
 };
 
-// Create new question
+// Create question
 export const createQuestion = createAsyncThunk(
   `question/${questionType.CREATE_QUESTION}`,
   async (questionData: QuestionInputInterface, thunkAPI) => {
@@ -33,12 +33,12 @@ export const createQuestion = createAsyncThunk(
   }
 );
 
-// Get all questions
-export const getQuestions = createAsyncThunk(
-  `question/${questionType.GET_ALL_QUESTIONS}`,
+// Paginate questions
+export const paginateQuestions = createAsyncThunk(
+  `question/${questionType.PAGINATE_QUESTIONS}`,
   async (queryString: string, thunkAPI) => {
     try {
-      return await questionService.getQuestions(queryString);
+      return await questionService.paginateQuestions(queryString);
     } catch (error: any) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -91,7 +91,7 @@ export const getRecommendQuestions = createAsyncThunk(
   }
 );
 
-// Update user question
+// Update question
 export const updateQuestion = createAsyncThunk(
   `question/${questionType.UPDATE_QUESTION}`,
   async (data: any, thunkAPI) => {
@@ -104,7 +104,7 @@ export const updateQuestion = createAsyncThunk(
   }
 );
 
-// Delete user question
+// Delete question
 export const deleteQuestion = createAsyncThunk(
   `question/${questionType.DELETE_QUESTION}`,
   async (id: string, thunkAPI) => {
@@ -143,17 +143,17 @@ export const questionSlice = createSlice({
         state.isError = questionType.CREATE_QUESTION;
         state.message = action.payload;
       })
-      .addCase(getQuestions.pending, (state) => {
+      .addCase(paginateQuestions.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getQuestions.fulfilled, (state, action) => {
+      .addCase(paginateQuestions.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = questionType.GET_ALL_QUESTIONS;
+        state.isSuccess = questionType.PAGINATE_QUESTIONS;
         state.questions = action.payload;
       })
-      .addCase(getQuestions.rejected, (state, action: any) => {
+      .addCase(paginateQuestions.rejected, (state, action: any) => {
         state.isLoading = false;
-        state.isError = questionType.GET_ALL_QUESTIONS;
+        state.isError = questionType.PAGINATE_QUESTIONS;
         state.message = action.payload;
       })
       .addCase(getRecommendQuestions.pending, (state) => {
