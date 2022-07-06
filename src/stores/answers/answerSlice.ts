@@ -210,13 +210,6 @@ export const answerSlice = createSlice({
               .reverse();
             break;
           case FILTER_TYPE.NEWEST_ANSWER:
-            state.answers.sort(
-              (a: Answer, b: Answer) =>
-                new Date(a.createdAt).getTime() -
-                new Date(b.createdAt).getTime()
-            );
-            break;
-          case FILTER_TYPE.OLDEST_ANSWER:
             state.answers
               .sort(
                 (a: Answer, b: Answer) =>
@@ -224,6 +217,13 @@ export const answerSlice = createSlice({
                   new Date(b.createdAt).getTime()
               )
               .reverse();
+            break;
+          case FILTER_TYPE.OLDEST_ANSWER:
+            state.answers.sort(
+              (a: Answer, b: Answer) =>
+                new Date(a.createdAt).getTime() -
+                new Date(b.createdAt).getTime()
+            );
             break;
         }
       });

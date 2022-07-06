@@ -8,7 +8,7 @@ import style from './style.module.css';
 const FilterButtons = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const [filterType, setFilterType] = useState(FILTER_TYPE.NEWEST_ANSWER);
+  const [filterType, setFilterType] = useState(FILTER_TYPE.OLDEST_ANSWER);
 
   const filterList = [
     { type: FILTER_TYPE.NEWEST_ANSWER, label: 'filter.newest_answer' },
@@ -18,6 +18,9 @@ const FilterButtons = () => {
   ];
 
   const handleChangeFilter = (type: number) => {
+    if (filterType === type) {
+      return;
+    }
     setFilterType(type);
     dispatch(filterAnswer(type));
   };
