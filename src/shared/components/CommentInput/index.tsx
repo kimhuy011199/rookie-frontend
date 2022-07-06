@@ -73,8 +73,8 @@ const CommentInput = (props: CommentInputInterface) => {
           questionId,
         };
         const { userId } = question;
+        dispatch(createAnswer(submitData));
         if (user._id !== userId) {
-          dispatch(createAnswer(submitData));
           const type = NOTI_TYPE.ANSWER_QUESTION;
           const actionId = user._id;
           dispatch(
