@@ -29,9 +29,11 @@ const SingleUser = () => {
     (state: any) => state.users
   );
 
-  const { userQuestions, isError: isQuestionError } = useSelector(
-    (state: any) => state.questions
-  );
+  const {
+    userQuestions,
+    isError: isQuestionError,
+    isSuccess: isQuestionSuccess,
+  } = useSelector((state: any) => state.questions);
 
   useEffect(() => {
     if (id) {
@@ -53,6 +55,12 @@ const SingleUser = () => {
       setUserInfoList(userInfoEntries);
     }
   }, [id, user, isSuccess]);
+
+  useEffect(() => {
+    if (isQuestionSuccess === questionType.DELETE_QUESTION) {
+      toast(t('toast.delete_question_success'));
+    }
+  }, [isQuestionSuccess, t]);
 
   useEffect(() => {
     if (isQuestionError === questionType.GET_QUESTION_BY_USER_ID) {
