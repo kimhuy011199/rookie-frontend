@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { formatMonthDateYear } from '../../../core/utils';
+import { formatTime } from '../../../core/utils';
 import { Question } from '../../constants/types/Question';
 import TagList from '../TagList';
 import style from './style.module.css';
@@ -11,9 +11,9 @@ interface QuestionItemInterface {
 
 const QuestionItem = (props: QuestionItemInterface) => {
   const { question } = props;
-  const info = `by ${
-    question.user.displayName
-  }, created on ${formatMonthDateYear(question.createdAt)}`;
+  const info = `by ${question.user.displayName}, created on ${formatTime(
+    question.createdAt
+  )}`;
   const linkTo = `/questions/${question._id}`;
 
   return (

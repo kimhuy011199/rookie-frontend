@@ -10,6 +10,7 @@ import Like from '../Like';
 import Avatar from '../Avatar';
 import TagList from '../TagList';
 import { Link, useNavigate } from 'react-router-dom';
+import { formatTime } from '../../../core/utils';
 
 interface CommentInterface {
   type: number;
@@ -36,11 +37,7 @@ const Comment = (props: CommentInterface) => {
   };
 
   const renderTime = () => {
-    const formatedDate = new Date(data?.createdAt).toLocaleTimeString('en-EN', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+    const formatedDate = formatTime(data?.createdAt);
     let action = '';
     switch (type) {
       case COMMENT_TYPE.QUESTION:
